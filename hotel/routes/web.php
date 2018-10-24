@@ -22,3 +22,7 @@ Route::get('/profile',function(){
 Route::get('/book', function(){
 	return view('book');
 });
+
+Route::get('/', function(){
+	return view('index');
+});

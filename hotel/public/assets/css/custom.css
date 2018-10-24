@@ -6044,6 +6044,117 @@ a:hover.xnext img {
     display: block;
 }
 
+.promo-container {
+    height: 30%;
+    display: block;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.promos-header {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.top-hot-gallery {
+    width: 85%;
+    height: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-gallery {
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+}
+
+.carousel-item {
+    width: 12%;
+    height: 100%;
+    float: left;
+    border: 1px solid black;
+    position: relative;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.carousel-item span {
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    bottom: 0px;
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    background-color: gray;
+    opacity: 0.5;
+    text-align: center;
+}
+
+.clear {
+    clear: both;
+}
+
+.top-hot-gallery .btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 40%;
+    display: block;
+}
+
+.btn-left {
+    left: 0px;
+    background: url('../../images/large_left3.png') no-repeat center;
+    background-size: 30px 30px;
+}
+
+.btn-right {
+    right: 0px;
+    background: url('../../images/large_right3.png') no-repeat center;
+    background-size: 30px 30px;
+}
+
+.intro {
+    margin: 50px;
+    margin-right: 8.5%;
+}
+
+.list-header {
+    background-color: #7CFC00;
+}
+
+.list-header h2 {
+    font-weight: bold;
+    margin: 0px;
+    padding: 20px 0px;
+}
+
+.list-item {
+    font-family: "Tahoma";
+}
+
+.size-18px {
+    font-size: 15px;
+}
+
+.list-item h3,p {
+    margin: 0px;
+    padding: 5px 0px;
+}
+
+.chart {
+    width: 120%;
+    height: 45%;
+    margin-left: 5%;
+}
+
 /* ########################################### */
 /* ########################################### */
 /* ########        UPDATE 1.4        ######### */

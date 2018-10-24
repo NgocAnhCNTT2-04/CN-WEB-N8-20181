@@ -230,7 +230,7 @@ jQuery(window).scroll(function(){
 		
 		
 		//Social
-		if(jQuery(window).scrollTop() >= 300){
+		if(jQuery(window).scrollTop() >= 500){
 			jQuery('.social1').stop().animate({top:'0px'}, 100);
 			
 			setTimeout(function (){
@@ -295,5 +295,31 @@ jQuery(".one").mouseleave(function() {
 		jQuery(".icon", this).stop().animate({marginLeft:"0px"}, 100);
 	});
 
-
-
+//------------------------------
+//GALLERY
+//------------------------------
+var galleryWid = jQuery(".carousel-item").width();
+			jQuery(document).ready(function(){
+				jQuery(".btn-left").click(function(){
+					jQuery(".carousel-gallery").animate({
+						left: '-=24%',
+					});
+				});
+				jQuery(".btn-left").click(function(){
+					jQuery(".carousel-gallery").animate({
+						left: '-=5px',
+					});
+				});
+			});
+			jQuery(document).ready(function(){
+				jQuery(".btn-right").click(function(){
+					jQuery(".carousel-gallery").animate({
+						left: '+=24%',
+					});
+				});
+				jQuery(".btn-right").click(function(){
+					jQuery(".carousel-gallery").animate({
+						left: '+=5px',
+					});
+				});
+			});
