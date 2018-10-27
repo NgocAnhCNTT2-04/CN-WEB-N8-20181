@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class FavoriteHotel extends Model
 {
     //
-    protected $table = "user";
+    protected $table = "favorite_hotel";
     public $timestamps = false;
 }
