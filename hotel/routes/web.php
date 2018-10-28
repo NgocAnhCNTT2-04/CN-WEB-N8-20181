@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile',function(){
-	return view('profile');
-});
+Route::get('/profile/{id}', 'UserController@showProfile');
 
 Route::get('/book', function(){
 	return view('book');
@@ -27,6 +25,10 @@ Route::get('/', function(){
 	return view('index');
 });
 
-Route :: get('/login', function (){
+Route:: get('/login', function (){
     return view('login');
 });
+
+Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
+
+Route:: post('/profile/changepassword', 'UserController@changePassword') -> name('changepassword');

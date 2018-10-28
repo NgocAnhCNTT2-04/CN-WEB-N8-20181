@@ -119,7 +119,7 @@
                         <div class="col-md-4 offset-0">
                             <img src="{{asset('images/users/dungnt.jpg')}}" width="60px" height="60px" alt="" class="left margright20"/>
                             <p class="size12 grey margtop10">
-                                Xin chào <span class="lred">Tên</span><br/>
+                                Xin chào <span class="lred">{{$profile->name}}</span><br/>
                                 <a href="#" class="lblue">Thay ảnh đại diện</a>
                             </p>
                             <div class="clearfix"></div>
@@ -136,12 +136,18 @@
 
                         <!-- COL 1 -->
                         <div class="col-md-12 offset-0">
+                            <form method="post" action="{{route('update')}}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <table>
                                 <tr>
                                     <td>
                                         <div class="radio left">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="ms" value="option1" checked>
+                                                @if($profile->sex == 2)
+                                                <input type="radio" name="gender" id="ms" value="2" checked="checked">
+                                                @else
+                                                <input type="radio" name="gender" id="ms" value="2">
+                                                @endif
                                                 Nữ
                                             </label>
                                         </div>
@@ -149,7 +155,11 @@
                                     <td>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="mr" value="option2" checked>
+                                                @if($profile->sex == 1)
+                                                <input type="radio" name="gender" id="mr" value="1" checked="checked">
+                                                @else
+                                                <input type="radio" name="gender" id="mr" value="1">
+                                                @endif
                                                 Nam
                                             </label>
                                         </div>
@@ -157,38 +167,37 @@
                                     <td>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="neither" value="option3" checked>
+                                                @if($profile->sex == 3)
+                                                <input type="radio" name="gender" id="neither" value="3" checked="checked">
+                                                @else
+                                                <input type="radio" name="gender" id="neither" value="3">
+                                                @endif
                                                 Khác
                                             </label>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
-
-
+                            
                             <br/>
                             Tên*:
-                            <input type="text" class="form-control" value="Username" rel="popover" id="name" data-content="Không được bỏ trống mục này" data-original-title="Tên của bạn">
+                            <input type="text" class="form-control" value="{{$profile->name}}" rel="popover" id="name" name="name" data-content="Không được bỏ trống mục này" data-original-title="Tên của bạn">
                             <br/>
                             Tên đăng nhập*:
-                            <input type="text" class="form-control" value="Username" rel="popover" id="username" data-content="Không được bỏ trống mục này" data-original-title="Tên đăng nhập của bạn">
+                            <input type="text" class="form-control" value="{{$profile->username}}" rel="popover" id="username" name="username" data-content="Không được bỏ trống mục này" data-original-title="Tên đăng nhập của bạn">
                             <br/>
                             E-mail*:
-                            <input type="text" class="form-control" value="Email" id="email" data-content="Không được bỏ trống mục này" data-original-title="Email của bạn">
+                            <input type="text" class="form-control" value="{{$profile->email}}" id="email" name="email" data-content="Không được bỏ trống mục này" data-original-title="Email của bạn">
                             <br/>
                             Số điện thoại:
-                            <input type="text" class="form-control" id="phone" value="Phone" data-content="Không được bỏ trống mục này" data-original-title="Số điện thoại của bạn">
-
-                            <br/>
-                            Ngày sinh:<br/>
-                            <input type="text" class="form-control mySelectCalendar" id="datepicker" value="Birth" data-content="Không được bỏ trống mục này" data-original-title="Ngày sinh của bạn"/>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{$profile->phone}}" data-content="Không được bỏ trống mục này" data-original-title="Số điện thoại của bạn">
 
                             <br/>
                             Địa chỉ:
-                            <input type="text" class="form-control" id="address" value="Address" data-content="Không được bỏ trống mục này" data-original-title="Địa chỉ nơi ở">
+                            <input type="text" class="form-control" id="address" name="address" value="{{$profile->address}}" data-content="Không được bỏ trống mục này" data-original-title="Địa chỉ nơi ở">
 
-
-                            <button type="submit" class="bluebtn margtop15" id="updateprofile" value="">Cập nhật</button>
+                            <button type="submit" class="bluebtn margtop15" id="updateprofile" value="{{$profile->id}}" name="id">Cập nhật</button>
+                            </form>
                         </div>
                         <!-- END OF COL 1 -->
 
@@ -269,25 +278,27 @@
 
                             <span class="dark size18">Đổi mật khẩu</span>
                             <div class="line4"></div>
-
+                            <form action="changepassword" method="post">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             {{--Tên đăng nhập--}}
                             {{--<br/>--}}
-                            {{--<input type="text" class="form-control " id="username" placeholder="">--}}
+                            <input type="hidden" class="form-control " id="username" name="username" value="{{$profile->username}}">
+                            <input type="hidden" class="form-control " id="password" name="password" value="{{$profile->password}}">
                             {{--<br/>--}}
                             Mật khẩu cũ
                             <br/>
-                            <input type="password" class="form-control " id="oldpassword" placeholder="">
+                            <input type="password" class="form-control " id="oldpassword" name="oldpassword" placeholder="">
                             <br/>
                             Mật khẩu mới
                             <br/>
-                            <input type="password" class="form-control " id="newpassword" placeholder="">
+                            <input type="password" class="form-control " id="newpassword" name="newpassword" placeholder="">
                             <br/>
                             Xác nhận lại mật khẩu mới
                             <br/>
-                            <input type="password" class="form-control " id="newpassword2" placeholder="">
+                            <input type="password" class="form-control " id="newpassword2" name="newpassword2" placeholder="">
                             <br/>
-                            <button type="submit" class="btn-search5" id="changepassword">Lưu thay đổi</button>
-
+                            <button type="submit" class="btn-search5" id="changepassword" value="{{$profile->id}}" name="id">Lưu thay đổi</button>
+                            </form>
                             <br/>
                             <br/>
                             <br/>
