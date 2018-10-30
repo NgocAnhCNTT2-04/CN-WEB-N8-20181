@@ -34,17 +34,7 @@
     <!-- jQuery -->
     <script src="{{asset('assets/js/jquery.v2.0.3.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
-    </script>
 
-    <script type="text/javascript" src="{{asset('js/updateprofile.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/deletefavorite.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/changepassword.js')}}"></script>
 
 </head>
 <?php
@@ -142,8 +132,6 @@
 
                         <!-- COL 1 -->
                         <div class="col-md-12 offset-0">
-                            <form method="post" action="{{route('update')}}">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <table>
                                 <tr>
                                     <td>
@@ -203,7 +191,6 @@
                             <input type="text" class="form-control" id="address" name="address" value="{{$user->address}}" data-content="Không được bỏ trống mục này" data-original-title="Địa chỉ nơi ở">
 
                             <button type="submit" class="bluebtn margtop15" id="updateprofile" value="{{$user->id}}" name="id">Cập nhật</button>
-                            </form>
                         </div>
                         <!-- END OF COL 1 -->
 
@@ -287,12 +274,9 @@
 
                             <span class="dark size18">Đổi mật khẩu</span>
                             <div class="line4"></div>
-                            <form action="changepassword" method="post">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             {{--Tên đăng nhập--}}
                             {{--<br/>--}}
-                            <input type="hidden" class="form-control " id="username" name="username" value="{{$user->username}}">
-                            <input type="hidden" class="form-control " id="password" name="password" value="{{$user->password}}">
+                            {{--<input type="text" class="form-control " id="username" placeholder="">--}}
                             {{--<br/>--}}
                             Mật khẩu cũ
                             <br/>
@@ -307,7 +291,6 @@
                             <input type="password" class="form-control " id="newpassword2" name="newpassword2" placeholder="">
                             <br/>
                             <button type="submit" class="btn-search5" id="changepassword" value="{{$user->id}}" name="id">Lưu thay đổi</button>
-                            </form>
                             <br/>
                             <br/>
                             <br/>
@@ -404,5 +387,9 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
+
+ <script type="text/javascript" src="{{asset('js/updateprofile.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/deletefavorite.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/changepassword.js')}}"></script>
 </body>
 </html>

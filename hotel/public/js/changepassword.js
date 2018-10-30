@@ -20,13 +20,20 @@ $(document).ready(function () {
             }
         }
         else {
+            $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+            });
             $.ajax({
-                url: "/user/changepassword",
-                type: 'POST',
+                url: "../profile/changepassword",
+                type: 'post',
                 data: {
                     // username: username,
+
+                    id: $(this).val(),
                     old: old,
-                    new1: new1
+                    new: new1
                 },
                 success: function (result) {
                     if (result == 0)

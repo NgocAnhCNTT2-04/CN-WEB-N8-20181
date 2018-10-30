@@ -1,41 +1,40 @@
 $(document).ready(function () {
     $('#updateprofile').click(function () {
         if($('#ms').is(':checked'))
-            var sex = 2;
+            var gender = 2;
         else if ($('#mr').is(':checked'))
-            var sex = 1;
+            var gender = 1;
         else
-            var sex = 3;
+            var gender = 3;
 
         var name = $('#name').val();
         var username = $('#username').val();
         var email = $('#email').val();
         var phone = $('#phone').val();
-        var birth_date = $('#datepicker').val();
         var address = $('#address').val();
-        var city = $('#city').val();
-        var district = $('#district').val();
         var id = $('#updateprofile').val();
-        if (name === "" || username === "" || email === "" || phone === "" || birth_date === "" || address === "" || city === "" || district === "")
+        if (name === "" || username === "" || email === "" || phone === "" || address === "")
         {
             if (!$('#alert').length)
-                $("#district").after("<div style='margin: 15px' id='alert'><i style='color: red'>Hãy nhập đầy đủ thông tin</i></div>");
+                $("#address").after("<div style='margin: 15px' id='alert'><i style='color: red'>Hãy nhập đầy đủ thông tin</i></div>");
         }
         else {
+            $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+            });
             $.ajax({
-                url: "/user/update",
-                type:'POST',
+                url: "../profile/update",
+                type:'post',
                 data:{
                     id: id,
-                    sex: sex,
+                    gender: gender,
                     name: name,
                     username: username,
                     email: email,
                     phone: phone,
-                    birth_date: birth_date,
-                    address: address,
-                    city: city,
-                    district: district
+                    address: address
                 },
                 success: function () {
                     alert("Cập nhật thông tin thành công");
