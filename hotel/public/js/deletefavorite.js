@@ -1,10 +1,15 @@
 $(document).ready(function () {
-    $('.close.mr20.mt15').click(function () {
+    $('.delete-fav').click(function () {
+        alert('12345');
         var hotel_id = $(this).val();
-
+        $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+            });
         $.ajax({
-            url: "/favorite/delete",
-            type:'POST',
+            url: "../profile/favorite/delete",
+            type:'post',
             data:{
                 hotel_id: hotel_id
             },
@@ -13,4 +18,4 @@ $(document).ready(function () {
             }
         });
     });
-})
+});

@@ -34,19 +34,15 @@
     <!-- jQuery -->
     <script src="{{asset('assets/js/jquery.v2.0.3.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
-    </script>
 
-    <script type="text/javascript" src="{{asset('js/updateprofile.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/deletefavorite.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/changepassword.js')}}"></script>
 
 </head>
+<?php
+    $user = $profile['user'];
+    $booked = $profile['booked'];
+    $favorites = $profile['favorites'];
+?>
+@include('layouts.header')
 <body id="top" class="thebg" >
 <div class="container breadcrub">
     <div>
@@ -119,7 +115,7 @@
                         <div class="col-md-4 offset-0">
                             <img src="{{asset('images/users/dungnt.jpg')}}" width="60px" height="60px" alt="" class="left margright20"/>
                             <p class="size12 grey margtop10">
-                                Xin chào <span class="lred">Tên</span><br/>
+                                Xin chào <span class="lred">{{$user->name}}</span><br/>
                                 <a href="#" class="lblue">Thay ảnh đại diện</a>
                             </p>
                             <div class="clearfix"></div>
@@ -141,7 +137,11 @@
                                     <td>
                                         <div class="radio left">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="ms" value="option1" checked>
+                                                @if($user->sex == 2)
+                                                <input type="radio" name="gender" id="ms" value="2" checked="checked">
+                                                @else
+                                                <input type="radio" name="gender" id="ms" value="2">
+                                                @endif
                                                 Nữ
                                             </label>
                                         </div>
@@ -149,7 +149,11 @@
                                     <td>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="mr" value="option2" checked>
+                                                @if($user->sex == 1)
+                                                <input type="radio" name="gender" id="mr" value="1" checked="checked">
+                                                @else
+                                                <input type="radio" name="gender" id="mr" value="1">
+                                                @endif
                                                 Nam
                                             </label>
                                         </div>
@@ -157,38 +161,36 @@
                                     <td>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="neither" value="option3" checked>
+                                                @if($user->sex == 3)
+                                                <input type="radio" name="gender" id="neither" value="3" checked="checked">
+                                                @else
+                                                <input type="radio" name="gender" id="neither" value="3">
+                                                @endif
                                                 Khác
                                             </label>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
-
-
+                            
                             <br/>
                             Tên*:
-                            <input type="text" class="form-control" value="Username" rel="popover" id="name" data-content="Không được bỏ trống mục này" data-original-title="Tên của bạn">
+                            <input type="text" class="form-control" value="{{$user->name}}" rel="popover" id="name" name="name" data-content="Không được bỏ trống mục này" data-original-title="Tên của bạn">
                             <br/>
                             Tên đăng nhập*:
-                            <input type="text" class="form-control" value="Username" rel="popover" id="username" data-content="Không được bỏ trống mục này" data-original-title="Tên đăng nhập của bạn">
+                            <input type="text" class="form-control" value="{{$user->username}}" rel="popover" id="username" name="username" data-content="Không được bỏ trống mục này" data-original-title="Tên đăng nhập của bạn">
                             <br/>
                             E-mail*:
-                            <input type="text" class="form-control" value="Email" id="email" data-content="Không được bỏ trống mục này" data-original-title="Email của bạn">
+                            <input type="text" class="form-control" value="{{$user->email}}" id="email" name="email" data-content="Không được bỏ trống mục này" data-original-title="Email của bạn">
                             <br/>
                             Số điện thoại:
-                            <input type="text" class="form-control" id="phone" value="Phone" data-content="Không được bỏ trống mục này" data-original-title="Số điện thoại của bạn">
-
-                            <br/>
-                            Ngày sinh:<br/>
-                            <input type="text" class="form-control mySelectCalendar" id="datepicker" value="Birth" data-content="Không được bỏ trống mục này" data-original-title="Ngày sinh của bạn"/>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone}}" data-content="Không được bỏ trống mục này" data-original-title="Số điện thoại của bạn">
 
                             <br/>
                             Địa chỉ:
-                            <input type="text" class="form-control" id="address" value="Address" data-content="Không được bỏ trống mục này" data-original-title="Địa chỉ nơi ở">
+                            <input type="text" class="form-control" id="address" name="address" value="{{$user->address}}" data-content="Không được bỏ trống mục này" data-original-title="Địa chỉ nơi ở">
 
-
-                            <button type="submit" class="bluebtn margtop15" id="updateprofile" value="">Cập nhật</button>
+                            <button type="submit" class="bluebtn margtop15" id="updateprofile" value="{{$user->id}}" name="id">Cập nhật</button>
                         </div>
                         <!-- END OF COL 1 -->
 
@@ -205,21 +207,24 @@
 
                             <div class="line4"></div>
                             <br/>
+                            @foreach ($booked as $room)
                             <div class="col-md-4 offset-0">
-                                <a href="#"><img alt="" class="left mr20" src="{{asset('images/hotel/1/main.jpg')}}" width="96px" height="61px"></a>
-                                <a class="dark" href="#"><b>Tên phòng</b></a> /
-                                <span class="dark size12">Chất lượng</span><br>
-                                <img alt="" src="{{asset('images/filter-rating-5.png')}}"><br/>
-                                <span class="opensans green bold size14">1000000 VNĐ</span> <span class="grey"> / đêm</span><br>
+                                <a href="#"><img alt="" class="left mr20" src="{{asset('images/'. $room->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
+                                <a class="dark" href="#"><b>{{$room->name}}</b></a> /
+                                <span class="dark size12">{{$room->quality}}</span><br>
+                                <img alt="" src="{{asset('images/filter-rating-'.$room->stars.'.png')}}"><br/>
+                                <span class="opensans green bold size14">{{number_format($room->price_per_night, 0, '.', ',') . ' VNĐ'}}</span> <span class="grey"> / đêm</span><br>
                             </div>
                             <div class="col-md-7">
-                                <span class="grey">Mô tả</span>
+                                <span class="grey"><?php if(strlen($room->description) > 300) echo substr($room->description, 0, 300) . '...';
+                                    else echo $room->description; ?></span>
                             </div>
                             <div class="col-md-1 offset-0">
                                 <a href="#"><button type="submit" class="btn-search4 right">Xem</button></a>
                             </div>
                             <div class="clearfix"></div>
                             <div class="line4"></div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- END OF TAB 2 -->
@@ -232,26 +237,26 @@
                             <span class="dark size18">Khách sạn yêu thích</span>
                             <div class="line4"></div>
                             <br/>
-
+                            @foreach($favorites as $favorite)
                             <div>
                                 <div class="col-md-4 offset-0">
-                                    <a href="#"><img alt="" class="left mr20" src="{{asset('images/hotel/1/main.jpg')}}" width="96px" height="61px"></a>
-                                    <a class="dark" href="#"><b>Tên</b></a> /
-                                    <span class="dark size12">Địa chỉ</span><br>
-                                    <span class="opensans green bold size14">Từ 1000000 VNĐ</span> <span class="grey"> / đêm</span><br>
-                                    <img alt="" src="{{asset('images/filter-rating-5.png')}}"><br/>
+                                    <a href="#"><img alt="" class="left mr20" src="{{asset('images/'.$favorite->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
+                                    <a class="dark" href="#"><b>{{$favorite->name}}</b></a> /
+                                    <span class="dark size12">{{$favorite->address.', '.$favorite->city}}</span><br>
+                                    <span class="opensans green bold size14">{{"Từ " . number_format($favorite->lowest_price, 0, '.', ',') . " VNĐ"}}</span> <span class="grey"> / đêm</span><br>
+                                    <img alt="" src="{{asset('images/filter-rating-'.$favorite->img_folder.'.png')}}"><br/>
                                 </div>
                                 <div class="col-md-7">
-                                    <span class="grey">Mô tả</span>
+                                    <span class="grey"><?php if(strlen($favorite->description) > 300) echo substr($favorite->description, 0,300) . '...' ; else echo $favorite->description; ?></span>
                                 </div>
                                 <div class="col-md-1 offset-0">
                                     <a href="#"><button type="submit" class="btn-search4 right">Xem</button></a>
                                 </div>
-                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt15" type="button" value="">×</button>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt15 delete-fav" type="button" value="{{$favorite->id}}">×</button>
                                 <div class="clearfix"></div>
                                 <div class="line6"></div>
                             </div>
-
+                            @endforeach
                         </div>
                     </div>
                     <!-- END OF TAB 3 -->
@@ -269,25 +274,23 @@
 
                             <span class="dark size18">Đổi mật khẩu</span>
                             <div class="line4"></div>
-
                             {{--Tên đăng nhập--}}
                             {{--<br/>--}}
                             {{--<input type="text" class="form-control " id="username" placeholder="">--}}
                             {{--<br/>--}}
                             Mật khẩu cũ
                             <br/>
-                            <input type="password" class="form-control " id="oldpassword" placeholder="">
+                            <input type="password" class="form-control " id="oldpassword" name="oldpassword" placeholder="">
                             <br/>
                             Mật khẩu mới
                             <br/>
-                            <input type="password" class="form-control " id="newpassword" placeholder="">
+                            <input type="password" class="form-control " id="newpassword" name="newpassword" placeholder="">
                             <br/>
                             Xác nhận lại mật khẩu mới
                             <br/>
-                            <input type="password" class="form-control " id="newpassword2" placeholder="">
+                            <input type="password" class="form-control " id="newpassword2" name="newpassword2" placeholder="">
                             <br/>
-                            <button type="submit" class="btn-search5" id="changepassword">Lưu thay đổi</button>
-
+                            <button type="submit" class="btn-search5" id="changepassword" value="{{$user->id}}" name="id">Lưu thay đổi</button>
                             <br/>
                             <br/>
                             <br/>
@@ -361,7 +364,6 @@
 </div>
 <!-- END OF CONTENT -->
 
-
 <!-- Javascript  -->
 <script src="{{asset('assets/js/js-profile.js')}}"></script>
 
@@ -385,5 +387,8 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/updateprofile.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/deletefavorite.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/changepassword.js')}}"></script>
 </body>
 </html>
