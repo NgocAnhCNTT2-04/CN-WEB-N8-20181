@@ -33,7 +33,7 @@ class User extends Model
         $hotels = array();
         foreach ($favorite as $fav) {
             # code...
-            $hotels[] = Hotel::find($fav->id);
+            $hotels[] = Hotel::find($fav->hotel_id);
         }
     	return ['user' => $user,'booked' => $booked,'favorites' => $hotels];
     }

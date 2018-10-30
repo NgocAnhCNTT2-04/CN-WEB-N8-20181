@@ -32,3 +32,5 @@ Route:: get('/login', function (){
 Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
 
 Route:: post('/profile/changepassword', 'UserController@changePassword') -> name('changepassword');
+
+Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');

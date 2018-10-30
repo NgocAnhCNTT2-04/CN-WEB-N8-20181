@@ -252,7 +252,7 @@
                                 <div class="col-md-1 offset-0">
                                     <a href="#"><button type="submit" class="btn-search4 right">Xem</button></a>
                                 </div>
-                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt15" type="button" value="">×</button>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt15 delete-fav" type="button" value="{{$favorite->id}}">×</button>
                                 <div class="clearfix"></div>
                                 <div class="line6"></div>
                             </div>
@@ -387,8 +387,7 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
-
- <script type="text/javascript" src="{{asset('js/updateprofile.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/updateprofile.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/deletefavorite.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/changepassword.js')}}"></script>
 </body>
