@@ -28,15 +28,20 @@ Route::get('/', function(){
 Route:: get('/login', function (){
     return view('login');
 });
-<<<<<<< HEAD
+
+Route :: get('/user', function (){
+    return view('user');
+});
+
+
 Route :: get('/detail',function (){
     return view('detail');
 });
-=======
+
 
 Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
 
 Route:: post('/profile/changepassword', 'UserController@changePassword') -> name('changepassword');
 
 Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');
->>>>>>> 1f3d74dfa82f82012ed0ed458fb195fcce78879e
+

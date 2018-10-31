@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b80824ae-da5a-4642-b83b-eb879749ec46" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/hotel/app/Book.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel/app/FavoriteHotel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel/app/Hotel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel/app/Http/Controllers/FavoriteController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel/app/Review.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotel/app/Room.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/public/js/changepassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/public/js/changepassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/public/js/deletefavorite.js" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/public/js/deletefavorite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/public/js/updateprofile.js" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/public/js/updateprofile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/resources/views/hotel.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel/resources/views/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/resources/views/profile.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotel/resources/views/user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotel/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/hotel/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,34 +19,38 @@
     <session id="-1318634706">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.43" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="446" />
+          <entry key="php" value="638" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Blade" value="446" />
+          <entry key="Blade" value="574" />
+          <entry key="PHP" value="64" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.composer.actions" />
       <usages-collector id="statistics.php.new.class" />
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Blade" value="2" />
+          <entry key="Blade" value="3" />
           <entry key="Image" value="19" />
+          <entry key="PHP" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gif" value="1" />
-          <entry key="php" value="2" />
+          <entry key="php" value="4" />
           <entry key="png" value="18" />
         </counts>
       </usages-collector>
@@ -71,11 +63,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hotel/resources/views/detail.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
               <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hotel/resources/views/user.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="129" column="48" selection-start-line="129" selection-start-column="48" selection-end-line="129" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hotel/routes/web.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -94,6 +104,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/hotel/resources/views/detail.blade.php" />
+        <option value="$PROJECT_DIR$/hotel/resources/views/admin.blade.php" />
+        <option value="$PROJECT_DIR$/hotel/routes/web.php" />
+        <option value="$PROJECT_DIR$/hotel/resources/views/user.blade.php" />
       </list>
     </option>
   </component>
@@ -199,6 +212,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -224,16 +238,21 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="CN-WEB-N8-20181" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CN-WEB-N8-20181" type="462c0819:PsiDirectoryNode" />
+              <item name="hotel" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hotel-patern" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -266,16 +285,19 @@
       <updated>1540909370155</updated>
       <workItem from="1540909372736" duration="3154000" />
       <workItem from="1540914180884" duration="49000" />
+      <workItem from="1540914425396" duration="814000" />
+      <workItem from="1540951939793" duration="3228000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3203000" />
+    <option name="totallyTimeSpent" value="7245000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18381241" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -360,13 +382,25 @@
     <entry file="file://$PROJECT_DIR$/hotel/public/images/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/hotel/resources/views/hotel.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hotel/resources/views/hotel.blade.php" />
     <entry file="file://$PROJECT_DIR$/hotel/resources/views/detail.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hotel/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hotel/resources/views/user.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="129" column="48" selection-start-line="129" selection-start-column="48" selection-end-line="129" selection-end-column="48" />
         </state>
       </provider>
     </entry>
