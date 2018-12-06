@@ -38,6 +38,10 @@ Route :: get('/detail',function (){
     return view('detail');
 });
 
+Route :: get('/admin',function() {
+	return view('admin');
+});
+
 
 Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
 
