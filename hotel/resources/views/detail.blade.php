@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title><?php echo "Hotel_Detail"; ?></title>
+    <title>Tên khách sạn</title>
 
     <!-- Bootstrap -->
     <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet" media="screen">
@@ -22,12 +22,12 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'>
     <!-- Font-Awesome -->
-    <link rel="stylesheet" type="text/css" href="#" media="screen" />
-    <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="#" media="screen" /><![endif]-->
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font-awesome.css')}}" media="screen" />
+    <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="assets/css/font-awesome-ie7.css" media="screen" /><![endif]-->
 
     <!-- REVOLUTION BANNER CSS SETTINGS -->
-    <link rel="stylesheet" type="text/css" href="#" media="screen" />
-    <link rel="stylesheet" type="text/css" href="#" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/fullscreen.css')}}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{asset('rs-plugin/css/settings.css')}}" media="screen" />
 
     <!-- Picker UI-->
     <link rel="stylesheet" href="{{asset('assets/css/jquery-ui.css')}}" />
@@ -39,7 +39,6 @@
     <!-- jQuery-->
     <script src="{{asset('assets/js/jquery.v2.0.3.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
-
 
     <!-- bin/jquery.slider.min.js -->
     <script type="text/javascript" src="{{asset('plugins/jslider/js/jshashtable-2.1_src.js')}}"></script>
@@ -56,19 +55,17 @@
 </head>
 <body id="top" class="thebg" >
 
-
-
 <div class="container breadcrub">
     <div>
-        <a class="homebtn left" href="#"></a>
+        <a class="homebtn left" href="{{url('')}}"></a>
         <div class="left">
             <ul class="bcrumbs">
                 <li>/</li>
                 <li>Khách sạn</li>
                 <li>/</li>
-                <li><a href="#" class="active"><?php echo "City"; ?></a></li>
+                <li><a href="#" class="active">Thành phố</a></li>
                 <li>/</li>
-                <li id="hotelid" value="<?php echo "Id"; ?>"><?php echo ""; ?></li>
+                <li id="hotelid" value="hotelid">Tên khách sạn</li>
             </ul>
         </div>
         <a class="backbtn right" href="#"></a>
@@ -89,12 +86,12 @@
                     <div id="inner">
                         <div id="caroufredsel_wrapper2">
                             <div id="carousel">
-                                <img src="./public/images/11.jpg" width="150" height="150"  alt="ẢNH" >
+                                <img src="{{asset('images/hotel/1/main.jpg')}}" width="723" height="407" alt=""/>
                             </div>
                         </div>
                         <div id="pager-wrapper">
                             <div id="pager">
-
+                                <img src="{{asset('images/hotel/1/main.jpg')}}" width="120" height="68" alt=""/>
                             </div>
                         </div>
                     </div>
@@ -110,58 +107,31 @@
         <!-- RIGHT INFO -->
         <div class="col-md-4 detailsright offset-0">
             <div class="padding20">
-                <h4 class="lh1"><?php echo "Name"; ?></h4>
-                <img src="" alt=""/>
+                <h4 class="lh1">Tên khách sạn</h4>
+                <img src="{{asset('images/filter-rating-5.png')}}" alt=""/>
             </div>
 
             <div class="line3"></div>
 
             <div class="hpadding20">
-                <h2 class="opensans slim green2">
-                    <?php
-                    $rate = 8;
-                    if ($rate >= 8) echo "Xuất sắc!";
-                    else if ($rate < 8 && $rate >= 7) echo "Tốt";
-                    else if ($rate < 7 && $rate >= 5) echo "Khá";
-                    else echo "Trung bình";
-                    ?>
+                <h2 class="opensans slim green2">Xuất sắc
                 </h2>
             </div>
-
-            <?php
-            // tính số lượng khách recommend khách sạn và đánh giá trung bình
-            $recommends = 0;
-
-
-            $avg_location = 0;
-            $avg_room = 0;
-            $avg_service = 0;
-            $avg_cleaness = 0;
-            $avg_value = 0;
-            $avg_comfort = 0;
-            $avg_equipment = 0;
-            $avg_hotel = 0;
-            $avg_meal = 0;
-
-            ?>
 
             <div class="line3 margtop20"></div>
 
             <div class="col-md-6 bordertype1 padding20">
-                <span class="opensans size30 bold grey2">Số lượng</span><br/>
+                <span class="opensans size30 bold grey2">100%</span><br/>
                 khách<br/>đề xuất
             </div>
             <div class="col-md-6 bordertype2 padding20">
-                <span class="opensans size30 bold grey2">Số lượng</span><br/>
+                <span class="opensans size30 bold grey2">9</span>/10<br/>
                 đánh giá của khách
             </div>
 
             <div class="col-md-6 bordertype3">
-                <?php
-                $rate2 = round($rate/2);
-                ?>
-                <img src="{{asset('images/user-rating-' . $rate2 . '.png')}}" alt=""/><br/>
-                <?php echo " đánh giá" ?>
+                <img src="{{asset('images/user-rating-5.png')}}" alt=""/><br/>
+                10 đánh giá
             </div>
             <div class="col-md-6 bordertype3">
                 <a href="#reviews" class="grey" id="showreview">+Thêm đánh giá</a>
@@ -169,15 +139,10 @@
             <div class="clearfix"></div><br/>
 
             <div class="hpadding20">
-                <button class="add2fav margtop5" id="addfavorite" data-hotelid="" data-userid="">
-                    <?php
-                    if (1)
-                        echo "Bỏ yêu thích";
-                    else
-                        echo "Yêu thích";
-                    ?>
+                <button class="add2fav margtop5" id="addfavorite" data-hotelid="hotelid" data-userid="userid">
+                       Yêu thích
                 </button>
-                <a href="#" class="booknow margtop20 btnmarg" id="showbook">Đặt phòng</a>
+                <a href="#rooms" class="booknow margtop20 btnmarg" id="showbook">Đặt phòng</a>
             </div>
         </div>
         <!-- END OF RIGHT INFO -->
@@ -243,14 +208,14 @@
 
                     <div class="line2"></div>
 
-
+                    @include('roomlist')
 
                 </div>
 
                 <!-- TAB 2 -->
-                <div id="maps" class="tab-pane fade" data-address="">
+                <div id="maps" class="tab-pane fade" data-address="địa chỉ, thành phố">
                     <div class="hpadding20">
-
+                      <span><i>Địa chỉ, thành phố</i></span>
                         <div id="map-canvas"></div>
                     </div>
                 </div>
@@ -260,22 +225,22 @@
                 <div id="reviews" class="tab-pane fade ">
                     <div class="hpadding20">
                         <div class="col-md-4 offset-0">
-                            <span class="opensans dark size60 slim lh3 ">
-                            <img src="" alt=""/><br/>
+                            <span class="opensans dark size60 slim lh3 ">9 / 10</span><br/>
+                            <img src="{{asset('images/user-rating-5.png')}}" alt=""/><br/>
                         </div>
                         <div class="col-md-8 offset-0">
                             <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-success wh75percent" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only"></span>
+                                <div class="progress-bar progress-bar-success wh75percent" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only">9 trên 10 điểm</span>
                                 </div>
                             </div>
                             <div class="progress progress-striped">
                                 <div class="progress-bar progress-bar-success wh100percent" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only"></span>
+                                    <span class="sr-only">100% khách đề xuất</span>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <?php echo "Đánh giá dựa trên đánh giá của khách" ?>
+                            Đánh giá dựa trên 10 đánh giá của khách
                         </div>
                         <div class="clearfix"></div>
                         <br/>
@@ -286,35 +251,35 @@
 
                     <div class="hpadding20">
                         <div class="col-md-4 offset-0">
-                            <div class="scircle left"><?php echo " " ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Vị trí</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left"><?php echo " " ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Phòng</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left"><?php echo " " ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Dịch vụ</div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-md-4 offset-0">
-                            <div class="scircle left"><?php echo number_format($avg_cleaness, 1); ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Vệ sinh</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left"><?php echo number_format($avg_value, 1); ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Đáng giá</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left"><?php echo number_format($avg_comfort, 1); ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Thoải mái</div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-md-4 offset-0">
-                            <div class="scircle left"><?php echo number_format($avg_equipment, 1); ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Thiết bị</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left"><?php echo number_format($avg_hotel, 1); ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Tòa nhà</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left"><?php echo number_format($avg_meal, 1); ?></div>
+                            <div class="scircle left">9</div>
                             <div class="sctext left margtop15">Đồ ăn</div>
                             <div class="clearfix"></div>
                         </div>
@@ -325,35 +290,43 @@
                     </div>
 
                     <div class="line2"></div>
-
-                        <div class="hpadding20" id="oldreviews">
-                            <div class="col-md-4 offset-0 center">
-                                <div class="padding20">
-                                    <div class="bordertype5">
-                                        <div class="circlewrap">
-                                            <img src="{{asset('images/user-avatar.jpg')}}" class="circleimg" alt=""/>
-                                            <span><?php echo "" ?></span>
-                                        </div>
-                                        <span class="dark"><?php echo" " ?></span><br/>
-                                        <?php echo  ", " ; ?><br/>
-                                        <img src="" alt=""/><br/>
-
+                    <div class="hpadding20" id="oldreviews">
+                        <div class="col-md-4 offset-0 center">
+                            <div class="padding20">
+                                <div class="bordertype5">
+                                    <div class="circlewrap">
+                                        <img src="{{asset('images/user-avatar.jpg')}}" class="circleimg" alt=""/>
+                                        <span>9</span>
                                     </div>
-
+                                    <span class="dark">Tên</span><br/>
+                                    địa chỉ, thành phố<br/>
+                                    <img src="{{asset('images/check.png')}}" alt=""/><br/>
+                                    <span class="green">Đề xuất<br/>cho tất cả mọi người</span>
                                 </div>
-                            </div>
-                            <div class="col-md-8 offset-0">
-                                <div class="padding20">
-                                    <span class="opensans size13 lgrey"><?php echo "" ?></span><br/>
-                                    <p><?php echo "" ?></p>
 
-                                </div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
+                        <div class="col-md-8 offset-0">
+                            <div class="padding20">
+                                <span class="opensans size13 lgrey">2018-10-10</span><br/>
+                                <p>Đánh giá</p>
+                                <ul class="circle-list">
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                    <li>9</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
 
-                        <div class="line2"></div>
-
+                    <div class="line2"></div>
 
                     <br/>
                     <br/>
@@ -421,7 +394,7 @@
                             <textarea class="form-control margtop10" rows="3" id="comment"></textarea>
 
                             <div class="clearfix"></div>
-                            <button type="submit" class="btn-search4 margtop20" id="addreview" value="">Đánh giá</button>
+                            <button type="submit" class="btn-search4 margtop20" id="addreview" value="hotelid">Đánh giá</button>
 
                             <br/>
                             <br/>
@@ -443,9 +416,8 @@
                 <div class="cpadding0 mt-10">
                     <span class="icon-quote"></span>
                     <p class="opensans size16 grey2">
-
                         <br/>
-                        <span class="lato lblue bold size13"><i>Sự nhận xét của khách hàng</i></span></p>
+                        <span class="lato lblue bold size13"><i>Nhận xét của A</i></span></p>
                 </div>
             </div>
 
@@ -459,32 +431,32 @@
             </div><br/>
 
             {{--<div class="pagecontainer2 mt20 alsolikebox">--}}
-            {{--<div class="cpadding1">--}}
-            {{--<span class="icon-location"></span>--}}
-            {{--<h3 class="opensans">Bạn có thể thích</h3>--}}
-            {{--<div class="clearfix"></div>--}}
-            {{--</div>--}}
-            {{--<div class="cpadding1 ">--}}
-            {{--<a href="#"><img src="{{asset('images/smallthumb-1.jpg')}}" class="left mr20" alt=""/></a>--}}
-            {{--<a href="#" class="dark"><b>Hotel Amaragua</b></a><br/>--}}
-            {{--<span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span><br/>--}}
-            {{--<img src="{{asset('images/filter-rating-5.png')}}" alt=""/>--}}
-            {{--</div>--}}
-            {{--<div class="line5"></div>--}}
-            {{--<div class="cpadding1 ">--}}
-            {{--<a href="#"><img src="{{asset('images/smallthumb-2.jpg')}}" class="left mr20" alt=""/></a>--}}
-            {{--<a href="#" class="dark"><b>Hotel Amaragua</b></a><br/>--}}
-            {{--<span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span><br/>--}}
-            {{--<img src="{{asset('images/filter-rating-5.png')}}" alt=""/>--}}
-            {{--</div>--}}
-            {{--<div class="line5"></div>--}}
-            {{--<div class="cpadding1 ">--}}
-            {{--<a href="#"><img src="{{asset('images/smallthumb-3.jpg')}}" class="left mr20" alt=""/></a>--}}
-            {{--<a href="#" class="dark"><b>Hotel Amaragua</b></a><br/>--}}
-            {{--<span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span><br/>--}}
-            {{--<img src="{{asset('images/filter-rating-5.png')}}" alt=""/>--}}
-            {{--</div>--}}
-            {{--<br/>--}}
+                {{--<div class="cpadding1">--}}
+                    {{--<span class="icon-location"></span>--}}
+                    {{--<h3 class="opensans">Bạn có thể thích</h3>--}}
+                    {{--<div class="clearfix"></div>--}}
+                {{--</div>--}}
+                {{--<div class="cpadding1 ">--}}
+                    {{--<a href="#"><img src="{{asset('images/smallthumb-1.jpg')}}" class="left mr20" alt=""/></a>--}}
+                    {{--<a href="#" class="dark"><b>Hotel Amaragua</b></a><br/>--}}
+                    {{--<span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span><br/>--}}
+                    {{--<img src="{{asset('images/filter-rating-5.png')}}" alt=""/>--}}
+                {{--</div>--}}
+                {{--<div class="line5"></div>--}}
+                {{--<div class="cpadding1 ">--}}
+                    {{--<a href="#"><img src="{{asset('images/smallthumb-2.jpg')}}" class="left mr20" alt=""/></a>--}}
+                    {{--<a href="#" class="dark"><b>Hotel Amaragua</b></a><br/>--}}
+                    {{--<span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span><br/>--}}
+                    {{--<img src="{{asset('images/filter-rating-5.png')}}" alt=""/>--}}
+                {{--</div>--}}
+                {{--<div class="line5"></div>--}}
+                {{--<div class="cpadding1 ">--}}
+                    {{--<a href="#"><img src="{{asset('images/smallthumb-3.jpg')}}" class="left mr20" alt=""/></a>--}}
+                    {{--<a href="#" class="dark"><b>Hotel Amaragua</b></a><br/>--}}
+                    {{--<span class="opensans green bold size14">$36-$160</span> <span class="grey">avg/night</span><br/>--}}
+                    {{--<img src="{{asset('images/filter-rating-5.png')}}" alt=""/>--}}
+                {{--</div>--}}
+                {{--<br/>--}}
 
 
             {{--</div>--}}
@@ -496,7 +468,6 @@
 
 </div>
 <!-- END OF CONTENT -->
-
 
 <!-- Javascript -->
 <script src="{{asset('assets/js/js-details.js')}}"></script>
