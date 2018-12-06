@@ -42,6 +42,10 @@ Route :: get('/admin',function() {
 	return view('admin');
 });
 
+Route :: get('/filter',function(){
+	return view('hotel');
+});
+
 
 Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
 
