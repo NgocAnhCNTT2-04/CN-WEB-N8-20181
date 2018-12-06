@@ -215,7 +215,8 @@
 
             <br/><br/>
             <div class="clearfix"></div>
-
+            
+            @include('hotellist')
             <!-- End of offset1-->
 
             {{--<div class="hpadding20">--}}
