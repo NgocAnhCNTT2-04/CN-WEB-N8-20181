@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/profile/{id}', 'UserController@showProfile');
 
 Route::get('/book', function(){
@@ -29,22 +25,20 @@ Route:: get('/login', function (){
     return view('login');
 });
 
-Route :: get('/user', function (){
+Route:: get('/user', function (){
     return view('user');
 });
 
 
-Route :: get('/detail',function (){
+Route:: get('/detail',function (){
     return view('detail');
 });
 
-Route :: get('/admin',function() {
-	return view('admin');
-});
-
-Route :: get('/filter',function(){
+Route:: get('/filter',function(){
 	return view('hotel');
 });
+
+Route:: get('/admin', 'AdminController@showAdminPage');
 
 
 Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
@@ -53,5 +47,5 @@ Route:: post('/profile/changepassword', 'UserController@changePassword') -> name
 
 Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');
 
-Route::get('admin', 'AdminController@showAdminPage');
+Route:: post('/admin/updatehotel', 'HotelController@updateHotel') -> name('updatehotel');
 

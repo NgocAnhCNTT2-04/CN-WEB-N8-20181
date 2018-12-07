@@ -38,13 +38,6 @@
 
     <link href="{{asset('css/switch.css')}}" rel="stylesheet" />
 
-    <script type="text/javascript" src="{{asset('js/userrole.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/userstatus.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/deletehotel.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/showhotelinfo.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/updatehotel.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/showaddhotel.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/addhotel.js')}}"></script>
 
 </head>
 <body id="top" class="thebg" >
@@ -428,6 +421,8 @@
 
 <!-- Javascript  -->
 <script src="{{asset('assets/js/js-profile.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/showhotelinfo.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/updatehotel.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
