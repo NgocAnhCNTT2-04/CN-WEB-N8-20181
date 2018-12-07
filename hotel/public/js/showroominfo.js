@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('.btn-search5.right').click(function () {
-        var hotel_id = $(this).data('hotelid');
-        var divid = '#info'.concat(hotel_id);
+    $('.btn-search5.right.room').click(function () {
+        var room_id = $(this).data('hotelid');
+        var divid = '#info'.concat(room_id);
 
         var e = $(divid)[0];
 

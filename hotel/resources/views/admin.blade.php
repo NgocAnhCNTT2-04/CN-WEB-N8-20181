@@ -80,6 +80,11 @@
                     <li>
                         <a href="#bookings" data-toggle="tab" onclick="mySelectUpdate()">
                             <span class="bookings-icon"></span>
+                            Quản lý khách sạn
+                        </a></li>
+                    <li>
+                        <a href="#rooms" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="bookings-icon"></span>
                             Quản lý phòng khách sạn
                         </a></li>
                 </ul>
@@ -394,7 +399,227 @@
                         </div>
                     </div>
                     <!-- END OF TAB 2 -->
+                    <!-- START OF TAB 3 -->
+                    <div class="tab-pane" id="rooms">
+                        <div class="padding40">
 
+                            <span class="dark size18">Danh sách phòng</span>
+
+                            <div class="line4"></div>
+                            <br/>
+                            <div class="itemscontainer offset-1" id="roomlist">
+                                <div class="padding20">
+                                    <div class="col-md-4 offset-0">
+                                        <a href="#">
+                                                <img src="{{asset('images/hotel/loading.png')}}" alt="" class="fwimg"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-8 offset-0">
+                                        <div class="col-md-8 mediafix1">
+                                            <h4 class="opensans dark bold margtop1 lh1">Tên khách sạn/Loại phòng</h4>
+                                            Sức chứa:4 người
+                                            </br>
+                                            Loại giường
+                                            <ul class="hotelpreferences2">
+                                                <li class="icohp-internet"></li>
+                                                <li class="icohp-air"></li>
+                                                <li class="icohp-hairdryer"></li>
+                                                <li class="icohp-tv"></li>
+                                                <li class="icohp-fridge"></li>
+                                                <li class="icohp-microwave"></li>
+                                                <li class="icohp-roomservice"></li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                            <ul class="checklist2 margtop10">
+                                                <li>Có thể hoàn hủy</li>
+                                                <li>Bao gồm bữa sáng</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4 center bordertype4">
+                                            <span class="opensans green size24">500,000 đ</span><br/>
+                                            <span class="opensans lightgrey size12">giá / 1 đêm</span><br/><br/>
+                                            <div class="col-md-1 offset-0" style="margin-left: 100px">
+                                            <button type="submit" class="btn-search5 right" data-hotelid = "room1">Xem</button>
+                                            </div>
+                                            <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="delete" value="">×</button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="line2"></div>
+                                <div class="col-md-12 offset-0" id="inforoom1" style="display: none">
+                                        <span class="size16 bold">Thông tin phòng</span>
+                                        <div class="line2"></div>
+                                        <div class="clearfix"></div>
+
+                                        <br/>
+                                        Chất lượng*:
+                                        <input type="text" class="form-control" value="" rel="popover" id="">
+
+                                        <br/>
+                                        Sức chứa*:
+                                        <input type="text" class="form-control" value="" rel="popover" id="">
+
+                                        <br/>
+                                        Loại giường*:
+                                        <input type="text" class="form-control" value="" id="">
+
+                                        <br/>
+                                        Số lượng phòng*:
+                                        <input type="text" class="form-control" value="" id="">
+
+                                        <br/>
+                                        Giá mỗi đêm*:<br/>
+                                        <input type="number" class="form-control" value="" id="" />
+
+
+                                        <br/>
+                                        <br/>
+                                        <span class="size16 bold">Tiện nghi phòng</span>
+                                        <div class="line2"></div>
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Internet
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Điều hoà
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Máy sấy tóc
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Tivi
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Tủ lạnh
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Lò vi sóng
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references" id="" >Dịch vụ phòng
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Có thể hoàn huỷ
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="" >Bữa sáng
+                                            </label>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <button type="submit" class="bluebtn margtop20" id="" value="">Cập nhật</button>
+                                </div>
+                            </div>
+                            <button type="submit" class="bluebtn margtop20" id="addroom">Thêm phòng mới</button>
+
+                            <div class="col-md-12 offset-0" id="newroominfor" style="display: none">
+                                <div class="line2"></div>
+                                <div class="clearfix"></div>
+
+                                <br/>
+                                Khách sạn*:
+                                <input type="text" class="form-control" rel="popover" id="newname">
+
+                                <br/>
+                                Loại phòng (chất lượng)*:
+                                <input type="text" class="form-control" rel="popover" id="newdescription">
+
+                                <br/>
+                                Sức chứa*:
+                                <input type="text" class="form-control" id="newcity">
+
+                                <br/>
+                                Loại giường*:
+                                <input type="text" class="form-control" id="newaddress">
+
+                                <br/>
+                                Số lượng phòng*:<br/>
+                                <input type="number" class="form-control" id="newdistance" />
+
+                                <br/>
+                                Giá mỗi đêm*:<br/>
+                                <input type="number" class="form-control" id="newprice"/>
+
+                                <br/>
+                                Thư mục ảnh:<br/>
+                                <input type="text" class="form-control" id="newimgfolder"/>
+
+
+                                <br/>
+                                <br/>
+                                <span class="size16 bold">Tiện nghi phòng</span>
+                                <div class="line2"></div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newwifi">Internet
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newpark">Điều hoà
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newelevator">Máy sấy tóc
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newspa">Tivi
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newpool">Tủ lạnh
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newgym">Lò vi sóng
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references" id="newrestaurant" >Dịch vụ phòng
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newcoffee">Có thể hoàn huỷ
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newbar">Bữa sáng
+                                    </label>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <button type="submit" class="bluebtn margtop20" id="addhotel">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- End of Tab panes from left menu -->
 
@@ -423,6 +648,9 @@
 <script src="{{asset('assets/js/js-profile.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/showhotelinfo.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updatehotel.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/showaddhotel.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/showroominfo.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/showaddroom.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
