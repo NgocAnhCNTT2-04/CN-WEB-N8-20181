@@ -156,38 +156,40 @@
 
                             <div class="line4"></div>
                             <br/>
+                            @foreach($hotels as $ht)
                                 <div class="col-md-4 offset-0">
-                                    <a href="#"><img alt="" class="left mr20" src="{{asset('images/hotel/1/main.jpg')}}" width="96px" height="61px"></a>
-                                    <a class="dark" href="#"><b>"Khách sạn 1"</b></a> /
-                                    <span class="dark size12">Địa chỉ</span>
+                                    <a href="{{url('/hotel/detail/' . $ht->id)}}"><img alt="" class="left mr20" src="{{asset('images/' . $ht->img_folder . "/main.jpg")}}" width="96px" height="61px"></a>
+                                    <a class="dark" href="{{url('/hotel/detail/' . $ht->id)}}"><b>{{$ht->name}}</b></a> /
+                                    <span class="dark size12">{{$ht->address}}</span>
                                     <br>
-                                    <img alt="" src="{{asset('images/filter-rating-5.png')}}"><br/>
-                                    <span class="opensans green bold size14">Từ 1000000</span> <span class="grey"> / đêm</span><br>
+                                    <img alt="" src="{{asset('images/filter-rating-' . $ht->stars . '.png')}}"><br/>
+                                    <span class="opensans green bold size14">{{"Từ " . number_format($ht->lowest_price, 0, '.', ',') . " VNĐ"}}</span> <span class="grey"> / đêm</span><br>
                                 </div>
                                 <div class="col-md-7">
-                                <span class="grey">Mô tả</span>
+                                <span class="grey"><?php if(strlen($ht->description) > 300) echo substr($ht->description, 0, 300) . '...';
+                                    else echo $ht->description; ?></span>
                                 </div>
                                 <div class="col-md-1 offset-0">
-                                    <button type="submit" class="btn-search5 right" data-hotelid = "idhotel">Xem</button>
+                                    <button type="submit" class="btn-search5 right" data-hotelid = "{{$ht->id}}">Xem</button>
                                 </div>
-                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="delete" value="">×</button>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="delete" value="{{$ht->id}}">×</button>
                                 <div class="clearfix"></div>
                                 <div class="line4"></div>
                                     <div class="clearfix"></div>
 
                                     <!-- COL 1 -->
-                                    <div class="col-md-12 offset-0" id="infoidhotel" style="display: none">
+                                    <div class="col-md-12 offset-0" id="{{'info' . $ht->id}}" style="display: none">
                                         <span class="size16 bold">Thông tin khách sạn</span>
                                         <div class="line2"></div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="kind1" id="idkind1" value="option1">
+                                                <input type="radio" name="{{'type' . $ht->id}}" id="{{'Acomodation1' . $ht->id}}" value="option1" <?php if ($ht->type == 'hotel') echo 'checked'; ?>>
                                                 Hotel
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="kind2" id="idkind2" value="option2">
+                                                <input type="radio" name="{{'type' . $ht->id}}" id="{{'Acomodation2' . $ht->id}}" value="option2" <?php if ($ht->type == 'resort') echo 'checked'; ?>>
                                                 Resort
                                             </label>
                                         </div>
@@ -195,31 +197,31 @@
 
                                         <br/>
                                         Tên*:
-                                        <input type="text" class="form-control" value="Tên khách sạn" rel="popover" id="idhotel">
+                                        <input type="text" class="form-control" value="{{$ht->name}}" rel="popover" id="{{'name' . $ht->id}}">
 
                                         <br/>
                                         Mô tả*:
-                                        <input type="text" class="form-control" value="Mô tả" rel="popover" id="description">
+                                        <input type="text" class="form-control" value="{{$ht->description}}" rel="popover" id="{{'description' . $ht->id}}">
 
                                         <br/>
                                         Thành phố*:
-                                        <input type="text" class="form-control" value="Thành phố" id="idcity">
+                                        <input type="text" class="form-control" value="{{$ht->city}}" id="{{'city' . $ht->id}}">
 
                                         <br/>
                                         Địa chỉ:
-                                        <input type="text" class="form-control" value="Địa chỉ" id="idaddres">
+                                        <input type="text" class="form-control" value="{{$ht->address}}" id="{{'address' . $ht->id}}">
 
                                         <br/>
                                         Khoảng cách tới trung tâm:<br/>
-                                        <input type="number" class="form-control" value="Khoảng cách tới trung tâm" id="iddistance" />
+                                        <input type="number" class="form-control" value="{{$ht->distance_to_centre}}" id="{{'distance' . $ht->id}}" />
 
                                         <br/>
                                         Giá phòng thấp nhất:<br/>
-                                        <input type="number" class="form-control" value="Giá phòng thấp nhất" id="idlowest"/>
+                                        <input type="number" class="form-control" value="{{$ht->lowest_price}}" id="{{'lowest_price' . $ht->id}}"/>
 
                                         <br/>
                                         Số sao:<br/>
-                                        <input type="number" class="form-control" value="Số sao" id="idstar"/>
+                                        <input type="number" class="form-control" value="{{$ht->stars}}" id="{{'stars' . $ht->id}}"/>
 
 
                                         <br/>
@@ -229,62 +231,63 @@
 
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="wifi" >Wifi miễn phí
+                                                <input type="checkbox" name="references[]" id="{{'wifi' . $ht->id}}" <?php if ($ht->wifi) echo "checked" ?>>Wifi miễn phí
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="park" >Bãi đỗ xe
+                                                <input type="checkbox" name="references[]" id="{{'park' . $ht->id}}" <?php if ($ht->park) echo "checked" ?>>Bãi đỗ xe
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="elevator">Thang máy
+                                                <input type="checkbox" name="references[]" id="{{'elevator' . $ht->id}}" <?php if ($ht->elevator) echo "checked" ?>>Thang máy
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="spa">Spa
+                                                <input type="checkbox" name="references[]" id="{{'spa' . $ht->id}}" <?php if ($ht->spa) echo "checked" ?>>Spa
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="pool">Hồ bơi
+                                                <input type="checkbox" name="references[]" id="{{'pool' . $ht->id}}" <?php if ($ht->swimming_pool) echo "checked" ?>>Hồ bơi
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="gym">Phòng gym
+                                                <input type="checkbox" name="references[]" id="{{'gym' . $ht->id}}" <?php if ($ht->gym) echo "checked" ?>>Phòng gym
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references" id="restaurant">Nhà hàng
+                                                <input type="checkbox" name="references" id="{{'restaurant' . $ht->id}}" <?php if ($ht->restaurant) echo "checked" ?>>Nhà hàng
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="coffee">Quán cà phê
+                                                <input type="checkbox" name="references[]" id="{{'coffee' . $ht->id}}" <?php if ($ht->coffee) echo "checked" ?>>Quán cà phê
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="bar">Quầy bar
+                                                <input type="checkbox" name="references[]" id="{{'bar' . $ht->id}}" <?php if ($ht->bar) echo "checked" ?>>Quầy bar
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="pets">Cho phép thú nuôi
+                                                <input type="checkbox" name="references[]" id="{{'pets' . $ht->id}}" <?php if ($ht->pets) echo "checked" ?>>Cho phép thú nuôi
                                             </label>
                                         </div>
                                         <div class="clearfix"></div>
 
-                                        <button type="submit" class="bluebtn margtop20" id="updatehotel" value="id">Cập nhật</button>
+                                        <button type="submit" class="bluebtn margtop20" id="{{'updatehotel' . $ht->id}}" value="{{$ht->id}}">Cập nhật</button>
                                     </div>
                                     <!-- END OF COL 1 -->
 
                                     <div class="clearfix"></div></br>
 
+                            @endforeach
                             <button type="submit" class="bluebtn margtop20" id="addht">Thêm khách sạn mới</button>
 
                             <div class="col-md-12 offset-0" id="newinfor" style="display: none">

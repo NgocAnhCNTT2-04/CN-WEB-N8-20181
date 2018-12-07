@@ -53,3 +53,5 @@ Route:: post('/profile/changepassword', 'UserController@changePassword') -> name
 
 Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');
 
+Route::get('admin', 'AdminController@showAdminPage');
+

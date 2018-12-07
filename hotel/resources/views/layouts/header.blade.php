@@ -22,7 +22,7 @@
           <li><a href="#">Đăng ký</a></li>
         </ul>
         </li>
-          <li><a href="#">Quản lý</a></li>
+          <li><a href="{{url('/admin')}}">Quản lý</a></li>
       </ul>
       </div>
       <!-- /Navigation-->
