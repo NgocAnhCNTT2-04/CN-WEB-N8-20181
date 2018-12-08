@@ -34,10 +34,6 @@ Route:: get('/detail',function (){
     return view('detail');
 });
 
-Route:: get('/filter',function(){
-	return view('hotel');
-});
-
 Route:: get('/admin', 'AdminController@showAdminPage');
 
 

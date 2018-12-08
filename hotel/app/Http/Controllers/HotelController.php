@@ -61,14 +61,14 @@ class HotelController extends Controller
 //
 //        $statistic = $this->handleReviews($reviews);
 
-        return view('hotel', ['ds_hotel' => $ds_hotel]);
+        return view('hotel', ['ds_hotel' => $ds_hotel, 'city' => $city]);
     }
 
     public function getHotelByCity($city)
     {
         $ds_hotel = Hotel::getHotelByCity($city);
 
-        return view('hotel', ['ds_hotel' => $ds_hotel]);
+        return view('hotel', ['ds_hotel' => $ds_hotel, 'city' => $city]);
     }
 
     public function filterHotel(Request $request)

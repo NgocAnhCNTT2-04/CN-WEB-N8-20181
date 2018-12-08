@@ -28,7 +28,7 @@ class Hotel extends Model
 
     public static function filterHotel($stars, $city, $min_price, $max_price, $min_distance, $max_distance, $type, $references)
     {
-        $ds_hotel = Hotel::where('city', 'like', $city)
+        $ds_hotel = Hotel::where('city', 'like', "%$city%")
                         ->where('type', '=', $type)
                         ->whereIn('stars', $stars)
                         ->whereBetween('lowest_price', [$min_price, $max_price])
@@ -49,7 +49,7 @@ class Hotel extends Model
 
     public static function sortHotel($stars, $city, $min_price, $max_price, $min_distance, $max_distance, $type, $references, $prop, $option)
     {
-        $ds_hotel = Hotel::where('city', 'like', $city)
+        $ds_hotel = Hotel::where('city', 'like', "%$city%")
             ->where('type', '=', $type)
             ->whereIn('stars', $stars)
             ->whereBetween('lowest_price', [$min_price, $max_price])

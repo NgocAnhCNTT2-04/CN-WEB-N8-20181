@@ -78,9 +78,7 @@
                 <li>/</li>
                 <li>Khách sạn</li>
                 <li>/</li>
-                @if(!empty($ds_hotel))
-                <li><a href="{{url('hotel/' . $ds_hotel[0]->city)}}" class="active" id="city"><?php echo $ds_hotel[0]->city; ?></a></li>
-                @endif
+                <li style="display: none;"><a href="" class="active" id="city"><?php echo $city; ?></a></li>
             </ul>
         </div>
         <a class="backbtn right" href="#"></a>
