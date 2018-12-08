@@ -5,8 +5,19 @@
     <!-- TOP TIP -->
     <div class="filtertip">
         <div class="padding20">
-            <p class="size13"><span class="size18 bold">10</span> khách sạn bắt đầu từ</p>
-            <p class="size30 bold">1,000,000 đ</p>
+            <p class="size13"><span class="size18 bold"><?php if($ds_hotel) echo count($ds_hotel); ?></span> khách sạn bắt đầu từ</p>
+            <?php
+                if($ds_hotel)
+                {
+                    $min = 100000000;
+                    foreach ($ds_hotel as $hotel)
+                    {
+                        if($hotel->lowest_price < $min)
+                            $min = $hotel->lowest_price;
+                    }
+                }
+            ?>
+            <p class="size30 bold"><?php echo number_format($min, 0, '.', ',') . " đ";?></p>
             <p class="size13">Bạn có thể lọc các khách sạn theo ý mình</p>
         </div>
         <div class="tip-arrow"></div>
@@ -19,7 +30,7 @@
     <div class="bookfilters hpadding20">
         <div class="clearfix"></div><br/>
         <!-- HOTELS TAB -->
-        <form action="#" method="get">
+        <form action="{{url('/hotel/search')}}" method="get">
         <div class="hotelstab2 none">
             <span class="opensans size13">Bạn muốn đi đâu?</span>
             <input type="text" name="city" class="form-control" placeholder="vd: Hà Nội">

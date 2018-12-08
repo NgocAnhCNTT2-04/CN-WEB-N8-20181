@@ -34,4 +34,212 @@ class HotelController extends Controller
         Hotel::updateHotel($hotelid, $type, $name, $description, $city, $address, $distance, $wifi, $park, $elevator, $restaurant, $coffee, $bar, $pool, $spa, $gym, $pets, $lowest_price, $stars);
         return redirect() -> back();
     }
+
+    public function search(Request $request)
+    {
+        $city = $request->input("city");
+
+        $checkin = $request->input("checkin");
+        $checkin = strtotime($checkin);
+        $checkin = date('Y-m-d', $checkin);
+
+        $checkout = $request->input("checkout");
+        $checkout = strtotime($checkout);
+        $checkout = date('Y-m-d', $checkout);
+
+        $sophong = $request->input("sophong");
+
+        $sokhach = $request->input("sokhach");
+
+        session(['checkin' => $checkin]);
+        session(['checkout' => $checkout]);
+        session(['sophong' => $sophong]);
+        session(['sokhach' => $sokhach]);
+
+        $ds_hotel = Hotel::getHotelByCity($city);
+//        $reviews = Review::getReviewOfHotel($id);
+//
+//        $statistic = $this->handleReviews($reviews);
+
+        return view('hotel', ['ds_hotel' => $ds_hotel]);
+    }
+
+    public function getHotelByCity($city)
+    {
+        $ds_hotel = Hotel::getHotelByCity($city);
+
+        return view('hotel', ['ds_hotel' => $ds_hotel]);
+    }
+
+    public function filterHotel(Request $request)
+    {
+        $stars = $request->input('stars');
+        $city = $request->input('city');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $min_distance = $request->input('min_distance');
+        $max_distance = $request->input('max_distance');
+        $type = $request->input('type');
+        $references = $request->input('references');
+        $ds_hotel = Hotel::filterHotel($stars, $city, $min_price, $max_price, $min_distance, $max_distance, $type, $references);
+        return view('hotellist', ['ds_hotel' => $ds_hotel]);
+    }
+
+    public function sortHotel(Request $request)
+    {
+        $stars = $request->input('stars');
+        $city = $request->input('city');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $min_distance = $request->input('min_distance');
+        $max_distance = $request->input('max_distance');
+        $type = $request->input('type');
+        $references = $request->input('references');
+        $prop = $request->input('prop');
+        $option = $request->input('option');
+        $ds_hotel = Hotel::sortHotel($stars, $city, $min_price, $max_price, $min_distance, $max_distance, $type, $references, $prop, $option);
+        return view('hotellist', ['ds_hotel' => $ds_hotel]);
+    }
+
+    public function getDSS(Request $request)
+    {
+        // lọc các khách sạn thỏa mãn yêu cầu tối thiểu
+        $stars = $request->input('stars');
+        $city = $request->input('city');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $min_distance = $request->input('min_distance');
+        $max_distance = $request->input('max_distance');
+        $type = $request->input('type');
+        $references = $request->input('references');
+        $ds_hotel = DB::table('hotels')
+                        ->where('city', 'like', $city)
+                        ->where('type', '=', $type)
+                        ->whereIn('stars', $stars)
+                        ->whereBetween('lowest_price', [$min_price, $max_price])
+                        ->whereBetween('distance_to_centre', [$min_distance, $max_distance])
+                        ->whereIn('wifi', [$references[0], 1])
+                        ->whereIn('park', [$references[1], 1])
+                        ->whereIn('elevator', [$references[2], 1])
+                        ->whereIn('spa', [$references[3], 1])
+                        ->whereIn('swimming_pool', [$references[4], 1])
+                        ->whereIn('gym', [$references[5], 1])
+                        ->whereIn('restaurant', [$references[6], 1])
+                        ->whereIn('coffee', [$references[7], 1])
+                        ->whereIn('bar', [$references[8], 1])
+                        ->whereIn('pets', [$references[9], 1])
+                        ->get();
+
+        // đưa các thuộc tính về cùng kiểu thuộc tính lợi ích
+        $distance = array();
+        $facility = array();
+        $price = array();
+        $stars = array();
+        $rate = array();
+        $popular = array();
+        foreach ($ds_hotel as $ht)
+        {
+            $distance[] = 1 / $ht->distance_to_centre;
+            $facility[] = $ht->wifi + $ht->park + $ht->elevator + $ht->restaurant + $ht->coffee + $ht->bar + $ht->swimming_pool + $ht->spa + $ht->gym + $ht->pets;
+            $price[] = 1 / $ht->lowest_price;
+            $stars[] = $ht->stars;
+            $rate[] = $ht->rate;
+            $popular[] = $ht->number_of_rate;
+        }
+
+        // chuẩn hóa thuộc tính: dùng chuẩn hóa vector
+        $dis_norm = 0;
+        $facility_norm = 0;
+        $price_norm = 0;
+        $stars_norm = 0;
+        $rate_norm = 0;
+        $popular_norm = 0;
+        for ($i = 0; $i < count($distance); $i++)
+        {
+           $dis_norm += pow($distance[$i], 2);
+           $facility_norm += pow($facility[$i], 2);
+           $price_norm += pow($price[$i], 2);
+           $stars_norm += pow($stars[$i], 2);
+           $rate_norm += pow($rate[$i], 2);
+           $popular_norm += pow($popular[$i], 2);
+        }
+
+        for ($i = 0; $i < count($distance); $i++)
+        {
+            $distance[$i] /= sqrt($dis_norm);
+            $facility[$i] /= sqrt($facility_norm);
+            $price[$i] /= sqrt($price_norm);
+            $stars[$i] /= sqrt($stars_norm);
+            $rate[$i] /= sqrt($rate_norm);
+            $popular[$i] /= sqrt($popular_norm);
+        }
+
+        // tính trọng số
+        $sum = $request->input('w1') + $request->input('w2') + $request->input('w3') + $request->input('w4') + $request->input('w5') + $request->input('w6');
+        $w1 = $request->input('w1') / $sum;
+        $w2 = $request->input('w2') / $sum;
+        $w3 = $request->input('w3') / $sum;
+        $w4 = $request->input('w4') / $sum;
+        $w5 = $request->input('w5') / $sum;
+        $w6 = $request->input('w6') / $sum;
+
+        // tính các giá trị theo trọng số
+
+        for ($i = 0; $i < count($distance); $i++)
+        {
+            $distance[$i] *= $w1;
+            $facility[$i] *= $w2;
+            $price[$i] *= $w3;
+            $stars[$i] *= $w4;
+            $rate[$i] *= $w5;
+            $popular[$i] *= $w6;
+        }
+
+        // tính phương án lý tưởng tốt và lý tưởng xấu
+        $best_distance = max($distance);
+        $best_facility = max($facility);
+        $best_price = max($price);
+        $best_stars = max($stars);
+        $best_rate = max($rate);
+        $best_popular = max($popular);
+
+        $worst_distance = min($distance);
+        $worst_facility = min($facility);
+        $worst_price = min($price);
+        $worst_stars = min($stars);
+        $worst_rate = min($rate);
+        $worst_popular = min($popular);
+
+        // tính khoảng cách và độ tương tự tới phương án lý tưởng
+        $score = array();
+        for ($i = 0; $i < count($distance); $i++)
+        {
+            $s1 = sqrt(pow($distance[$i] - $best_distance, 2)
+                         + pow($facility[$i] - $best_facility, 2)
+                         + pow($price[$i] - $best_price, 2)
+                         + pow($stars[$i] - $best_stars, 2)
+                         + pow($rate[$i] - $best_rate, 2)
+                         + pow($popular[$i] - $best_popular, 2));
+
+            $s2 = sqrt(pow($distance[$i] - $worst_distance, 2)
+                         + pow($facility[$i] - $worst_facility, 2)
+                         + pow($price[$i] - $worst_price, 2)
+                         + pow($stars[$i] - $worst_stars, 2)
+                         + pow($rate[$i] - $worst_rate, 2)
+                         + pow($popular[$i] - $worst_popular, 2));
+
+            $score[] = $s2 / ($s1 + $s2);
+        }
+
+        $i = 0;
+        foreach ($ds_hotel as $ht)
+        {
+            $ht->score = $score[$i];
+            $i++;
+        }
+
+        $ds_hotel = $ds_hotel->sortByDesc('score');
+
+        return view('hotellist', ['ds_hotel' => $ds_hotel, 'score' => $score]);
+    }
 }

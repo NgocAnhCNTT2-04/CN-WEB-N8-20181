@@ -50,7 +50,7 @@
 			<div class="fullscreenbanner">
 				<ul>
 					<li data-transition="fade" data-slotamount="1" data-masterspeed="300">
-						<a href="#"><img src="{{asset('images/slider/hanoi.jpg')}}" width="1920" height="769" alt=""/></a>
+						<a href="{{url('hotel/Hà Nội')}}"><img src="{{asset('images/slider/hanoi.jpg')}}" width="1920" height="769" alt=""/></a>
 						<div class="tp-caption scrolleffect sft"
 							 data-x="center"
 							 data-y="120"
@@ -64,7 +64,7 @@
 					</li>
 
 					<li data-transition="fade" data-slotamount="1" data-masterspeed="300">
-						<a href="#"><img src="{{asset('images/slider/danang.jpg')}}" width="1920" height="769" alt=""/></a>
+						<a href="{{url('hotel/Đà Nẵng')}}"><img src="{{asset('images/slider/danang.jpg')}}" width="1920" height="769" alt=""/></a>
 						<div class="tp-caption scrolleffect sft"
 							 data-x="center"
 							 data-y="120"
@@ -78,7 +78,7 @@
 					</li>
 
 					<li data-transition="fade" data-slotamount="1" data-masterspeed="300">
-						<a href="#"><img src="{{asset('images/slider/hcm.jpg')}}" width="1920" height="769" alt=""/></a>
+						<a href="{{url('hotel/Hồ Chí Minh')}}"><img src="{{asset('images/slider/hcm.jpg')}}" width="1920" height="769" alt=""/></a>
 						<div class="tp-caption scrolleffect sft"
 							 data-x="center"
 							 data-y="120"
@@ -176,7 +176,7 @@
 
 	<!-- WRAP -->
 	<div class="wrap cstyle03">
-		<form >
+		<form action="{{url('/hotel/search')}}" method="get">
 		<div class="container mt-130 z-index100">
 		  <div class="row">
 			<div class="col-md-12">
@@ -257,7 +257,9 @@
 					</div>
 
 					<div class="searchbg2">
+						{{--<form action="list4.html">--}}
 							<input type="submit" class="btn-search right mr30" value="Tìm kiếm">
+						{{--</form>--}}
 					</div>
 
 				</div>

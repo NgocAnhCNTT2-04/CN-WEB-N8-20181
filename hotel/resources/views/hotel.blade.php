@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Khách sạn tại Hà Nội</title>
+    <title>Tìm kiếm khách sạn</title>
 
     <!-- Bootstrap -->
     <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet" media="screen">
@@ -44,6 +44,13 @@
     <!-- jQuery -->
     <script src="{{asset('assets/js/jquery.v2.0.3.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+    </script>
 
     <!-- bin/jquery.slider.min.js -->
     <script type="text/javascript" src="{{asset('plugins/jslider/js/jshashtable-2.1_src.js')}}"></script>
@@ -71,7 +78,9 @@
                 <li>/</li>
                 <li>Khách sạn</li>
                 <li>/</li>
-                <li><a href="#" class="active" id="city">Thành phố</a></li>
+                @if(!empty($ds_hotel))
+                <li><a href="{{url('hotel/' . $ds_hotel[0]->city)}}" class="active" id="city"><?php echo $ds_hotel[0]->city; ?></a></li>
+                @endif
             </ul>
         </div>
         <a class="backbtn right" href="#"></a>
@@ -83,7 +92,9 @@
 <!-- CONTENT -->
 <div class="container">
     <div class="container pagecontainer offset-0">
+
         @include('layouts.filterbar')
+
         <!-- LIST CONTENT-->
         <div class="rightcontent col-md-9 offset-0">
 
@@ -215,7 +226,8 @@
 
             <br/><br/>
             <div class="clearfix"></div>
-            
+
+
             @include('hotellist')
             <!-- End of offset1-->
 
@@ -243,6 +255,7 @@
 
 </div>
 <!-- END OF CONTENT -->
+
 
 <!-- Javascript -->
 <script src="{{asset('assets/js/js-list4.js')}}"></script>

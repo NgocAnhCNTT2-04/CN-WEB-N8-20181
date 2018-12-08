@@ -49,3 +49,13 @@ Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');
 
 Route:: post('/admin/updatehotel', 'HotelController@updateHotel') -> name('updatehotel');
 
+Route::get('/hotel/search', 'HotelController@search');
+
+Route::get('/hotel/{city}', 'HotelController@getHotelByCity');
+
+Route::post('hotel/filter', 'HotelController@filterHotel');
+
+Route::post('hotel/sort', 'HotelController@sortHotel');
+
+Route::post('hotel/dss', 'HotelController@getDSS');
+
