@@ -336,6 +336,10 @@
                                 Thư mục ảnh:<br/>
                                 <input type="text" class="form-control" id="newimgfolder"/>
 
+                                <br/>
+                                Hình ảnh khách sạn:<br/>
+                                <input type="file" class="form-control" id="newimage"/>
+
 
                                 <br/>
                                 <br/>
