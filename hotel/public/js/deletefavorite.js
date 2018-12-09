@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('.delete-fav').click(function () {
-        alert('12345');
         var hotel_id = $(this).val();
         $.ajaxSetup({
                     headers: {
