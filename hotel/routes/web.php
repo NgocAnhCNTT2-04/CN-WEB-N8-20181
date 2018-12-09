@@ -44,6 +44,8 @@ Route:: post('/profile/changepassword', 'UserController@changePassword') -> name
 Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');
 
 Route:: post('/admin/updatehotel', 'HotelController@updateHotel') -> name('updatehotel');
+Route:: post('/admin/addhoteltest', 'HotelController@addHotelTest')->name('addhotel');
+Route:: post('/admin/saveimageupload', 'HotelController@saveImage');
 
 Route::get('/hotel/search', 'HotelController@search');
 

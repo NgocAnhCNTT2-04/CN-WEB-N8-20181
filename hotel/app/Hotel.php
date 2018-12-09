@@ -68,4 +68,33 @@ class Hotel extends Model
             ->get();
         return $ds_hotel;
     }
+
+    public static function addHotel($type, $name, $description, $city, $address, $distance, $wifi, $park, $elevator, $restaurant, $coffee, $bar, $pool, $spa, $gym, $pets, $lowest_price, $stars, $imgfolder)
+    {
+        $hotel = new Hotel();
+
+        $hotel->type = $type;
+        $hotel->name = $name;
+        $hotel->description = $description;
+        $hotel->city = $city;
+        $hotel->address = $address;
+        $hotel->distance_to_centre = $distance;
+        $hotel->wifi = $wifi;
+        $hotel->park = $park;
+        $hotel->elevator = $elevator;
+        $hotel->restaurant = $restaurant;
+        $hotel->coffee = $coffee;
+        $hotel->bar = $bar;
+        $hotel->swimming_pool = $pool;
+        $hotel->spa = $spa;
+        $hotel->gym = $gym;
+        $hotel->pets = $pets;
+        $hotel->lowest_price = $lowest_price;
+        $hotel->stars = $stars;
+        $hotel->img_folder = $imgfolder;
+        $hotel->rate = 0;
+        $hotel->number_of_rate = 0;
+
+        $hotel->save();
+    }
 }

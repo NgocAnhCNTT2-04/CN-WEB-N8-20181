@@ -41,7 +41,7 @@
 
 </head>
 <body id="top" class="thebg" >
-
+@include('layouts.header')
 
 <div class="container breadcrub">
     <div>
@@ -332,13 +332,16 @@
                                 Số sao:<br/>
                                 <input type="number" class="form-control" id="newstars"/>
 
-                                <br/>
-                                Thư mục ảnh:<br/>
-                                <input type="text" class="form-control" id="newimgfolder"/>
+                                <!--<form action="{{ action('HotelController@saveImage') }}" method="post" enctype="multipart/form-data">
+                                    {{ csrf_field() }}-->
+                                    <br/>
+                                    Thư mục ảnh:<br/>
+                                    <input type="text" class="form-control" id="newimgfolder" name = "newimgfolder"/>
 
-                                <br/>
-                                Hình ảnh khách sạn:<br/>
-                                <input type="file" class="form-control" id="newimage"/>
+                                    <br/>
+                                    Hình ảnh khách sạn:<br/>
+                                    <input type="file" class="form-control" id="newimage" multiple="multiple" enctype="multipart/form-data" name="image_upload[]"/>
+                                
 
 
                                 <br/>
@@ -398,7 +401,8 @@
                                 </div>
                                 <div class="clearfix"></div>
 
-                                <button type="submit" class="bluebtn margtop20" id="addhotel">Thêm</button>
+                                <button type="submit" class="bluebtn2 margtop20" id="addhotel">Thêm</button>
+                                <!--</form>-->
                             </div>
                         </div>
                     </div>
@@ -541,31 +545,31 @@
 
                                 <br/>
                                 Khách sạn*:
-                                <input type="text" class="form-control" rel="popover" id="newname">
+                                <input type="text" class="form-control" rel="popover" id="">
 
                                 <br/>
                                 Loại phòng (chất lượng)*:
-                                <input type="text" class="form-control" rel="popover" id="newdescription">
+                                <input type="text" class="form-control" rel="popover" id="">
 
                                 <br/>
                                 Sức chứa*:
-                                <input type="text" class="form-control" id="newcity">
+                                <input type="text" class="form-control" id="">
 
                                 <br/>
                                 Loại giường*:
-                                <input type="text" class="form-control" id="newaddress">
+                                <input type="text" class="form-control" id="">
 
                                 <br/>
                                 Số lượng phòng*:<br/>
-                                <input type="number" class="form-control" id="newdistance" />
+                                <input type="number" class="form-control" id="" />
 
                                 <br/>
                                 Giá mỗi đêm*:<br/>
-                                <input type="number" class="form-control" id="newprice"/>
+                                <input type="number" class="form-control" id=""/>
 
                                 <br/>
                                 Thư mục ảnh:<br/>
-                                <input type="text" class="form-control" id="newimgfolder"/>
+                                <input type="text" class="form-control" id=""/>
 
 
                                 <br/>
@@ -575,52 +579,52 @@
 
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newwifi">Internet
+                                        <input type="checkbox" name="references[]" id="">Internet
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newpark">Điều hoà
+                                        <input type="checkbox" name="references[]" id="">Điều hoà
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newelevator">Máy sấy tóc
+                                        <input type="checkbox" name="references[]" id="">Máy sấy tóc
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newspa">Tivi
+                                        <input type="checkbox" name="references[]" id="">Tivi
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newpool">Tủ lạnh
+                                        <input type="checkbox" name="references[]" id="">Tủ lạnh
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newgym">Lò vi sóng
+                                        <input type="checkbox" name="references[]" id="">Lò vi sóng
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references" id="newrestaurant" >Dịch vụ phòng
+                                        <input type="checkbox" name="references" id="" >Dịch vụ phòng
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newcoffee">Có thể hoàn huỷ
+                                        <input type="checkbox" name="references[]" id="">Có thể hoàn huỷ
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="newbar">Bữa sáng
+                                        <input type="checkbox" name="references[]" id="">Bữa sáng
                                     </label>
                                 </div>
                                 <div class="clearfix"></div>
 
-                                <button type="submit" class="bluebtn margtop20" id="addhotel">Thêm</button>
+                                <button type="submit" class="bluebtn margtop20" id="">Thêm</button>
                             </div>
                         </div>
                     </div>
@@ -646,7 +650,7 @@
 
 
 <!-- FOOTER -->
-
+@include('layouts.footer2')
 
 <!-- Javascript  -->
 <script src="{{asset('assets/js/js-profile.js')}}"></script>
@@ -655,6 +659,7 @@
 <script type="text/javascript" src="{{asset('js/showaddhotel.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/showroominfo.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/showaddroom.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/addhotel.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
