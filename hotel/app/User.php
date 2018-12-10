@@ -10,7 +10,7 @@ class User extends Model
     //
     protected $table = "user";
     public $timestamps = false;
-    protected $fillable = array('name','username','sex','email','phone','address','password');
+    protected $fillable = array('name','username','sex','email','phone','address','password','status');
 
     public function book(){
         return $this->hasMany('App\Book','user_id','id');
@@ -46,5 +46,12 @@ class User extends Model
     public static function changePassword($id,$newPassword){
         $user = User::find($id);
         $user->update(['password'=>$newPassword]);
+    }
+
+    public static function updateStatus($userid, $status)
+    {
+        $user = User::find($userid);
+
+        $user->update(['status'=>$status]);
     }
 }

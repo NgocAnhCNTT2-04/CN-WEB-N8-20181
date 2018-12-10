@@ -117,26 +117,33 @@
                                     <th>Trạng thái</th>
 
                                 </tr>
+                                @foreach($users as $index=>$user)
                                 <tr>
-                                    <td>1</td>
-                                        <td>Hằng</td>
-                                        <td>1212</td>
+                                    <td><?php echo $index+1; ?></td>
+                                    <td><?php echo $user->name;?></td>
+                                    <td><?php echo $user->email; ?></td>
                                     <td>
                                         <label class="switch">
+                                            <input type="checkbox" <?php if($user->admin) echo "checked" ?> class="js-user-role" data-userid="{{$user->id}}" type="checkbox">
+                                            <div class="slider round">
                                                 <span class="on">Admin</span>
-                                                <input type="checkbox"  class="js-user-role" data-userid="" type="checkbox">
-                                            </label>
+                                                <span class="off">Member</span>
+                                            </div>
+                                        </label>
                                     </td>
 
                                     <td>
                                         <label class="switch">
+                                            <input type="checkbox" <?php if($user->status) echo "checked" ?> class="js-user-status" data-userid="{{$user->id}}" type="checkbox">
+                                            <div class="slider round">
                                                 <span class="on">On</span>
-                                                <input type="checkbox"  class="js-user-status" data-userid="" type="checkbox">
-
-                                            </label>
+                                                <span class="off">Off</span>
+                                            </div>
+                                        </label>
 
                                     </td>
                                 </tr>
+                                @endforeach
                             </table>
                         </div>
                         <!-- END OF COL 1 -->
@@ -660,6 +667,7 @@
 <script type="text/javascript" src="{{asset('js/showroominfo.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/showaddroom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/addhotel.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/changeuserstatus.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
