@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\FavoriteHotel;
+use App\Review;
+use App\Room;
 
 class Hotel extends Model
 {
@@ -10,6 +13,21 @@ class Hotel extends Model
     protected $table = "hotels";
     public $timestamps = false;
     protected $fillable = array('name','description','city','address','distance_to_centre','wifi','park','elevator','restaurant','coffee','bar','swimming_pool','spa','gym','pets','lowest_price','type','stars');
+
+    public function review()
+    {
+        return $this->hasMany('App\Review', 'hotel_id', 'id');
+    }
+
+    public function room()
+    {
+        return $this->hasMany('App\Room', 'hotel_id', 'id');
+    }
+
+    public function favorite_hotel()
+    {
+        return $this->hasMany('App\FavoriteHotel', 'hotel_id', 'id');
+    }
 
     public static function updateHotel($hotelid, $type, $name, $description, $city, $address, $distance, $wifi, $park, $elevator, $restaurant, $coffee, $bar, $pool, $spa, $gym, $pets, $lowest_price, $stars)
     {
@@ -96,5 +114,18 @@ class Hotel extends Model
         $hotel->number_of_rate = 0;
 
         $hotel->save();
+    }
+
+    public static function deleteHotel($hotelid)
+    {
+        // FavoriteHotel::where(["hotel_id", "=", $hotelid])
+        //             ->delete();
+        // Review::where(["hotel_id", "=", $hotelid])
+        //         ->delete();
+
+        // Room::where(["hotel_id", "=", $hotelid])
+        //             ->delete();
+
+        $hotel = Hotel::where(["id", "=" , $hotelid])->delete();
     }
 }

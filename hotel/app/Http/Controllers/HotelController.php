@@ -312,4 +312,11 @@ class HotelController extends Controller
         return view('detail', ['hotel' => $hotel, 'ds_room' => $room_left, 'reviews' => $reviews, 'is_fav' => $is_fav]);
     }
 
+    public function deleteHotel(Request $request)
+    {
+        $hotelid = $request->input('hotel_id');
+
+        Hotel::deleteHotel($hotelid);
+    }
+
 }

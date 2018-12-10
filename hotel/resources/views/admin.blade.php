@@ -162,6 +162,7 @@
                             <div class="line4"></div>
                             <br/>
                             @foreach($hotels as $ht)
+                            <div>
                                 <div class="col-md-4 offset-0">
                                     <a href="{{url('/hotel/detail/' . $ht->id)}}"><img alt="" class="left mr20" src="{{asset('images/' . $ht->img_folder . "/main.jpg")}}" width="96px" height="61px"></a>
                                     <a class="dark" href="{{url('/hotel/detail/' . $ht->id)}}"><b>{{$ht->name}}</b></a> /
@@ -177,7 +178,7 @@
                                 <div class="col-md-1 offset-0">
                                     <button type="submit" class="btn-search5 right" data-hotelid = "{{$ht->id}}">Xem</button>
                                 </div>
-                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="delete" value="{{$ht->id}}">×</button>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" value="{{$ht->id}}">×</button>
                                 <div class="clearfix"></div>
                                 <div class="line4"></div>
                                     <div class="clearfix"></div>
@@ -291,6 +292,7 @@
                                     <!-- END OF COL 1 -->
 
                                     <div class="clearfix"></div></br>
+                                </div>
 
                             @endforeach
                             <button type="submit" class="bluebtn margtop20" id="addht">Thêm khách sạn mới</button>
@@ -669,6 +671,7 @@
 <script type="text/javascript" src="{{asset('js/addhotel.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/changeuserstatus.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/changeuserrole.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/deletehotel.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>

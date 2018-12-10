@@ -70,3 +70,5 @@ Route::get('/logout', ['as'=>'logout', function(){
 
 Route::post('/profile/favorite/add', 'FavoriteController@addHotel');
 
+Route::post('/admin/deletehotel', 'HotelController@deleteHotel');
+
