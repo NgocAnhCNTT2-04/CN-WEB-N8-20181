@@ -32,9 +32,7 @@ Route:: get('/user', function (){
 });
 
 
-Route:: get('/detail',function (){
-    return view('detail');
-});
+Route::get('/hotel/detail/{id}', 'HotelController@getHotelDetailById');
 
 Route:: get('/admin', 'AdminController@showAdminPage');
 
@@ -62,4 +60,6 @@ Route::post('hotel/dss', 'HotelController@getDSS');
 Route::post('user/updatestatus', 'UserController@updateStatus');
 
 Route::post('user/updaterole', 'UserController@updateRole');
+
+Route::post('/hotel/room/update', 'RoomController@updateStatusRoom');
 

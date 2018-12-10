@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Hotel;
+use App\Room;
+use App\Review;
+use App\Book;
+use App\FavoriteHotel;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -290,6 +294,22 @@ class HotelController extends Controller
             }
         }
         return redirect() -> back();
+    }
+
+    public function getHotelDetailById($id)
+    {
+        $hotel = Hotel::find($id);
+        $ds_room = Room::getRoomByHotelId($id);
+        $room_left = Book::getRoomLeft($ds_room);
+        $reviews = Review::getReviewOfHotel($id);
+
+        $userid = session('userid');
+        $fav = FavoriteHotel::where([["user_id", "=", $userid], ["hotel_id", "=", $id]])->first();
+        if ($fav)
+            $is_fav = 1;
+        else
+            $is_fav = 0;
+        return view('detail', ['hotel' => $hotel, 'ds_room' => $room_left, 'reviews' => $reviews, 'is_fav' => $is_fav]);
     }
 
 }

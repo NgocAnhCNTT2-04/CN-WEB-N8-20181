@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Tên khách sạn</title>
+    <title><?php echo $hotel->name; ?></title>
 
     <!-- Bootstrap -->
     <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet" media="screen">
@@ -55,6 +55,8 @@
 </head>
 <body id="top" class="thebg" >
 
+@include('layouts.header')
+
 <div class="container breadcrub">
     <div>
         <a class="homebtn left" href="{{url('')}}"></a>
@@ -63,9 +65,9 @@
                 <li>/</li>
                 <li>Khách sạn</li>
                 <li>/</li>
-                <li><a href="#" class="active">Thành phố</a></li>
+                <li><a href="{{url('hotel/' . $hotel->city)}}" class="active"><?php echo $hotel->city; ?></a></li>
                 <li>/</li>
-                <li id="hotelid" value="hotelid">Tên khách sạn</li>
+                <li id="hotelid" value="<?php echo $hotel->id; ?>"><?php echo $hotel->name; ?></li>
             </ul>
         </div>
         <a class="backbtn right" href="#"></a>
@@ -86,12 +88,19 @@
                     <div id="inner">
                         <div id="caroufredsel_wrapper2">
                             <div id="carousel">
-                                <img src="{{asset('images/hotel/1/main.jpg')}}" width="723" height="407" alt=""/>
+                                <?php
+                                    $path = public_path('images/' . $hotel->img_folder);
+                                ?>
+                                @foreach(glob($path . '/*.*') as $file)
+                                <img src="{{asset('images/' . $hotel->img_folder . '/' . basename($file))}}" width="723" height="407" alt=""/>
+                                @endforeach
                             </div>
                         </div>
                         <div id="pager-wrapper">
                             <div id="pager">
-                                <img src="{{asset('images/hotel/1/main.jpg')}}" width="120" height="68" alt=""/>
+                                @foreach(glob($path . '/*.*') as $file)
+                                <img src="{{asset('images/' . $hotel->img_folder . '/' . basename($file))}}" width="120" height="68" alt=""/>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -107,31 +116,82 @@
         <!-- RIGHT INFO -->
         <div class="col-md-4 detailsright offset-0">
             <div class="padding20">
-                <h4 class="lh1">Tên khách sạn</h4>
-                <img src="{{asset('images/filter-rating-5.png')}}" alt=""/>
+                <h4 class="lh1"><?php echo $hotel->name; ?></h4>
+                <img src="{{asset('images/filter-rating-' . $hotel->stars . '.png')}}" alt=""/>
             </div>
 
             <div class="line3"></div>
 
             <div class="hpadding20">
-                <h2 class="opensans slim green2">Xuất sắc
+                <h2 class="opensans slim green2">
+                    <?php
+                    $rate = $hotel->rate;
+                    if ($rate >= 8) echo "Xuất sắc!";
+                    else if ($rate < 8 && $rate >= 7) echo "Tốt";
+                    else if ($rate < 7 && $rate >= 5) echo "Khá";
+                    else echo "Trung bình";
+                    ?>
                 </h2>
             </div>
+
+            <?php
+            // tính số lượng khách recommend khách sạn và đánh giá trung bình
+                $recommends = 0;
+                foreach ($reviews as $review)
+                {
+                    if ($review->avg_rating >= 8)
+                        $recommends += 1;
+                }
+
+                $avg_location = 0;
+                $avg_room = 0;
+                $avg_service = 0;
+                $avg_cleaness = 0;
+                $avg_value = 0;
+                $avg_comfort = 0;
+                $avg_equipment = 0;
+                $avg_hotel = 0;
+                $avg_meal = 0;
+                foreach ($reviews as $review)
+                {
+                    $avg_location += $review->location;
+                    $avg_room += $review->room;
+                    $avg_service += $review->service;
+                    $avg_cleaness += $review->cleaness;
+                    $avg_value += $review->value;
+                    $avg_comfort += $review->comfort;
+                    $avg_equipment += $review->equipment;
+                    $avg_hotel += $review->hotel;
+                    $avg_meal += $review->meal;
+                }
+                $avg_location /= count($reviews);
+                $avg_room /= count($reviews);
+                $avg_service /= count($reviews);
+                $avg_cleaness /= count($reviews);
+                $avg_value /= count($reviews);
+                $avg_comfort /= count($reviews);
+                $avg_equipment /= count($reviews);
+                $avg_hotel /= count($reviews);
+                $avg_meal /= count($reviews);
+            ?>
 
             <div class="line3 margtop20"></div>
 
             <div class="col-md-6 bordertype1 padding20">
-                <span class="opensans size30 bold grey2">100%</span><br/>
+                <span class="opensans size30 bold grey2"><?php echo $recommends / count($reviews) * 100 . "%"; ?></span><br/>
                 khách<br/>đề xuất
             </div>
             <div class="col-md-6 bordertype2 padding20">
-                <span class="opensans size30 bold grey2">9</span>/10<br/>
+                <span class="opensans size30 bold grey2"><?php echo $hotel->rate; ?></span>/10<br/>
                 đánh giá của khách
             </div>
 
             <div class="col-md-6 bordertype3">
-                <img src="{{asset('images/user-rating-5.png')}}" alt=""/><br/>
-                10 đánh giá
+                <?php
+                $rate2 = round($rate/2);
+                ?>
+                <img src="{{asset('images/user-rating-' . $rate2 . '.png')}}" alt=""/><br/>
+                <?php echo $hotel->number_of_rate . " đánh giá" ?>
             </div>
             <div class="col-md-6 bordertype3">
                 <a href="#reviews" class="grey" id="showreview">+Thêm đánh giá</a>
@@ -139,8 +199,13 @@
             <div class="clearfix"></div><br/>
 
             <div class="hpadding20">
-                <button class="add2fav margtop5" id="addfavorite" data-hotelid="hotelid" data-userid="userid">
-                       Yêu thích
+                <button class="add2fav margtop5" id="addfavorite" data-hotelid="{{$hotel->id}}" data-userid="{{session('userid')}}">
+                    <?php
+                        if ($is_fav)
+                            echo "Bỏ yêu thích";
+                        else
+                            echo "Yêu thích";
+                    ?>
                 </button>
                 <a href="#rooms" class="booknow margtop20 btnmarg" id="showbook">Đặt phòng</a>
             </div>
@@ -213,9 +278,9 @@
                 </div>
 
                 <!-- TAB 2 -->
-                <div id="maps" class="tab-pane fade" data-address="địa chỉ, thành phố">
+                <div id="maps" class="tab-pane fade" data-address="{{$hotel->address . ', ' . $hotel->city}}">
                     <div class="hpadding20">
-                      <span><i>Địa chỉ, thành phố</i></span>
+                      <span><i>{{$hotel->address . ', ' . $hotel->city}}</i></span>
                         <div id="map-canvas"></div>
                     </div>
                 </div>
@@ -225,22 +290,22 @@
                 <div id="reviews" class="tab-pane fade ">
                     <div class="hpadding20">
                         <div class="col-md-4 offset-0">
-                            <span class="opensans dark size60 slim lh3 ">9 / 10</span><br/>
-                            <img src="{{asset('images/user-rating-5.png')}}" alt=""/><br/>
+                            <span class="opensans dark size60 slim lh3 "><?php echo $rate . " / 10"; ?></span><br/>
+                            <img src="{{asset('images/user-rating-' . $rate2 . '.png')}}" alt=""/><br/>
                         </div>
                         <div class="col-md-8 offset-0">
                             <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-success wh75percent" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only">9 trên 10 điểm</span>
+                                <div class="progress-bar progress-bar-success wh75percent" role="progressbar" aria-valuenow="<?php echo $rate*10; ?>" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="sr-only"><?php echo $rate . " trên 10 điểm" ?></span>
                                 </div>
                             </div>
                             <div class="progress progress-striped">
                                 <div class="progress-bar progress-bar-success wh100percent" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only">100% khách đề xuất</span>
+                                    <span class="sr-only"><?php echo $recommends / count($reviews) * 100 . "% khách đề xuất" ?></span>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            Đánh giá dựa trên 10 đánh giá của khách
+                            <?php echo "Đánh giá dựa trên " . count($reviews) . " đánh giá của khách" ?>
                         </div>
                         <div class="clearfix"></div>
                         <br/>
@@ -251,35 +316,35 @@
 
                     <div class="hpadding20">
                         <div class="col-md-4 offset-0">
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_location, 1); ?></div>
                             <div class="sctext left margtop15">Vị trí</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_room, 1); ?></div>
                             <div class="sctext left margtop15">Phòng</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_service, 1); ?></div>
                             <div class="sctext left margtop15">Dịch vụ</div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-md-4 offset-0">
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_cleaness, 1); ?></div>
                             <div class="sctext left margtop15">Vệ sinh</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_value, 1); ?></div>
                             <div class="sctext left margtop15">Đáng giá</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_comfort, 1); ?></div>
                             <div class="sctext left margtop15">Thoải mái</div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-md-4 offset-0">
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_equipment, 1); ?></div>
                             <div class="sctext left margtop15">Thiết bị</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_hotel, 1); ?></div>
                             <div class="sctext left margtop15">Tòa nhà</div>
                             <div class="clearfix"></div>
-                            <div class="scircle left">9</div>
+                            <div class="scircle left"><?php echo number_format($avg_meal, 1); ?></div>
                             <div class="sctext left margtop15">Đồ ăn</div>
                             <div class="clearfix"></div>
                         </div>
@@ -290,36 +355,39 @@
                     </div>
 
                     <div class="line2"></div>
+                    @foreach($reviews as $review)
                     <div class="hpadding20" id="oldreviews">
                         <div class="col-md-4 offset-0 center">
                             <div class="padding20">
                                 <div class="bordertype5">
                                     <div class="circlewrap">
                                         <img src="{{asset('images/user-avatar.jpg')}}" class="circleimg" alt=""/>
-                                        <span>9</span>
+                                        <span><?php echo number_format($review->avg_rating, 1); ?></span>
                                     </div>
-                                    <span class="dark">Tên</span><br/>
-                                    địa chỉ, thành phố<br/>
+                                    <span class="dark"><?php echo $review->name; ?></span><br/>
+                                    <?php echo $review->address .", " . $review->district . ", " . $review->city; ?><br/>
                                     <img src="{{asset('images/check.png')}}" alt=""/><br/>
+                                    @if($review->avg_rating >= 8)
                                     <span class="green">Đề xuất<br/>cho tất cả mọi người</span>
+                                    @endif
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-md-8 offset-0">
                             <div class="padding20">
-                                <span class="opensans size13 lgrey">2018-10-10</span><br/>
-                                <p>Đánh giá</p>
+                                <span class="opensans size13 lgrey"><?php echo $review->date; ?></span><br/>
+                                <p><?php echo $review->review; ?></p>
                                 <ul class="circle-list">
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
-                                    <li>9</li>
+                                    <li><?php echo number_format($review->location, 1); ?></li>
+                                    <li><?php echo number_format($review->room, 1); ?></li>
+                                    <li><?php echo number_format($review->service, 1); ?></li>
+                                    <li><?php echo number_format($review->cleaness, 1); ?></li>
+                                    <li><?php echo number_format($review->value, 1); ?></li>
+                                    <li><?php echo number_format($review->comfort, 1); ?></li>
+                                    <li><?php echo number_format($review->equipment, 1); ?></li>
+                                    <li><?php echo number_format($review->hotel, 1); ?></li>
+                                    <li><?php echo number_format($review->meal, 1); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -327,6 +395,7 @@
                     </div>
 
                     <div class="line2"></div>
+                    @endforeach
 
                     <br/>
                     <br/>
@@ -394,7 +463,7 @@
                             <textarea class="form-control margtop10" rows="3" id="comment"></textarea>
 
                             <div class="clearfix"></div>
-                            <button type="submit" class="btn-search4 margtop20" id="addreview" value="hotelid">Đánh giá</button>
+                            <button type="submit" class="btn-search4 margtop20" id="addreview" value="<?php echo $hotel->id; ?>">Đánh giá</button>
 
                             <br/>
                             <br/>
@@ -416,8 +485,13 @@
                 <div class="cpadding0 mt-10">
                     <span class="icon-quote"></span>
                     <p class="opensans size16 grey2">
+                        <?php
+                            $rand = rand(0, count($reviews) - 1);
+                            $rand_rv = $reviews[$rand];
+                            echo $rand_rv->review;
+                        ?>
                         <br/>
-                        <span class="lato lblue bold size13"><i>Nhận xét của A</i></span></p>
+                        <span class="lato lblue bold size13"><i><?php echo "Nhận xét của " . $rand_rv->name . ", " . $rand_rv->district . ", " . $rand_rv->city; ?></i></span></p>
                 </div>
             </div>
 
@@ -469,6 +543,8 @@
 </div>
 <!-- END OF CONTENT -->
 
+@include('layouts.footer2')
+
 <!-- Javascript -->
 <script src="{{asset('assets/js/js-details.js')}}"></script>
 
@@ -510,9 +586,7 @@
 
 <!-- app js -->
 <script type="text/javascript" src="{{asset('js/show.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/addreview.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updateroom.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/addfavorite.js')}}"></script>
-
+<script type="text/javascript" src="{{asset('js/updateroom.js')}}"></script>
 </body>
 </html>
