@@ -26,7 +26,7 @@
           <li><a href="{{url('login')}}">Đăng nhập</a></li>
           <li><a href="#">Đăng ký</a></li>
           @else
-          <li><a href="">Đăng xuất</a></li>
+          <li><a href="{{url('logout')}}">Đăng xuất</a></li>
             <li><a href="{{url('/profile/' . session('userid'))}}">Thông tin tài khoản</a></li>
           @endif
         </ul>

@@ -63,3 +63,8 @@ Route::post('user/updaterole', 'UserController@updateRole');
 
 Route::post('/hotel/room/update', 'RoomController@updateStatusRoom');
 
+Route::get('/logout', ['as'=>'logout', function(){
+    session()->flush();
+    return redirect()->route('home');
+}]);
+

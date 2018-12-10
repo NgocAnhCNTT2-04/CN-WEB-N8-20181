@@ -588,5 +588,6 @@
 <script type="text/javascript" src="{{asset('js/show.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updateroom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updateroom.js')}}"></script>
+
 </body>
 </html>
