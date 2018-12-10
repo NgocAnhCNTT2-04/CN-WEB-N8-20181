@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Agency - HTML5 Booking template</title>
+    <title>Login</title>
 
     <!-- Bootstrap -->
     <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet" media="screen">
@@ -40,41 +40,41 @@
     <!-- Login Wrap  -->
     <form action="{{url('/checklogin')}}" method="post">
         {!! csrf_field() !!}
-        <div class="login-wrap">
-            <img src="{{asset('images/logo.png')}}" class="login-img" alt="logo"/><br/>
-            <div class="login-c1">
-                <div class="cpadding50">
-                    <input type="text" name="username" class="form-control logpadding" placeholder="tài khoản">
-                    <br/>
-                    <input type="password" name="password" class="form-control logpadding" placeholder="mật khẩu">
-                    @if(isset($fail))
-                        <div style="margin-top: 10px">
-                            <i style="color: red">{{$fail}}</i>
-                        </div>
-                    @endif
-                </div>
+    <div class="login-wrap">
+        <img src="{{asset('images/logo.png')}}" class="login-img" alt="logo"/><br/>
+        <div class="login-c1">
+            <div class="cpadding50">
+                <input type="text" name="username" class="form-control logpadding" placeholder="tài khoản">
+                <br/>
+                <input type="password" name="password" class="form-control logpadding" placeholder="mật khẩu">
+                @if(isset($fail))
+                    <div style="margin-top: 10px">
+                    <i style="color: red">{{$fail}}</i>
+                    </div>
+                @endif
             </div>
-            <div class="login-c2">
-                <div class="logmargfix">
-                    <div class="chpadding50">
-                        <div class="alignbottom">
-                            <input class="btn-search4"  type="submit" onclick="errorMessage()" value="Đăng nhập"></input>
-                        </div>
-                        <div class="alignbottom2">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">Nhớ tài khoản
-                                </label>
-                            </div>
+        </div>
+        <div class="login-c2">
+            <div class="logmargfix">
+                <div class="chpadding50">
+                    <div class="alignbottom">
+                        <input class="btn-search4"  type="submit" onclick="errorMessage()" value="Đăng nhập"></input>
+                    </div>
+                    <div class="alignbottom2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">Nhớ tài khoản
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="login-c3">
-                <div class="left"><a href="{{url('')}}" class="whitelink"><span></span>Website</a></div>
-                <div class="right"><a href="#" class="whitelink">Quên mật khẩu?</a></div>
-            </div>
         </div>
+        <div class="login-c3">
+            <div class="left"><a href="{{url('')}}" class="whitelink"><span></span>Website</a></div>
+            <div class="right"><a href="#" class="whitelink">Quên mật khẩu?</a></div>
+        </div>
+    </div>
     </form>
     <!-- End of Login Wrap  -->
 

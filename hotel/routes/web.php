@@ -19,11 +19,13 @@ Route::get('/book', function(){
 
 Route::get('/', function(){
 	return view('index');
-});
+})->name('home');
 
 Route:: get('/login', function (){
     return view('login');
-});
+})->name('login');
+
+Route:: post('checklogin', 'UserController@checkLogin');
 
 Route:: get('/user', function (){
     return view('user');

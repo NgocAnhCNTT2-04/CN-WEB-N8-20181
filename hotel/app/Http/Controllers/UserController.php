@@ -34,4 +34,31 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function checkLogin(Request $request)
+    {
+        $username = $request->input("username");
+        $password = $request->input("password");
+
+        $user = User::where([['username', $username], ['password', $password],])
+                    ->first();
+        if (!empty($user))
+        {
+            if ($user->status == 1) {
+                session(['userid' => $user->id]);
+                session(['username' => $user->username]);
+                if($user->admin == 1) {
+                    session(['admin' => $user->admin]);
+                }
+                return redirect()->route('home');
+            }
+            else {
+                return view('login', ['fail' => "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với bộ phận hỗ trợ để được giải đáp"]);
+            }
+        }
+        else
+        {
+            return view('login', ['fail' => "Tài khoản hoặc mật khẩu không đúng"]);
+        }
+    }
+
 }
