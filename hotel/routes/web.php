@@ -68,3 +68,5 @@ Route::get('/logout', ['as'=>'logout', function(){
     return redirect()->route('home');
 }]);
 
+Route::post('/profile/favorite/add', 'FavoriteController@addHotel');
+
