@@ -69,4 +69,12 @@ class UserController extends Controller
         User::updateStatus($userid, $status);
     }
 
+    public function updateRole(Request $request)
+    {
+        $userid = $request->input('userid');
+        $role = $request->input('role');
+
+        User::updateRole($userid, $role);
+    }
+
 }

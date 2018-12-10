@@ -61,3 +61,5 @@ Route::post('hotel/dss', 'HotelController@getDSS');
 
 Route::post('user/updatestatus', 'UserController@updateStatus');
 
+Route::post('user/updaterole', 'UserController@updateRole');
+

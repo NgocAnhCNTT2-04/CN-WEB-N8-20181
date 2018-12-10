@@ -668,6 +668,7 @@
 <script type="text/javascript" src="{{asset('js/showaddroom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/addhotel.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/changeuserstatus.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/changeuserrole.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
