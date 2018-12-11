@@ -70,6 +70,8 @@
 </head>
 <body id="top" class="thebg" >
 
+@include('layouts.header')
+
 <div class="container breadcrub">
     <div>
         <a class="homebtn left" href="{{url('/')}}"></a>
@@ -254,6 +256,8 @@
 </div>
 <!-- END OF CONTENT -->
 
+
+@include('layouts.footer2')
 
 <!-- Javascript -->
 <script src="{{asset('assets/js/js-list4.js')}}"></script>

@@ -61,10 +61,15 @@ $(document).ready(function () {
         var w4 = $('#stars').val();
         var w5 = $('#rate').val();
         var w6 = $('#popular').val();
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
         $.ajax({
-            url: "/hotel/dss",
-            type: 'POST',
+            url: "dss",
+            type: 'post',
             data: {
                 city: city,
                 stars: stars,
@@ -84,7 +89,7 @@ $(document).ready(function () {
             success: function (markup) {
                 $('#hotellist').html(markup);
                 if (!$('#alert').length) {
-                  $("#getsupport").after("<span style='margin-top: 10px' id='alert'><i style='color: red'>Danh sách khách sạn đã được sắp xếp phù hợp với tiêu chí của bạn</i></span>");
+                  $("#getsupport").after("<br/><span style='margin-top: 10px;width: 200px' id='alert'><i style='color: red'>Danh sách khách sạn đã được sắp xếp phù hợp với tiêu chí của bạn</i></span><br/>");
                 }
             }
         });
