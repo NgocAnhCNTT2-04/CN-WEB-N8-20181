@@ -116,7 +116,6 @@
                             <img src="{{asset('images/users/dungnt.jpg')}}" width="60px" height="60px" alt="" class="left margright20"/>
                             <p class="size12 grey margtop10">
                                 Xin chào <span class="lred">{{$user->name}}</span><br/>
-                                <a href="#" class="lblue">Thay ảnh đại diện</a>
                             </p>
                             <div class="clearfix"></div>
                         </div>
@@ -220,7 +219,7 @@
                                     else echo $room->description; ?></span>
                             </div>
                             <div class="col-md-1 offset-0">
-                                <a href="#"><button type="submit" class="btn-search4 right">Xem</button></a>
+                                <a href="{{url('hotel/detail/' . $room->hotel_id)}}"><button type="submit" class="btn-search4 right">Xem</button></a>
                             </div>
                             <div class="clearfix"></div>
                             <div class="line4"></div>
@@ -250,7 +249,7 @@
                                     <span class="grey"><?php if(strlen($favorite->description) > 300) echo substr($favorite->description, 0,300) . '...' ; else echo $favorite->description; ?></span>
                                 </div>
                                 <div class="col-md-1 offset-0">
-                                    <a href="#"><button type="submit" class="btn-search4 right">Xem</button></a>
+                                    <a href="{{url('hotel/detail/' . $favorite->id)}}"><button type="submit" class="btn-search4 right">Xem</button></a>
                                 </div>
                                 <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt15 delete-fav" type="button" value="{{$favorite->id}}">×</button>
                                 <div class="clearfix"></div>

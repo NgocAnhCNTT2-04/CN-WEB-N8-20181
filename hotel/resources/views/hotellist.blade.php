@@ -4,8 +4,8 @@
         <div class="offset-2">
             <div class="col-md-4 offset-0">
                 <div class="listitem2">
-                    <a href="#">
-                        <img src="{{asset('images/' . $hotel->img_folder . "/main.jpg")}}" alt=""/></a>
+                    <a href="{{url('hotel/detail/' . $hotel->id)}}">
+                        <img src="{{asset('images/' . $hotel->img_folder . '/main.jpg')}}" alt=""/></a>
                     {{--<div class="liover"></div>--}}
                     {{--<a class="fav-icon" href="#"></a>--}}
                     {{--<a class="book-icon" href="details.html"></a>--}}
@@ -18,13 +18,14 @@
                         {{--<img src="{{asset('images/user-rating-5.png')}}" width="60" alt=""/><br/>--}}
                         <div class="box-review">
                             <span class="rate"><?php echo $hotel->rate; ?></span>
-                            <span class="rate-info">
+                            <span class="rate-info" style="width: 120px; text-align: center;">
                                     <?php
                                 $rate = $hotel->rate;
                                 if ($rate >= 8) echo "Xuất sắc";
                                 else if ($rate < 8 && $rate >= 7) echo "Tốt";
                                 else if ($rate < 7 && $rate >= 5) echo "Khá";
-                                else echo "Trung bình";
+                                else if ($rate < 5 && $rate > 0) echo "Trung bình";
+                                else echo "Chưa đánh giá";
                                 ?>
                                     </span>
                             <p class="rate-number-info">

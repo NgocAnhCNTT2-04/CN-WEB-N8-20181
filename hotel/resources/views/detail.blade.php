@@ -129,7 +129,8 @@
                     if ($rate >= 8) echo "Xuất sắc!";
                     else if ($rate < 8 && $rate >= 7) echo "Tốt";
                     else if ($rate < 7 && $rate >= 5) echo "Khá";
-                    else echo "Trung bình";
+                    else if ($rate < 5 && $rate > 0) echo "Trung bình";
+                    else echo "Chưa được đánh giá";
                     ?>
                 </h2>
             </div>
@@ -137,6 +138,7 @@
             <?php
             // tính số lượng khách recommend khách sạn và đánh giá trung bình
                 $recommends = 0;
+                if($reviews){
                 foreach ($reviews as $review)
                 {
                     if ($review->avg_rating >= 8)
@@ -164,6 +166,7 @@
                     $avg_hotel += $review->hotel;
                     $avg_meal += $review->meal;
                 }
+                if(count($reviews)!=0){
                 $avg_location /= count($reviews);
                 $avg_room /= count($reviews);
                 $avg_service /= count($reviews);
@@ -173,12 +176,16 @@
                 $avg_equipment /= count($reviews);
                 $avg_hotel /= count($reviews);
                 $avg_meal /= count($reviews);
+                }
+                }
             ?>
 
             <div class="line3 margtop20"></div>
 
             <div class="col-md-6 bordertype1 padding20">
-                <span class="opensans size30 bold grey2"><?php echo $recommends / count($reviews) * 100 . "%"; ?></span><br/>
+                <span class="opensans size30 bold grey2"><?php if(count($reviews)!=0){echo $recommends / count($reviews) * 100 . "%";} else {
+                    echo "0%";
+                } ?></span><br/>
                 khách<br/>đề xuất
             </div>
             <div class="col-md-6 bordertype2 padding20">
@@ -301,11 +308,15 @@
                             </div>
                             <div class="progress progress-striped">
                                 <div class="progress-bar progress-bar-success wh100percent" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only"><?php echo $recommends / count($reviews) * 100 . "% khách đề xuất" ?></span>
+                                    <span class="sr-only"><?php if(count($reviews)!=0){ echo $recommends / count($reviews) * 100 . "% khách đề xuất"; } else{
+                                        echo "Chưa được đề xuất";
+                                    } ?></span>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <?php echo "Đánh giá dựa trên " . count($reviews) . " đánh giá của khách" ?>
+                            <?php if(count($reviews)!=0){ echo "Đánh giá dựa trên " . count($reviews) . " đánh giá của khách";}else {
+                                echo "Chưa được đánh giá";
+                            } ?>
                         </div>
                         <div class="clearfix"></div>
                         <br/>
@@ -355,6 +366,7 @@
                     </div>
 
                     <div class="line2"></div>
+                    @if($reviews)
                     @foreach($reviews as $review)
                     <div class="hpadding20" id="oldreviews">
                         <div class="col-md-4 offset-0 center">
@@ -396,7 +408,7 @@
 
                     <div class="line2"></div>
                     @endforeach
-
+                    @endif
                     <br/>
                     <br/>
                     <div class="hpadding20">
@@ -486,12 +498,15 @@
                     <span class="icon-quote"></span>
                     <p class="opensans size16 grey2">
                         <?php
+                        if(count($reviews)!=0){
                             $rand = rand(0, count($reviews) - 1);
                             $rand_rv = $reviews[$rand];
                             echo $rand_rv->review;
+                            }
+                            $rand_rv = "null";
                         ?>
                         <br/>
-                        <span class="lato lblue bold size13"><i><?php echo "Nhận xét của " . $rand_rv->name . ", " . $rand_rv->district . ", " . $rand_rv->city; ?></i></span></p>
+                        <span class="lato lblue bold size13"><i><?php if($rand_rv!="null"){echo "Nhận xét của " . $rand_rv->name . ", " . $rand_rv->district . ", " . $rand_rv->city;} ?></i></span></p>
                 </div>
             </div>
 
