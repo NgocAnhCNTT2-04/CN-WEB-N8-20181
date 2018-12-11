@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#updateprofile').click(function () {
+    $('#submit').click(function () {
         if($('#ms').is(':checked'))
             var gender = 2;
         else if ($('#mr').is(':checked'))
@@ -12,7 +12,8 @@ $(document).ready(function () {
         var email = $('#email').val();
         var phone = $('#phone').val();
         var address = $('#address').val();
-        var id = $('#updateprofile').val();
+        var pass = $('#password').val();
+        var repass = $('#password').val();
         if (name === "" || username === "" || email === "" || phone === "" || address === "")
         {
             if (!$('#alert').length)

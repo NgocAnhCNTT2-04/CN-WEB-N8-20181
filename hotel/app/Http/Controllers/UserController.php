@@ -77,4 +77,25 @@ class UserController extends Controller
         User::updateRole($userid, $role);
     }
 
+    public function register(Request $request) {
+        $name = $request->input('name');
+        $gender = $request->input('gender');
+        $username = $request->input('username');
+        $password = $request->input('password');
+        $address = $request->input('address');
+        $phone = $request->input('phone');
+        $email = $request->input('email');
+        $user = User::where([['username', $username]])
+                    ->orwhere([['email', $email]])
+                    ->first();
+        if (!empty($user)) {
+            $result = 0;
+            return $result;
+        }
+
+        User::addUser($name,$username,$password,$email,$phone,$address,$gender);
+        $result = 1;
+        return $result;
+    }
+
 }

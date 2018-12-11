@@ -61,4 +61,18 @@ class User extends Model
         
         $user->update(['admin'=>$role]);
     }
+
+    public static function addUser($name,$username,$pass,$email,$phone,$address,$gender) {
+        $user = new User();
+        $user->name = $name;
+        $user->username = $username;
+        $user->password = $pass;
+        $user->status = 1;
+        $user->admin = 0;
+        $user->sex = $gender;
+        $user->email = $email;
+        $user->phone = $phone;
+        $user->address = $address;
+        $user->save();
+    }
 }

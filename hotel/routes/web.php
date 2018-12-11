@@ -74,3 +74,9 @@ Route::post('/admin/deletehotel', 'HotelController@deleteHotel');
 
 Route::post('/review/addreview', 'ReviewController@addReview');
 
+Route:: get('/register',function(){
+	return view('register');
+})->name('register');
+
+Route::post('/profile/register', 'UserController@register');
+
