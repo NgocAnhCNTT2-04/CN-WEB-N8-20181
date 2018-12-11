@@ -253,15 +253,14 @@ class HotelController extends Controller
         $lowest_price = $request->input('lowest_price');
         $stars = $request->input('stars');
         $imgfolder = $request->input('imgfolder');
-        // $input=$request->input('image_upload');
-        // $images=array();
-        // if($files=$request->file('image_upload')){
-        //     foreach($files as $file){
-        //         $name=$file->getClientOriginalName();
-        //         $file->move('images/hotel/'.$imgfolder,$name);
-        //     }
-        // }
-        // $imgfolder = 'hotel/'.$imgfolder;
+        $input=$request->input('images');
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                $name=$file->getClientOriginalName();
+                $file->move('images/hotel/'.$imgfolder,$name);
+            }
+        }
+        $imgfolder = 'hotel/'.$imgfolder;
 
         Hotel::addHotel($type, $name, $description, $city, $address, $distance, $wifi, $park, $elevator, $restaurant, $coffee, $bar, $pool, $spa, $gym, $pets, $lowest_price, $stars, $imgfolder);
 

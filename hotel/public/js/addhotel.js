@@ -71,7 +71,7 @@ $(document).ready(function () {
                    coffee: coffee,
                    bar: bar,
                    pets: pets,
-                   image_upload: images
+                   images: images
                },
                success: function(html){
                    alert('Thêm thành công');
