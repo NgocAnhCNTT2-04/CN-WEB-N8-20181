@@ -314,7 +314,7 @@ class HotelController extends Controller
 
     public function deleteHotel(Request $request)
     {
-        $hotelid = $request->input('hotel_id');
+        $hotelid = $request->input('hotelid');
 
         Hotel::deleteHotel($hotelid);
     }

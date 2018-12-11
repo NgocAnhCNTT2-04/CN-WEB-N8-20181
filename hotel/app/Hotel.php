@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\FavoriteHotel;
 use App\Review;
 use App\Room;
+use App\Book;
+use DB;
 
 class Hotel extends Model
 {
@@ -118,14 +120,15 @@ class Hotel extends Model
 
     public static function deleteHotel($hotelid)
     {
-        // FavoriteHotel::where(["hotel_id", "=", $hotelid])
-        //             ->delete();
-        // Review::where(["hotel_id", "=", $hotelid])
-        //         ->delete();
-
-        // Room::where(["hotel_id", "=", $hotelid])
-        //             ->delete();
-
-        $hotel = Hotel::where(["id", "=" , $hotelid])->delete();
+        $deleted = DB::delete('delete from favorite_hotel where hotel_id = '.$hotelid);
+        $deleted = DB::delete('delete from review where hotel_id = '.$hotelid);
+        $rooms = DB::select('select * from room where hotel_id = ?', [$hotelid]);
+        foreach ($rooms as $room) {
+            # code...
+            $deleted = DB::delete('delete from book where room_id = '.$room->id);
+        }
+        $deleted = DB::delete('delete from room where hotel_id = '.$hotelid);
+        $deleted = DB::delete('delete from hotels where id = '.$hotelid);
+       
     }
 }
