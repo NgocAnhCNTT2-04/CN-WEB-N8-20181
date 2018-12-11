@@ -38,4 +38,12 @@ class Book extends Model
         }
         return $room_left;
     }
+
+    public static function getBook($userid, $hotelid)
+    {
+        $book = Book::join("room", "book.room_id", "room.id")
+                    ->where([["user_id", "=", $userid], ["hotel_id", "like", $hotelid],])
+                    ->first();
+        return $book;
+    }
 }

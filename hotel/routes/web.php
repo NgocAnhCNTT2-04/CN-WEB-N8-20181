@@ -72,3 +72,5 @@ Route::post('/profile/favorite/add', 'FavoriteController@addHotel');
 
 Route::post('/admin/deletehotel', 'HotelController@deleteHotel');
 
+Route::post('/review/addreview', 'ReviewController@addReview');
+

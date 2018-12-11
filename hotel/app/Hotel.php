@@ -14,7 +14,7 @@ class Hotel extends Model
     //
     protected $table = "hotels";
     public $timestamps = false;
-    protected $fillable = array('name','description','city','address','distance_to_centre','wifi','park','elevator','restaurant','coffee','bar','swimming_pool','spa','gym','pets','lowest_price','type','stars');
+    protected $fillable = array('name','description','city','address','distance_to_centre','wifi','park','elevator','restaurant','coffee','bar','swimming_pool','spa','gym','pets','lowest_price','type','stars','rate','number_of_rate');
 
     public function review()
     {
@@ -130,5 +130,14 @@ class Hotel extends Model
         $deleted = DB::delete('delete from room where hotel_id = '.$hotelid);
         $deleted = DB::delete('delete from hotels where id = '.$hotelid);
        
+    }
+
+    public static function updateReview($hotelid,$avg_rating) {
+        $ht = Hotel::find($hotelid);
+        $old_number_rate = $ht->number_of_rate;
+        $old_rate = $ht->rate;
+        $new_rate = number_format(($old_rate * $old_number_rate + $avg_rating) / ($old_number_rate + 1), 1);
+        $number_of_rate = $old_number_rate + 1;
+        $ht->update(['rate'=>$new_rate,'number_of_rate'=>$number_of_rate]);
     }
 }

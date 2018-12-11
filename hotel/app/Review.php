@@ -28,4 +28,24 @@ class Review extends Model
                         ->get();
         return $reviews;
     }
+
+    public static function addReview($userid, $hotelid, $review, $date, $location, $room, $service, $cleaness, $value, $comfort, $equipment, $hotel, $meal, $avg_rating)
+    {
+        $new_review = new Review();
+        $new_review->user_id = $userid;
+        $new_review->hotel_id = $hotelid;
+        $new_review->review = $review;
+        $new_review->date = $date;
+        $new_review->location = $location;
+        $new_review->room = $room;
+        $new_review->service = $service;
+        $new_review->cleaness = $cleaness;
+        $new_review->value = $value;
+        $new_review->comfort = $comfort;
+        $new_review->equipment = $equipment;
+        $new_review->hotel = $hotel;
+        $new_review->meal = $meal;
+        $new_review->avg_rating = $avg_rating;
+        $new_review->save();
+    }
 }

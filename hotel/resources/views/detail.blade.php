@@ -552,7 +552,7 @@
 <script src="{{asset('assets/js/initialize-google-map.js')}}"></script>
 
 <!-- Custom Select -->
-<script type='text/javascript' src='{{asset('assets/js/jquery.customSelect.js')}}'></script>
+<script type='text/javascript' src="{{asset('assets/js/jquery.customSelect.js')}}"></script>
 
 <!-- Custom functions -->
 <script src="{{asset('assets/js/functions.js')}}"></script>
@@ -589,5 +589,6 @@
 <script type="text/javascript" src="{{asset('js/updateroom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updateroom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/addfavorite.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/addreview.js')}}"></script>
 </body>
 </html>
