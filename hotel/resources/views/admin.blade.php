@@ -425,70 +425,94 @@
                             <div class="line4"></div>
                             <br/>
                             <div class="itemscontainer offset-1" id="roomlist">
+                                @foreach($rooms as $room)
+                                <div>
                                 <div class="padding20">
                                     <div class="col-md-4 offset-0">
                                         <a href="#">
+                                            @if ($room->img)
+                                                <img src="{{asset('images/' . $room->img)}}" alt="" class="fwimg"/>
+                                            @else
                                                 <img src="{{asset('images/hotel/loading.png')}}" alt="" class="fwimg"/>
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="col-md-8 offset-0">
                                         <div class="col-md-8 mediafix1">
                                             <h4 class="opensans dark bold margtop1 lh1">Tên khách sạn/Loại phòng</h4>
-                                            Sức chứa:4 người
+                                            <?php echo "Sức chứa: " . $room->capacity . " người" ?>
                                             </br>
-                                            Loại giường
+                                            <?php echo $room->type_of_bed; ?>
                                             <ul class="hotelpreferences2">
-                                                <li class="icohp-internet"></li>
-                                                <li class="icohp-air"></li>
-                                                <li class="icohp-hairdryer"></li>
-                                                <li class="icohp-tv"></li>
-                                                <li class="icohp-fridge"></li>
-                                                <li class="icohp-microwave"></li>
-                                                <li class="icohp-roomservice"></li>
+                                                @if($room->internet)
+                                                    <li class="icohp-internet"></li>
+                                                @endif
+                                                @if($room->air)
+                                                    <li class="icohp-air"></li>
+                                                @endif
+                                                @if($room->hairdryer)
+                                                    <li class="icohp-hairdryer"></li>
+                                                @endif
+                                                @if($room->tv)
+                                                    <li class="icohp-tv"></li>
+                                                @endif
+                                                @if($room->fridge)
+                                                    <li class="icohp-fridge"></li>
+                                                @endif
+                                                @if($room->microwave)
+                                                    <li class="icohp-microwave"></li>
+                                                @endif
+                                                @if($room->roomservice)
+                                                    <li class="icohp-roomservice"></li>
+                                                @endif
                                             </ul>
                                             <div class="clearfix"></div>
                                             <ul class="checklist2 margtop10">
-                                                <li>Có thể hoàn hủy</li>
-                                                <li>Bao gồm bữa sáng</li>
+                                                @if($room->cancellation)
+                                                    <li>Có thể hoàn hủy</li>
+                                                @endif
+                                                @if($room->breakfast)
+                                                    <li>Bao gồm bữa sáng</li>
+                                                @endif
                                             </ul>
                                         </div>
                                         <div class="col-md-4 center bordertype4">
-                                            <span class="opensans green size24">500,000 đ</span><br/>
+                                            <span class="opensans green size24"><?php echo number_format($room->price_per_night, 0, '.', ',') . " đ"; ?></span><br/>
                                             <span class="opensans lightgrey size12">giá / 1 đêm</span><br/><br/>
                                             <div class="col-md-1 offset-0" style="margin-left: 100px">
-                                            <button type="submit" class="btn-search5 right" data-hotelid = "room1">Xem</button>
+                                            <button type="submit" class="btn-search5 right" data-hotelid = "{{'room'.$room->id}}">Xem</button>
                                             </div>
-                                            <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="delete" value="">×</button>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="" value="" style="margin-top: -120px">×</button>
                                 <div class="line2"></div>
-                                <div class="col-md-12 offset-0" id="inforoom1" style="display: none">
+                                <div class="col-md-12 offset-0" id="{{'inforoom' . $room->id}}" style="display: none">
                                         <span class="size16 bold">Thông tin phòng</span>
                                         <div class="line2"></div>
                                         <div class="clearfix"></div>
 
                                         <br/>
                                         Chất lượng*:
-                                        <input type="text" class="form-control" value="" rel="popover" id="">
+                                        <input type="text" class="form-control" value="{{$room->quality}}" rel="popover" id="">
 
                                         <br/>
                                         Sức chứa*:
-                                        <input type="text" class="form-control" value="" rel="popover" id="">
+                                        <input type="text" class="form-control" value="{{$room->capacity}}" rel="popover" id="">
 
                                         <br/>
                                         Loại giường*:
-                                        <input type="text" class="form-control" value="" id="">
+                                        <input type="text" class="form-control" value="{{$room->type_of_bed}}" id="">
 
                                         <br/>
                                         Số lượng phòng*:
-                                        <input type="text" class="form-control" value="" id="">
+                                        <input type="text" class="form-control" value="{{$room->amount}}" id="">
 
                                         <br/>
                                         Giá mỗi đêm*:<br/>
-                                        <input type="number" class="form-control" value="" id="" />
+                                        <input type="number" class="form-control" value="{{$room->price_per_night}}" id="" />
 
 
                                         <br/>
@@ -498,53 +522,55 @@
 
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Internet
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->internet) echo "checked" ?>>Internet
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Điều hoà
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->air) echo "checked" ?>>Điều hoà
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Máy sấy tóc
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->hairdryer) echo "checked" ?>>Máy sấy tóc
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Tivi
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->tv) echo "checked" ?>>Tivi
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Tủ lạnh
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->fridge) echo "checked" ?>>Tủ lạnh
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Lò vi sóng
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->microwave) echo "checked" ?>>Lò vi sóng
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references" id="" >Dịch vụ phòng
+                                                <input type="checkbox" name="references" id="" <?php if ($room->roomservice) echo "checked" ?>>Dịch vụ phòng
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Có thể hoàn huỷ
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->cancellation) echo "checked" ?>>Có thể hoàn huỷ
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" >Bữa sáng
+                                                <input type="checkbox" name="references[]" id="" <?php if ($room->breakfast) echo "checked" ?>>Bữa sáng
                                             </label>
                                         </div>
                                         <div class="clearfix"></div>
 
                                         <button type="submit" class="bluebtn margtop20" id="" value="">Cập nhật</button>
                                 </div>
+                                </div>
+                                @endforeach
                             </div>
                             <button type="submit" class="bluebtn margtop20" id="addroom">Thêm phòng mới</button>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Hotel;
 use App\User;
+use App\Room;
 
 class AdminController extends Controller
 {
@@ -13,6 +14,7 @@ class AdminController extends Controller
     {
         $hotels = Hotel::all();
         $users = User::all();
-        return view('admin', ['hotels' => $hotels, 'users' => $users]);
+        $rooms = Room::all();
+        return view('admin', ['hotels' => $hotels, 'users' => $users, 'rooms' => $rooms]);
     }
 }
