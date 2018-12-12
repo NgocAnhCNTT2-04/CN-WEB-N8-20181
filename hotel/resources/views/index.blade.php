@@ -287,7 +287,10 @@
 	        ["6", 765],
 	        ["7", 423],
 	        ["8", 546],
-	        ["9", 764]
+	        ["9", 764],
+	        ["10", 476],
+	        ["11", 376],
+	        ["12", 543]
 	      ]);
 
 	      var view = new google.visualization.DataView(data);
@@ -298,7 +301,7 @@
 	                         role: "annotation" }]);
 
 	      var options = {
-	        title: "Số lượng phòng đã được đặt",
+	        title: "Số lượng phòng đã được đặt mỗi tháng",
 	        subtitle: "Tính từ tháng 1/2018",
 	        bar: {groupWidth: "95%"},
 	        legend: { position: "none" },
@@ -310,43 +313,7 @@
     </script>
 
 		<div class="lastminute2 lcfix">
-			<div class="promo-container">
-				<div class="promos-header">
-					<h3>Các điểm đến nổi bật</h3>
-				</div>
-				<div class="top-hot-gallery">
-					<div class="carousel-gallery">
-						<div class="carousel-item">
-							<a href="{{url('hotel/Hà nội')}}"></a>
-							<img src="{{asset('images/hotel/loading.png')}}" width="100%" height="100%">
-							<span >100 khách sạn</span>
-						</div>
-						<div class="carousel-item">
-							<a href="{{url('hotel/Hà nội')}}"></a>
-							<img src="{{asset('images/hotel/loading.png')}}" width="100%" height="100%">
-							<span >100 khách sạn</span>
-						</div>
-						<div class="carousel-item">
-							<a href="{{url('hotel/Hà nội')}}"></a>
-							<img src="{{asset('images/hotel/loading.png')}}" width="100%" height="100%">
-							<span >100 khách sạn</span>
-						</div>
-						<div class="carousel-item">
-							<a href="{{url('hotel/Hà nội')}}"></a>
-							<img src="{{asset('images/hotel/loading.png')}}" width="100%" height="100%">
-							<span >100 khách sạn</span>
-						</div>
-						<div class="carousel-item">
-							<a href="{{url('hotel/Hà nội')}}"></a>
-							<img src="{{asset('images/hotel/loading.png')}}" width="100%" height="100%">
-							<span >100 khách sạn</span>
-						</div>
-						<div class="clear"></div>
-					</div>
-					<i class="btn btn-left"></i>
-					<i class="btn btn-right"></i>
-				</div>
-			</div>
+			
 			<div class="textleft right intro">
 				<div class="list-header">
 					<h2>Tại sao lựa chọn chúng tôi?</h2>
@@ -367,7 +334,7 @@
 				</div>
 			</div>
 			<div class="chart">
-				<div id="columnchart" style="width: 40%; height: 100%;"></div>
+				<div id="columnchart" style="width: 40%; height: 160%;"></div>
 			</div>
 			<div class="clear"></div>
 			<div class="container lmc">

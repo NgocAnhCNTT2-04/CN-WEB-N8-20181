@@ -439,7 +439,7 @@
                                     </div>
                                     <div class="col-md-8 offset-0">
                                         <div class="col-md-8 mediafix1">
-                                            <h4 class="opensans dark bold margtop1 lh1">Tên khách sạn/Loại phòng</h4>
+                                            <h4 class="opensans dark bold margtop1 lh1"><?php echo $room->name . '/' . $room->quality ?></h4>
                                             <?php echo "Sức chứa: " . $room->capacity . " người" ?>
                                             </br>
                                             <?php echo $room->type_of_bed; ?>
@@ -496,23 +496,23 @@
 
                                         <br/>
                                         Chất lượng*:
-                                        <input type="text" class="form-control" value="{{$room->quality}}" rel="popover" id="">
+                                        <input type="text" class="form-control" value="{{$room->quality}}" rel="popover" id="{{'quality' . $room->id}}">
 
                                         <br/>
                                         Sức chứa*:
-                                        <input type="text" class="form-control" value="{{$room->capacity}}" rel="popover" id="">
+                                        <input type="number" class="form-control" value="{{$room->capacity}}" rel="popover" id="{{'capacity' . $room->id}}">
 
                                         <br/>
                                         Loại giường*:
-                                        <input type="text" class="form-control" value="{{$room->type_of_bed}}" id="">
+                                        <input type="text" class="form-control" value="{{$room->type_of_bed}}" id="{{'typeofbed' . $room->id}}">
 
                                         <br/>
                                         Số lượng phòng*:
-                                        <input type="text" class="form-control" value="{{$room->amount}}" id="">
+                                        <input type="number" class="form-control" value="{{$room->amount}}" id="{{'amount' . $room->id}}">
 
                                         <br/>
                                         Giá mỗi đêm*:<br/>
-                                        <input type="number" class="form-control" value="{{$room->price_per_night}}" id="" />
+                                        <input type="number" class="form-control" value="{{$room->price_per_night}}" id="{{'pricepernight' . $room->id}}" />
 
 
                                         <br/>
@@ -522,52 +522,52 @@
 
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->internet) echo "checked" ?>>Internet
+                                                <input type="checkbox" name="references[]" id="{{'internet' . $room->id}}" <?php if ($room->internet) echo "checked" ?>>Internet
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->air) echo "checked" ?>>Điều hoà
+                                                <input type="checkbox" name="references[]" id="{{'air' . $room->id}}" <?php if ($room->air) echo "checked" ?>>Điều hoà
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->hairdryer) echo "checked" ?>>Máy sấy tóc
+                                                <input type="checkbox" name="references[]" id="{{'hairdryer' . $room->id}}" <?php if ($room->hairdryer) echo "checked" ?>>Máy sấy tóc
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->tv) echo "checked" ?>>Tivi
+                                                <input type="checkbox" name="references[]" id="{{'tv' . $room->id}}" <?php if ($room->tv) echo "checked" ?>>Tivi
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->fridge) echo "checked" ?>>Tủ lạnh
+                                                <input type="checkbox" name="references[]" id="{{'fridge' . $room->id}}" <?php if ($room->fridge) echo "checked" ?>>Tủ lạnh
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->microwave) echo "checked" ?>>Lò vi sóng
+                                                <input type="checkbox" name="references[]" id="{{'microwave' . $room->id}}" <?php if ($room->microwave) echo "checked" ?>>Lò vi sóng
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references" id="" <?php if ($room->roomservice) echo "checked" ?>>Dịch vụ phòng
+                                                <input type="checkbox" name="references" id="{{'roomservice' . $room->id}}" <?php if ($room->roomservice) echo "checked" ?>>Dịch vụ phòng
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->cancellation) echo "checked" ?>>Có thể hoàn huỷ
+                                                <input type="checkbox" name="references[]" id="{{'cancellation' . $room->id}}" <?php if ($room->cancellation) echo "checked" ?>>Có thể hoàn huỷ
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="references[]" id="" <?php if ($room->breakfast) echo "checked" ?>>Bữa sáng
+                                                <input type="checkbox" name="references[]" id="{{'breakfast' . $room->id}}" <?php if ($room->breakfast) echo "checked" ?>>Bữa sáng
                                             </label>
                                         </div>
                                         <div class="clearfix"></div>
 
-                                        <button type="submit" class="bluebtn margtop20" id="" value="">Cập nhật</button>
+                                        <button type="submit" class="bluebtn3 margtop20 room" id="" value="{{$room->id}}">Cập nhật</button>
                                 </div>
                                 </div>
                                 @endforeach
@@ -698,6 +698,7 @@
 <script type="text/javascript" src="{{asset('js/changeuserstatus.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/changeuserrole.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/deletehotel.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/updateinforoom.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>

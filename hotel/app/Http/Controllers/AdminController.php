@@ -14,7 +14,7 @@ class AdminController extends Controller
     {
         $hotels = Hotel::all();
         $users = User::all();
-        $rooms = Room::all();
+        $rooms = Room::getRoomAndHotel();
         return view('admin', ['hotels' => $hotels, 'users' => $users, 'rooms' => $rooms]);
     }
 }
