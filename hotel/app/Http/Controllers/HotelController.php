@@ -306,6 +306,21 @@ class HotelController extends Controller
     public function deleteHotel(Request $request)
     {
         $hotelid = $request->input('hotelid');
+        $hotel = Hotel::find($hotelid);
+        $path = 'images/'.$hotel->img_folder;
+
+        $path = rtrim($path, '/') . '/';
+        $handle = opendir($path);
+         
+        while (false !== ($file = readdir($handle))) {
+            if($file != '.' and $file != '..' ) {
+              $fullpath = $path.$file;
+              if (is_dir($fullpath)) rmdir_recurse($fullpath);
+              else unlink($fullpath);
+            }
+        }
+        closedir($handle);
+        rmdir($path);
 
         Hotel::deleteHotel($hotelid);
     }

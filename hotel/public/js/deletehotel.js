@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $('.close.mr20.mt10').click(function () {
         var hotelid = $(this).val();
-        alert(hotelid);
         $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
