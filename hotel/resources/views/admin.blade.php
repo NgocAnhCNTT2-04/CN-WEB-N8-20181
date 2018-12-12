@@ -156,6 +156,127 @@
                     <!-- TAB 2 -->
                     <div class="tab-pane" id="bookings">
                         <div class="padding40">
+                            <button type="submit" class="bluebtn margtop20" id="addht">Thêm khách sạn mới</button>
+
+                            <div class="col-md-12 offset-0" id="newinfor" style="display: none">
+                                <div class="line2"></div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="type" id="Acomodation1" value="option1" checked>
+                                        Hotel
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="type" id="Acomodation2" value="option2" >
+                                        Resort
+                                    </label>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <br/>
+                                Tên*:
+                                <input type="text" class="form-control" rel="popover" id="newname">
+
+                                <br/>
+                                Mô tả*:
+                                <input type="text" class="form-control" rel="popover" id="newdescription">
+
+                                <br/>
+                                Thành phố*:
+                                <input type="text" class="form-control" id="newcity">
+
+                                <br/>
+                                Địa chỉ:
+                                <input type="text" class="form-control" id="newaddress">
+
+                                <br/>
+                                Khoảng cách tới trung tâm:<br/>
+                                <input type="number" class="form-control" id="newdistance" />
+
+                                <br/>
+                                Giá phòng thấp nhất:<br/>
+                                <input type="number" class="form-control" id="newprice"/>
+
+                                <br/>
+                                Số sao:<br/>
+                                <input type="number" class="form-control" id="newstars"/>
+
+                                <!--<form action="{{ action('HotelController@saveImage') }}" method="post" enctype="multipart/form-data">
+                                    {{ csrf_field() }}-->
+                                    <br/>
+                                    Thư mục ảnh:<br/>
+                                    <input type="text" class="form-control" id="newimgfolder" name = "newimgfolder"/>
+
+                                    <br/>
+                                    Hình ảnh khách sạn:<br/>
+                                    <input type="file" class="form-control" id="newimage" multiple="multiple" enctype="multipart/form-data" name="image_upload[]"/>
+                                
+
+
+                                <br/>
+                                <br/>
+                                <span class="size16 bold">Tiện nghi khách sạn</span>
+                                <div class="line2"></div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newwifi">Wifi miễn phí
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newpark">Bãi đỗ xe
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newelevator">Thang máy
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newspa">Spa
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newpool">Hồ bơi
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newgym">Phòng gym
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references" id="newrestaurant" >Nhà hàng
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newcoffee">Quán cà phê
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newbar">Quầy bar
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="references[]" id="newpets">Cho phép thú nuôi
+                                    </label>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <button type="submit" class="bluebtn2 margtop20" id="addhotel">Thêm</button>
+                                <!--</form>-->
+                            </div>
+
+                            <br/>
+                            <br/>
 
                             <span class="dark size18">Danh sách khách sạn</span>
 
@@ -295,124 +416,7 @@
                                 </div>
 
                             @endforeach
-                            <button type="submit" class="bluebtn margtop20" id="addht">Thêm khách sạn mới</button>
-
-                            <div class="col-md-12 offset-0" id="newinfor" style="display: none">
-                                <div class="line2"></div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="type" id="Acomodation1" value="option1" checked>
-                                        Hotel
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="type" id="Acomodation2" value="option2" >
-                                        Resort
-                                    </label>
-                                </div>
-                                <div class="clearfix"></div>
-
-                                <br/>
-                                Tên*:
-                                <input type="text" class="form-control" rel="popover" id="newname">
-
-                                <br/>
-                                Mô tả*:
-                                <input type="text" class="form-control" rel="popover" id="newdescription">
-
-                                <br/>
-                                Thành phố*:
-                                <input type="text" class="form-control" id="newcity">
-
-                                <br/>
-                                Địa chỉ:
-                                <input type="text" class="form-control" id="newaddress">
-
-                                <br/>
-                                Khoảng cách tới trung tâm:<br/>
-                                <input type="number" class="form-control" id="newdistance" />
-
-                                <br/>
-                                Giá phòng thấp nhất:<br/>
-                                <input type="number" class="form-control" id="newprice"/>
-
-                                <br/>
-                                Số sao:<br/>
-                                <input type="number" class="form-control" id="newstars"/>
-
-                                <!--<form action="{{ action('HotelController@saveImage') }}" method="post" enctype="multipart/form-data">
-                                    {{ csrf_field() }}-->
-                                    <br/>
-                                    Thư mục ảnh:<br/>
-                                    <input type="text" class="form-control" id="newimgfolder" name = "newimgfolder"/>
-
-                                    <br/>
-                                    Hình ảnh khách sạn:<br/>
-                                    <input type="file" class="form-control" id="newimage" multiple="multiple" enctype="multipart/form-data" name="image_upload[]"/>
-                                
-
-
-                                <br/>
-                                <br/>
-                                <span class="size16 bold">Tiện nghi khách sạn</span>
-                                <div class="line2"></div>
-
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newwifi">Wifi miễn phí
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newpark">Bãi đỗ xe
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newelevator">Thang máy
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newspa">Spa
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newpool">Hồ bơi
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newgym">Phòng gym
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references" id="newrestaurant" >Nhà hàng
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newcoffee">Quán cà phê
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newbar">Quầy bar
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="references[]" id="newpets">Cho phép thú nuôi
-                                    </label>
-                                </div>
-                                <div class="clearfix"></div>
-
-                                <button type="submit" class="bluebtn2 margtop20" id="addhotel">Thêm</button>
-                                <!--</form>-->
-                            </div>
+                            
                         </div>
                     </div>
                     <!-- END OF TAB 2 -->
@@ -431,7 +435,7 @@
                                     <div class="col-md-4 offset-0">
                                         <a href="#">
                                             @if ($room->img)
-                                                <img src="{{asset('images/' . $room->img)}}" alt="" class="fwimg"/>
+                                                <img style="width: 304.375px;height: 171px;" src="{{asset('images/' . $room->img)}}" alt="" class="fwimg"/>
                                             @else
                                                 <img src="{{asset('images/hotel/loading.png')}}" alt="" class="fwimg"/>
                                             @endif
@@ -580,31 +584,34 @@
 
                                 <br/>
                                 Khách sạn*:
-                                <input type="text" class="form-control" rel="popover" id="">
-
+                                <select class="form-control" id="hotel_id">
+                                    @foreach($hotels as $ht)
+                                    <option value="{{$ht->id}}"><?php echo $ht->name ?></option>
+                                    @endforeach
+                                </select>
                                 <br/>
                                 Loại phòng (chất lượng)*:
-                                <input type="text" class="form-control" rel="popover" id="">
+                                <input type="text" class="form-control" rel="popover" id="newquality">
 
                                 <br/>
                                 Sức chứa*:
-                                <input type="text" class="form-control" id="">
+                                <input type="number" class="form-control" id="newcapacity">
 
                                 <br/>
                                 Loại giường*:
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="newtypeofbed">
 
                                 <br/>
                                 Số lượng phòng*:<br/>
-                                <input type="number" class="form-control" id="" />
+                                <input type="number" class="form-control" id="newamount" />
 
                                 <br/>
                                 Giá mỗi đêm*:<br/>
-                                <input type="number" class="form-control" id=""/>
+                                <input type="number" class="form-control" id="newpricepernight"/>
 
                                 <br/>
-                                Thư mục ảnh:<br/>
-                                <input type="text" class="form-control" id=""/>
+                                Hình ảnh:<br/>
+                                <input type="file" class="form-control" id="newimageroom" enctype="multipart/form-data" name="image_upload"/>
 
 
                                 <br/>
@@ -614,52 +621,52 @@
 
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Internet
+                                        <input type="checkbox" name="references[]" id="newinternet">Internet
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Điều hoà
+                                        <input type="checkbox" name="references[]" id="newair">Điều hoà
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Máy sấy tóc
+                                        <input type="checkbox" name="references[]" id="newhairdryer">Máy sấy tóc
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Tivi
+                                        <input type="checkbox" name="references[]" id="newtv">Tivi
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Tủ lạnh
+                                        <input type="checkbox" name="references[]" id="newfridge">Tủ lạnh
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Lò vi sóng
+                                        <input type="checkbox" name="references[]" id="newmicrowave">Lò vi sóng
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references" id="" >Dịch vụ phòng
+                                        <input type="checkbox" name="references" id="newroomservice" >Dịch vụ phòng
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Có thể hoàn huỷ
+                                        <input type="checkbox" name="references[]" id="newcancellation">Có thể hoàn huỷ
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="references[]" id="">Bữa sáng
+                                        <input type="checkbox" name="references[]" id="newbreakfast">Bữa sáng
                                     </label>
                                 </div>
                                 <div class="clearfix"></div>
 
-                                <button type="submit" class="bluebtn margtop20" id="">Thêm</button>
+                                <button type="submit" class="bluebtn margtop20" id="addnewroom">Thêm</button>
                             </div>
                         </div>
                     </div>
@@ -699,6 +706,7 @@
 <script type="text/javascript" src="{{asset('js/changeuserrole.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/deletehotel.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updateinforoom.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/addroom.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>

@@ -81,3 +81,7 @@ Route:: get('/register',function(){
 
 Route::post('/profile/register', 'UserController@register');
 
+Route:: post('/admin/addnewroom', 'RoomController@addNewRoom')->name('addroom');
+
+Route:: post('/admin/saveimageroom', 'RoomController@saveImageRoom');
+

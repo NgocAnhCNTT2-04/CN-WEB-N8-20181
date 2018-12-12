@@ -9,7 +9,7 @@ class Room extends Model
     //
     protected $table = "room";
     public $timestamps = false;
-    protected $fillable = array('quality','capacity','type_of_bed','amount','price_per_night','internet','air','hairdryer','tv','fridge','microwave','roomservice','cancellation','breakfast');
+    protected $fillable = array('quality','capacity','type_of_bed','amount','price_per_night','internet','air','hairdryer','tv','fridge','microwave','roomservice','cancellation','breakfast','img');
 
     public function book()
     {
@@ -36,5 +36,33 @@ class Room extends Model
     public static function updateInfoRoom($roomid, $quality, $capacity, $type_of_bed, $amount, $price_per_night, $internet, $air, $hairdryer, $tv, $fridge, $microwave, $roomservice, $cancellation, $breakfast) {
         $room = Room::find($roomid);
         $room->update(['quality'=>$quality,'capacity'=>$capacity,'type_of_bed'=>$type_of_bed,'amount'=>$amount,'price_per_night'=>$price_per_night,'internet'=>$internet,'air'=>$air,'hairdryer'=>$hairdryer,'tv'=>$tv,'fridge'=>$fridge,'microwave'=>$microwave,'roomservice'=>$roomservice,'cancellation'=>$cancellation,'breakfast'=>$breakfast]);
+    }
+
+    public static function addNewRoom($hotel_id, $quality, $capacity, $type_of_bed, $amount, $price_per_night, $internet, $air, $hairdryer, $tv, $fridge, $microwave, $roomservice, $cancellation, $breakfast){
+        $room = new Room();
+        $room->hotel_id = $hotel_id;
+        $room->quality = $quality;
+        $room->capacity = $capacity;
+        $room->type_of_bed = $type_of_bed;
+        $room->amount = $amount;
+        $room->internet = $internet;
+        $room->air = $air;
+        $room->hairdryer = $hairdryer;
+        $room->tv = $tv;
+        $room->fridge = $fridge;
+        $room->microwave = $microwave;
+        $room->roomservice = $roomservice;
+        $room->cancellation = $cancellation;
+        $room->breakfast = $breakfast;
+        $room->price_per_night = $price_per_night;
+        $room->img = '';
+        $room->save();
+    }
+
+    public static function updateImg($folder,$hotel_id) {
+        $room = Room::find($hotel_id)
+                ->orderBy('id','desc')
+                ->first();
+        $room->update(['img'=>$folder]);
     }
 }
