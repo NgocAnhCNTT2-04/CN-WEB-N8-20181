@@ -14,11 +14,13 @@ $(document).ready(function () {
        var lowest_price = $('#newprice').val();
        var stars = $('#newstars').val();
        var imgfolder = $('#newimgfolder').val();
-       var images = $('#newimage').val();
-       // var image_upload = new FormData();
-       // for(var i = 0; i < $('#newimage')[0].files.length; i ++ ) {
-       //      image_upload.append('images[]', images.files[i]);
-       // }
+       var images = $('#newimage')[0];
+       var image_upload = new FormData();
+       for(var i = 0; i < $('#newimage')[0].files.length; i ++ ) {
+            image_upload.append('images[]', images.files[i]);
+       }
+
+       image_upload.append('imagefolder', imgfolder);
 
        var wifi = $('#newwifi').prop('checked') ? 1 : 0;
        var park = $('#newpark').prop('checked') ? 1 : 0;
@@ -71,11 +73,24 @@ $(document).ready(function () {
                    coffee: coffee,
                    bar: bar,
                    pets: pets,
-                   images: images
                },
-               success: function(html){
-                   alert('Thêm thành công');
-                   window.location.href = window.location.href;
+               success: function(result){
+                   $.ajax({
+                     url: "./admin/saveimageupload",
+                     type:'post',
+                     data: image_upload,
+                     processData: false,
+                     contentType: false,
+                      success: function(res) {
+                        if(res == 1){
+                        alert('Thêm thành công');
+                        window.location.href = window.location.href;
+                        }
+                        else {
+                          alert('Thêm thất bại');
+                        }
+                      }
+                     });
                }
            });
        }

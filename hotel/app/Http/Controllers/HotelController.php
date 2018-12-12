@@ -253,32 +253,38 @@ class HotelController extends Controller
         $lowest_price = $request->input('lowest_price');
         $stars = $request->input('stars');
         $imgfolder = $request->input('imgfolder');
-        $input=$request->input('images');
-        if($files=$request->file('images')){
-            foreach($files as $file){
-                $name=$file->getClientOriginalName();
-                $file->move('images/hotel/'.$imgfolder,$name);
-            }
-        }
         $imgfolder = 'hotel/'.$imgfolder;
 
         Hotel::addHotel($type, $name, $description, $city, $address, $distance, $wifi, $park, $elevator, $restaurant, $coffee, $bar, $pool, $spa, $gym, $pets, $lowest_price, $stars, $imgfolder);
 
         //$imgfolder = $request->input('newimgfolder');
-        return redirect() -> back();
     }
 
     public function saveImage(Request $request) {
-        $imgfolder = $request->input('newimgfolder');
-        $input=$request->input('image_upload');
-        $images=array();
-        if($files=$request->file('image_upload')){
-            foreach($files as $file){
-                $name=$file->getClientOriginalName();
-                $file->move('images/hotel/'.$imgfolder,$name);
-            }
+        // $imgfolder = $request->input('newimgfolder');
+        // $input=$request->input('image_upload');
+        // $images=array();
+        // if($files=$request->file('image_upload')){
+        //     foreach($files as $file){
+        //         $name=$file->getClientOriginalName();
+        //         $file->move('images/hotel/'.$imgfolder,$name);
+        //     }
+        // }
+        $imgfolder = $request->imagefolder;
+        $link = 'images/hotel/'.$imgfolder;
+        if (is_dir($link))
+        {
+            $res = 0;
+            return $res;
         }
-        return redirect() -> back();
+        mkdir($link);
+        $images = $request->images;
+        foreach ($images as $image) {
+            $name = $image->getClientOriginalName();
+            $image->move('images/hotel/'.$imgfolder,$name);
+        }
+        $res = 1;
+        return $res;
     }
 
     public function getHotelDetailById($id)
