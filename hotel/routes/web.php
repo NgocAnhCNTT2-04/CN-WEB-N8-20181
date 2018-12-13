@@ -85,3 +85,5 @@ Route:: post('/admin/addnewroom', 'RoomController@addNewRoom')->name('addroom');
 
 Route:: post('/admin/saveimageroom', 'RoomController@saveImageRoom');
 
+Route::post('/admin/deleteroom', 'RoomController@deleteRoom');
+

@@ -5199,7 +5199,7 @@ a.list-group-item:hover, a.list-group-item:focus {
     border-radius: 3px;
 }
 
-.close {
+.close, .closeroom {
     float: right;
     font-size: 21px;
     font-weight: bold;
@@ -5210,7 +5210,7 @@ a.list-group-item:hover, a.list-group-item:focus {
     filter: alpha(opacity=20);
 }
 
-.close:hover, .close:focus {
+.close:hover, .close:focus, .closeroom:hover, .closeroom:focus {
     color: #000000;
     text-decoration: none;
     cursor: pointer;
@@ -5218,7 +5218,7 @@ a.list-group-item:hover, a.list-group-item:focus {
     filter: alpha(opacity=50);
 }
 
-button.close {
+button.close, button.closeroom {
     padding: 0;
     cursor: pointer;
     background: transparent;

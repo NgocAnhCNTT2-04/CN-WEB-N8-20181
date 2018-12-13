@@ -95,4 +95,9 @@ class RoomController extends Controller
         $res = 1;
         return $res;
     }
+
+    public function deleteRoom(Request $request) {
+        $roomid = $request->input('roomid');
+        Room::deleteRoom($roomid);
+    }
 }

@@ -424,158 +424,6 @@
                     <div class="tab-pane" id="rooms">
                         <div class="padding40">
 
-                            <span class="dark size18">Danh sách phòng</span>
-
-                            <div class="line4"></div>
-                            <br/>
-                            <div class="itemscontainer offset-1" id="roomlist">
-                                @foreach($rooms as $room)
-                                <div>
-                                <div class="padding20">
-                                    <div class="col-md-4 offset-0">
-                                        <a href="#">
-                                            @if ($room->img)
-                                                <img style="width: 304.375px;height: 171px;" src="{{asset('images/' . $room->img)}}" alt="" class="fwimg"/>
-                                            @else
-                                                <img src="{{asset('images/hotel/loading.png')}}" alt="" class="fwimg"/>
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <div class="col-md-8 offset-0">
-                                        <div class="col-md-8 mediafix1">
-                                            <h4 class="opensans dark bold margtop1 lh1"><?php echo $room->name . '/' . $room->quality ?></h4>
-                                            <?php echo "Sức chứa: " . $room->capacity . " người" ?>
-                                            </br>
-                                            <?php echo $room->type_of_bed; ?>
-                                            <ul class="hotelpreferences2">
-                                                @if($room->internet)
-                                                    <li class="icohp-internet"></li>
-                                                @endif
-                                                @if($room->air)
-                                                    <li class="icohp-air"></li>
-                                                @endif
-                                                @if($room->hairdryer)
-                                                    <li class="icohp-hairdryer"></li>
-                                                @endif
-                                                @if($room->tv)
-                                                    <li class="icohp-tv"></li>
-                                                @endif
-                                                @if($room->fridge)
-                                                    <li class="icohp-fridge"></li>
-                                                @endif
-                                                @if($room->microwave)
-                                                    <li class="icohp-microwave"></li>
-                                                @endif
-                                                @if($room->roomservice)
-                                                    <li class="icohp-roomservice"></li>
-                                                @endif
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                            <ul class="checklist2 margtop10">
-                                                @if($room->cancellation)
-                                                    <li>Có thể hoàn hủy</li>
-                                                @endif
-                                                @if($room->breakfast)
-                                                    <li>Bao gồm bữa sáng</li>
-                                                @endif
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4 center bordertype4">
-                                            <span class="opensans green size24"><?php echo number_format($room->price_per_night, 0, '.', ',') . " đ"; ?></span><br/>
-                                            <span class="opensans lightgrey size12">giá / 1 đêm</span><br/><br/>
-                                            <div class="col-md-1 offset-0" style="margin-left: 100px">
-                                            <button type="submit" class="btn-search5 right" data-hotelid = "{{'room'.$room->id}}">Xem</button>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <button aria-hidden="true" data-dismiss="alert" class="close mr20 mt10" type="button" id="" value="" style="margin-top: -120px">×</button>
-                                <div class="line2"></div>
-                                <div class="col-md-12 offset-0" id="{{'inforoom' . $room->id}}" style="display: none">
-                                        <span class="size16 bold">Thông tin phòng</span>
-                                        <div class="line2"></div>
-                                        <div class="clearfix"></div>
-
-                                        <br/>
-                                        Chất lượng*:
-                                        <input type="text" class="form-control" value="{{$room->quality}}" rel="popover" id="{{'quality' . $room->id}}">
-
-                                        <br/>
-                                        Sức chứa*:
-                                        <input type="number" class="form-control" value="{{$room->capacity}}" rel="popover" id="{{'capacity' . $room->id}}">
-
-                                        <br/>
-                                        Loại giường*:
-                                        <input type="text" class="form-control" value="{{$room->type_of_bed}}" id="{{'typeofbed' . $room->id}}">
-
-                                        <br/>
-                                        Số lượng phòng*:
-                                        <input type="number" class="form-control" value="{{$room->amount}}" id="{{'amount' . $room->id}}">
-
-                                        <br/>
-                                        Giá mỗi đêm*:<br/>
-                                        <input type="number" class="form-control" value="{{$room->price_per_night}}" id="{{'pricepernight' . $room->id}}" />
-
-
-                                        <br/>
-                                        <br/>
-                                        <span class="size16 bold">Tiện nghi phòng</span>
-                                        <div class="line2"></div>
-
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'internet' . $room->id}}" <?php if ($room->internet) echo "checked" ?>>Internet
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'air' . $room->id}}" <?php if ($room->air) echo "checked" ?>>Điều hoà
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'hairdryer' . $room->id}}" <?php if ($room->hairdryer) echo "checked" ?>>Máy sấy tóc
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'tv' . $room->id}}" <?php if ($room->tv) echo "checked" ?>>Tivi
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'fridge' . $room->id}}" <?php if ($room->fridge) echo "checked" ?>>Tủ lạnh
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'microwave' . $room->id}}" <?php if ($room->microwave) echo "checked" ?>>Lò vi sóng
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references" id="{{'roomservice' . $room->id}}" <?php if ($room->roomservice) echo "checked" ?>>Dịch vụ phòng
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'cancellation' . $room->id}}" <?php if ($room->cancellation) echo "checked" ?>>Có thể hoàn huỷ
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="references[]" id="{{'breakfast' . $room->id}}" <?php if ($room->breakfast) echo "checked" ?>>Bữa sáng
-                                            </label>
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <button type="submit" class="bluebtn3 margtop20 room" id="" value="{{$room->id}}">Cập nhật</button>
-                                </div>
-                                </div>
-                                @endforeach
-                            </div>
                             <button type="submit" class="bluebtn margtop20" id="addroom">Thêm phòng mới</button>
 
                             <div class="col-md-12 offset-0" id="newroominfor" style="display: none">
@@ -668,6 +516,163 @@
 
                                 <button type="submit" class="bluebtn margtop20" id="addnewroom">Thêm</button>
                             </div>
+
+                            <br/>
+                            <br/>
+
+                            <span class="dark size18">Danh sách phòng</span>
+
+                            <div class="line4"></div>
+                            <br/>
+                            <div class="itemscontainer offset-1" id="roomlist">
+                                @foreach($rooms as $room)
+                                <div>
+                                <div class="padding20">
+                                    <div class="col-md-4 offset-0">
+                                        <a href="#">
+                                            @if ($room->img)
+                                                <img style="width: 304.375px;height: 171px;" src="{{asset('images/' . $room->img)}}" alt="" class="fwimg"/>
+                                            @else
+                                                <img src="{{asset('images/hotel/loading.png')}}" alt="" class="fwimg"/>
+                                            @endif
+                                        </a>
+                                    </div>
+                                    <div class="col-md-8 offset-0">
+                                        <div class="col-md-8 mediafix1">
+                                            <h4 class="opensans dark bold margtop1 lh1"><?php echo $room->name . '/' . $room->quality ?></h4>
+                                            <?php echo "Sức chứa: " . $room->capacity . " người" ?>
+                                            </br>
+                                            <?php echo $room->type_of_bed; ?>
+                                            <ul class="hotelpreferences2">
+                                                @if($room->internet)
+                                                    <li class="icohp-internet"></li>
+                                                @endif
+                                                @if($room->air)
+                                                    <li class="icohp-air"></li>
+                                                @endif
+                                                @if($room->hairdryer)
+                                                    <li class="icohp-hairdryer"></li>
+                                                @endif
+                                                @if($room->tv)
+                                                    <li class="icohp-tv"></li>
+                                                @endif
+                                                @if($room->fridge)
+                                                    <li class="icohp-fridge"></li>
+                                                @endif
+                                                @if($room->microwave)
+                                                    <li class="icohp-microwave"></li>
+                                                @endif
+                                                @if($room->roomservice)
+                                                    <li class="icohp-roomservice"></li>
+                                                @endif
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                            <ul class="checklist2 margtop10">
+                                                @if($room->cancellation)
+                                                    <li>Có thể hoàn hủy</li>
+                                                @endif
+                                                @if($room->breakfast)
+                                                    <li>Bao gồm bữa sáng</li>
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4 center bordertype4">
+                                            <span class="opensans green size24"><?php echo number_format($room->price_per_night, 0, '.', ',') . " đ"; ?></span><br/>
+                                            <span class="opensans lightgrey size12">giá / 1 đêm</span><br/><br/>
+                                            <div class="col-md-1 offset-0" style="margin-left: 100px">
+                                            <button type="submit" class="btn-search5 right" data-hotelid = "{{'room'.$room->id}}">Xem</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <button aria-hidden="true" data-dismiss="alert" class="closeroom mr20 mt10" type="button" value="{{$room->id}}" style="margin-top: -120px">×</button>
+                                <div class="line2"></div>
+                                <div class="col-md-12 offset-0" id="{{'inforoom' . $room->id}}" style="display: none">
+                                        <span class="size16 bold">Thông tin phòng</span>
+                                        <div class="line2"></div>
+                                        <div class="clearfix"></div>
+
+                                        <br/>
+                                        Chất lượng*:
+                                        <input type="text" class="form-control" value="{{$room->quality}}" rel="popover" id="{{'quality' . $room->id}}">
+
+                                        <br/>
+                                        Sức chứa*:
+                                        <input type="number" class="form-control" value="{{$room->capacity}}" rel="popover" id="{{'capacity' . $room->id}}">
+
+                                        <br/>
+                                        Loại giường*:
+                                        <input type="text" class="form-control" value="{{$room->type_of_bed}}" id="{{'typeofbed' . $room->id}}">
+
+                                        <br/>
+                                        Số lượng phòng*:
+                                        <input type="number" class="form-control" value="{{$room->amount}}" id="{{'amount' . $room->id}}">
+
+                                        <br/>
+                                        Giá mỗi đêm*:<br/>
+                                        <input type="number" class="form-control" value="{{$room->price_per_night}}" id="{{'pricepernight' . $room->id}}" />
+
+
+                                        <br/>
+                                        <br/>
+                                        <span class="size16 bold">Tiện nghi phòng</span>
+                                        <div class="line2"></div>
+
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'internet' . $room->id}}" <?php if ($room->internet) echo "checked" ?>>Internet
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'air' . $room->id}}" <?php if ($room->air) echo "checked" ?>>Điều hoà
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'hairdryer' . $room->id}}" <?php if ($room->hairdryer) echo "checked" ?>>Máy sấy tóc
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'tv' . $room->id}}" <?php if ($room->tv) echo "checked" ?>>Tivi
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'fridge' . $room->id}}" <?php if ($room->fridge) echo "checked" ?>>Tủ lạnh
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'microwave' . $room->id}}" <?php if ($room->microwave) echo "checked" ?>>Lò vi sóng
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references" id="{{'roomservice' . $room->id}}" <?php if ($room->roomservice) echo "checked" ?>>Dịch vụ phòng
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'cancellation' . $room->id}}" <?php if ($room->cancellation) echo "checked" ?>>Có thể hoàn huỷ
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="references[]" id="{{'breakfast' . $room->id}}" <?php if ($room->breakfast) echo "checked" ?>>Bữa sáng
+                                            </label>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <button type="submit" class="bluebtn3 margtop20 room" id="" value="{{$room->id}}">Cập nhật</button>
+                                </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -707,6 +712,7 @@
 <script type="text/javascript" src="{{asset('js/deletehotel.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/updateinforoom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/addroom.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/deleteroom.js')}}"></script>
 
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>

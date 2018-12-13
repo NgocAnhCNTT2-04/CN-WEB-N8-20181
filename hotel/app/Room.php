@@ -2,6 +2,7 @@
 
 namespace App;
 use DB;
+use App\Book;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
@@ -64,5 +65,12 @@ class Room extends Model
                 ->orderBy('id','desc')
                 ->first();
         $room->update(['img'=>$folder]);
+    }
+
+    public static function deleteRoom($roomid)
+    {
+        $deleted = DB::delete('delete from book where room_id = '.$roomid);
+        $deleted = DB::delete('delete from room where id = '.$roomid);
+       
     }
 }
