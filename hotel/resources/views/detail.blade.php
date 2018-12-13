@@ -241,14 +241,14 @@
                             <div class="w50percent">
                                 <div class="wh90percent textleft">
                                     <span class="opensans size13"><b>Nhận phòng</b></span>
-                                    <input type="text" class="form-control mySelectCalendar" id="datepicker" placeholder="mm/dd/yyyy"/>
+                                    <input type="text" class="form-control mySelectCalendar" id="datepicker" placeholder="mm/dd/yyyy" value="{{session()->get('checkin1')}}"/>
                                 </div>
                             </div>
 
                             <div class="w50percentlast">
                                 <div class="wh90percent textleft right">
                                     <span class="opensans size13"><b>Trả phòng</b></span>
-                                    <input type="text" class="form-control mySelectCalendar" id="datepicker2" placeholder="mm/dd/yyyy"/>
+                                    <input type="text" class="form-control mySelectCalendar" id="datepicker2" placeholder="mm/dd/yyyy" value="{{session()->get('checkout1')}}"/>
                                 </div>
                             </div>
                         </div>
@@ -257,11 +257,11 @@
                                 <div class="room1" >
                                     <div class="w50percent">
                                         <span class="opensans size13"><b>Số phòng</b></span>
-                                        <input type="number" name="sophong" id="sophong" class="form-control" min="1" max="10">
+                                        <input type="number" name="sophong" id="sophong" class="form-control" min="1" max="10" value="{{session()->get('sophong')}}">
                                     </div>
                                     <div class="w50percent">
                                         <span class="opensans size13"><b>Số khách</b></span>
-                                        <input type="number" name="sokhach" id="sokhach" class="form-control" min="1" max="40">
+                                        <input type="number" name="sokhach" id="sokhach" class="form-control" min="1" max="40" value="{{session()->get('sokhach')}}">
                                     </div>
 
                                 </div>

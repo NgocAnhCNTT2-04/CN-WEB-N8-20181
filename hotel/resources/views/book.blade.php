@@ -28,6 +28,7 @@
 </head>
 <body id="top" class="thebg">
 
+@include('layouts.header')
 
 <div class="container breadcrub">
     <div>
@@ -40,7 +41,7 @@
                 </li>
                 <li>/</li>
                 <li>
-                    <a href="#">Tên khách sạn</a>
+                    <a href="#"><?php echo $hotel->name; ?></a>
                 </li>
                 <li>/</li>
             </ul>
@@ -57,35 +58,57 @@
         <div class="col-md-8 pagecontainer2 offset-0">
             <div class="padding30 grey">
 
-                <div class="padding20">
+                <div class="">
                     <div class="col-md-4 offset-0">
                         <a href="#">
+                            @if ($room->img)
+                                <img src="{{asset('images/' . $room->img)}}" alt="" class="fwimg"/>
+                            @else
                                 <img src="{{asset('images/hotel/loading.png')}}" alt="" class="fwimg"/>
+                            @endif
                         </a>
                     </div>
                     <div class="col-md-8 offset-0">
                         <div class="col-md-8 mediafix1">
-                            <h4 class="opensans dark bold margtop1 lh1">Chất lượng</h4>
-                            Sức chứa: ?? người
+                            <h4 class="opensans dark bold margtop1 lh1"><?php echo $room->quality ?></h4>
+                            <?php echo "Sức chứa: " . $room->capacity . " người" ?>
                             </br>
-                            Loại giường
+                            <?php echo $room->type_of_bed; ?>
                             <ul class="hotelpreferences2">
+                                @if($room->internet)
                                     <li class="icohp-internet"></li>
+                                @endif
+                                @if($room->air)
                                     <li class="icohp-air"></li>
+                                @endif
+                                @if($room->hairdryer)
                                     <li class="icohp-hairdryer"></li>
+                                @endif
+                                @if($room->tv)
                                     <li class="icohp-tv"></li>
+                                @endif
+                                @if($room->fridge)
                                     <li class="icohp-fridge"></li>
+                                @endif
+                                @if($room->microwave)
                                     <li class="icohp-microwave"></li>
+                                @endif
+                                @if($room->roomservice)
                                     <li class="icohp-roomservice"></li>
+                                @endif
                             </ul>
                             <div class="clearfix"></div>
                             <ul class="checklist2 margtop10">
+                                @if($room->cancellation)
                                     <li>Có thể hoàn hủy</li>
+                                @endif
+                                @if($room->breakfast)
                                     <li>Bao gồm bữa sáng</li>
+                                @endif
                             </ul>
                         </div>
-                        <div class="col-md-4 center bordertype4">
-                            <span class="opensans green size24">1000000 đ</span><br/>
+                        <div class="col-md-4 center bordertype4" style="padding-right: 0px">
+                            <span class="opensans green size24"><?php echo number_format($room->price_per_night, 0, '.', ',') . " đ"; ?></span><br/>
                             <span class="opensans lightgrey size12">giá / 1 đêm</span><br/><br/>
                         </div>
                     </div>
@@ -94,22 +117,31 @@
                 <div class="line2"></div>
 
                 {{--<script type="text/javascript"src="http://202.9.84.88/documents/payment/logoscript.jsp?logos=v,m,a,j,u,at&lang=en"></script>--}}
-
                 <form action="{{url('/book/sendrequest')}}" method="post">
                     {!! csrf_field() !!}
                     <input type="hidden" name="Title" value="VPC 3-Party" />
                     <input type="hidden" name="virtualPaymentClientURL" size="63" value="https://mtf.onepay.vn/onecomm-pay/vpc.op" maxlength="250" />
                     <input type="hidden" name="vpc_Merchant" value="ONEPAY" size="20" maxlength="16" />
                     <input type="hidden" name="vpc_AccessCode" value="D67342C2" size="20" maxlength="8" />
+                    <input type="hidden" name="vpc_MerchTxnRef" value="<?php echo date ( 'YmdHis' ) . rand (); ?>" size="40" maxlength="40" />
+                    <input type="hidden" name="vpc_OrderInfo" value="{{$book_id}}" size="20" maxlength="34" />
+                    <input type="hidden" name="vpc_Amount" value="{{$room->price_per_night * $days * 100}}" size="20" maxlength="10" />
+                    <input type="hidden" name="vpc_ReturnURL" size="60" value="{{url('/book/getresponse')}}" maxlength="300" />
                     <input type="hidden" name="vpc_Version" value="2" size="20" maxlength="8" />
                     <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
                     <input type="hidden" name="vpc_Locale" value="vn" size="20" maxlength="5" />
                     <input type="hidden" name="vpc_Currency" value="VND" size="20" maxlength="5" />
+                    <input type="hidden" name="vpc_TicketNo" maxlength="15" value="<?php echo $_SERVER ['REMOTE_ADDR']; ?>" />
+                    <input type="hidden" name="vpc_SHIP_Street01" value="{{$user->address}}" size="20" maxlength="500" />
+                    <input type="hidden" name="vpc_SHIP_Provice" value="{{$user->district}}" size="20" maxlength="50" />
+                    <input type="hidden" name="vpc_SHIP_City" value="{{$user->city}}" size="20" maxlength="50" />
                     <input type="hidden" name="vpc_SHIP_Country" value="Viet Nam" size="20" maxlength="50" />
+                    <input type="hidden" name="vpc_Customer_Phone" value="{{$user->phone}}" size="20" maxlength="50" />
+                    <input type="hidden" name="vpc_Customer_Email" size="20" value="{{$user->phone}}" maxlength="50" />
+                    <input type="hidden" name="vpc_Customer_Id" value="{{$user->username}}" size="20" maxlength="50" />
                     <script type="text/javascript" src="http://202.9.84.88/documents/payment/logoscript.jsp?logos=v,m&lang=vn"></script>
                     <input type="submit" class="booknow margtop20 btnmarg"  value="Đặt phòng ngay với onepay" />
                 </form>
-                
             </div>
         </div>
         <!-- END OF LEFT CONTENT -->
@@ -117,12 +149,12 @@
         <div class="col-md-4">
             <div class="pagecontainer2 paymentbox grey">
                 <div class="padding30">
-                    <img src="{{asset('images/hotel/1/main.jpg')}}" class="left margright20" width="71px" height="71px" alt=""/>
-                    <span class="opensans size18 dark bold">Tên khách sạn</span>
+                    <img src="{{asset('images/' . $hotel->img_folder . "/main.jpg")}}" class="left margright20" width="71px" height="71px" alt=""/>
+                    <span class="opensans size18 dark bold">{{$hotel->name}}</span>
                     <br/>
-                    <span class="opensans size13 grey">Thành phố, Việt Nam</span>
+                    <span class="opensans size13 grey"><?php echo $hotel->city . ", Việt Nam"; ?></span>
                     <br/>
-                    <img src="{{asset('images/filter-rating-5.png')}}" width="60" alt=""/>
+                    <img src="{{asset('images/filter-rating-' . $hotel->stars . '.png')}}" width="60" alt=""/>
 
                 </div>
                 <div class="line3"></div>
@@ -130,28 +162,28 @@
                     <table class="table table-bordered margbottom20">
                         <tr>
                             <td>Đánh giá của khách</td>
-                            <td class="center green bold">10.0</td>
+                            <td class="center green bold"><?php echo $hotel->rate; ?></td>
                         </tr>
                         <tr>
-                            <td>Số lượt đánh giá</td>
-                            <td class="center green bold">100</td>
+                            <td><?php echo "Số lượt đánh gía"; ?></td>
+                            <td class="center green bold"><?php echo $hotel->number_of_rate; ?></td>
                         </tr>
                         <tr>
                             <td colspan=2>
                                 <span class="dark">Phòng: </span>
-                                Chất lượng phòng
+                                <?php echo $room->quality; ?>
                             </td>
                         </tr>
                         <tr>
                             <td colspan=2>
-                                <span class="dark">?? đêm: </span>
-                                Từ ngày ?? đến ngày ??
+                                <span class="dark"><?php echo $days . " đêm: " ?></span>
+                                <?php echo session('checkin') . " đến " . session('checkout'); ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span class="dark">Phòng: </span>
-                                ?? người<br/>
+                                <?php echo $room->capacity . " người"; ?><br/>
                                 {{--5 Nights--}}
 
                                 {{--<!-- Collapse 1 -->--}}
@@ -190,7 +222,7 @@
                             </td>
                             <td class="center">
                                 số tiền / đêm<br/>
-                                ??? VNĐ<br/>
+                                <?php echo number_format($room->price_per_night, 0, '.', ',') . " VNĐ"; ?><br/>
                             </td>
                         </tr>
                     </table>
@@ -198,7 +230,7 @@
                 <div class="line3"></div>
                 <div class="padding30">
                     <span class="left size14 dark">Tổng cộng:</span>
-                    <span class="right lred2 bold size18">??? VNĐ</span>
+                    <span class="right lred2 bold size18"><?php echo number_format($room->price_per_night * $days, 0, '.', ',')  . "VNĐ"; ?></span>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -219,6 +251,8 @@
     </div>
 </div>
 <!-- END OF CONTENT -->
+<!-- FOOTER -->
+@include('layouts.footer2')
 
 <!-- Javascript  -->
 <script src="{{asset('assets/js/js-payment.js')}}"></script>

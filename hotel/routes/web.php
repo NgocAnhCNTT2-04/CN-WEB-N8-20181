@@ -13,9 +13,7 @@
 
 Route::get('/profile/{id}', 'UserController@showProfile');
 
-Route::get('/book', function(){
-	return view('book');
-});
+Route::get('room/book/{id}', 'BookController@showBookingPage');
 
 Route::get('/', function(){
 	return view('index');

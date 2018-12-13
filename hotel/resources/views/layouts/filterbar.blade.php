@@ -40,14 +40,14 @@
             <div class="w50percent">
                 <div class="wh90percent textleft">
                     <span class="opensans size13">Nhận phòng</span>
-                    <input type="text" name="checkin" class="form-control mySelectCalendar" id="datepicker" placeholder="mm/dd/yyyy"/>
+                    <input type="text" name="checkin" class="form-control mySelectCalendar" id="datepicker" placeholder="mm/dd/yyyy" value="{{session()->get('checkin1')}}" />
                 </div>
             </div>
 
             <div class="w50percentlast">
                 <div class="wh90percent textleft right">
                     <span class="opensans size13">Trả phòng</span>
-                    <input type="text" name="checkout" class="form-control mySelectCalendar" id="datepicker2" placeholder="mm/dd/yyyy"/>
+                    <input type="text" name="checkout" class="form-control mySelectCalendar" id="datepicker2" placeholder="mm/dd/yyyy" value="{{session()->get('checkout1')}}"/>
                 </div>
             </div>
 
@@ -58,13 +58,13 @@
                     <div class="w50percent">
                         <div class="wh90percent textleft left">
                             <span class="opensans size13">Số phòng</span>
-                            <input type="number" name="sophong" class="form-control" min="1" max="10">
+                            <input type="number" name="sophong" class="form-control" min="1" max="10" value="{{session()->get('sophong')}}">
                         </div>
                     </div>
                     <div class="w50percentlast">
                         <div class="wh90percent textleft right ohidden">
                             <span class="opensans size13">Số khách</span>
-                            <input type="number" name="sokhach" class="form-control" min="1" max="40">
+                            <input type="number" name="sokhach" class="form-control" min="1" max="40" value="{{session()->get('sokhach')}}">
                         </div>
                     </div>
                 </div>

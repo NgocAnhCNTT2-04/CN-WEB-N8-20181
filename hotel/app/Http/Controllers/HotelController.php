@@ -45,12 +45,28 @@ class HotelController extends Controller
         $city = $request->input("city");
 
         $checkin = $request->input("checkin");
-        $checkin = strtotime($checkin);
-        $checkin = date('Y-m-d', $checkin);
+        if($checkin != '') {
+            $checkin = strtotime($checkin);
+            $checkin = date('Y-m-d', $checkin);
+        }
 
         $checkout = $request->input("checkout");
-        $checkout = strtotime($checkout);
-        $checkout = date('Y-m-d', $checkout);
+        if($checkout != '') {
+            $checkout = strtotime($checkout);
+            $checkout = date('Y-m-d', $checkout);
+        }
+
+        $checkin1 = $request->input("checkin");
+        if($checkin1 != '') {
+            $checkin1 = strtotime($checkin1);
+            $checkin1 = date('m/d/Y', $checkin1);
+        }
+
+        $checkout1 = $request->input("checkout");
+        if($checkout1 != '') {
+            $checkout1 = strtotime($checkout1);
+            $checkout1 = date('m/d/Y', $checkout1);
+        }
 
         $sophong = $request->input("sophong");
 
@@ -58,6 +74,8 @@ class HotelController extends Controller
 
         session(['checkin' => $checkin]);
         session(['checkout' => $checkout]);
+        session(['checkin1' => $checkin1]);
+        session(['checkout1' => $checkout1]);
         session(['sophong' => $sophong]);
         session(['sokhach' => $sokhach]);
 

@@ -15,14 +15,32 @@ class RoomController extends Controller
         $id = $request->input('hotelid');
 
         $checkin = $request->input('checkin');
-        $checkin = strtotime($checkin);
-        $checkin = date('Y-m-d', $checkin);
+        if($checkin != '') {
+            $checkin = strtotime($checkin);
+            $checkin = date('Y-m-d', $checkin);
+        }
         session(['checkin' => $checkin]);
 
         $checkout = $request->input('checkout');
-        $checkout = strtotime($checkout);
-        $checkout = date('Y-m-d', $checkout);
+        if($checkout != '') {
+            $checkout = strtotime($checkout);
+            $checkout = date('Y-m-d', $checkout);
+        }
         session(['checkout' => $checkout]);
+
+        $checkin1 = $request->input('checkin');
+        if($checkin1 != '') {
+            $checkin1 = strtotime($checkin1);
+            $checkin1 = date('m/d/Y', $checkin1);
+        }
+        session(['checkin1' => $checkin1]);
+
+        $checkout1 = $request->input('checkout');
+        if($checkout1 != '') {
+            $checkout1 = strtotime($checkout1);
+            $checkout1 = date('m/d/Y', $checkout1);
+        }
+        session(['checkout1' => $checkout1]);
 
         $ds_room = Room::getRoomByHotelId($id);
         $room_left = Book::getRoomLeft($ds_room);

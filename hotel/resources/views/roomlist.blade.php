@@ -54,10 +54,10 @@
                 <span class="opensans lightgrey size12">giá / 1 đêm</span><br/><br/>
                 @if (session('checkin') && session('checkout'))
                     <span class="lred bold"><?php echo "Còn " . $room[1] . " phòng"; ?></span><br/><br/>
+                    <a href="{{url('room/book/' . $room[0]->id)}}"><button class="bookbtn mt1">Đặt phòng</button></a>
                 @else
                     <span class="lred bold">Cập nhật ngày để kiểm tra phòng trống</span><br/><br/>
                 @endif
-                <a href="#"><button class="bookbtn mt1">Đặt phòng</button></a>
             </div>
         </div>
         <div class="clearfix"></div>
