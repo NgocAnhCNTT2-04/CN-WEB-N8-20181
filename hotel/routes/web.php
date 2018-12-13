@@ -11,40 +11,13 @@
 |
 */
 
-Route::get('/profile/{id}', 'UserController@showProfile');
-
-Route::get('room/book/{id}', 'BookController@showBookingPage');
+//cac route nguoi dung chua dang nhap
 
 Route::get('/', function(){
 	return view('index');
 })->name('home');
 
-Route:: get('/login', function (){
-    return view('login');
-})->name('login');
-
-Route:: post('checklogin', 'UserController@checkLogin');
-
-Route:: get('/user', function (){
-    return view('user');
-});
-
-
 Route::get('/hotel/detail/{id}', 'HotelController@getHotelDetailById');
-
-Route:: get('/admin', 'AdminController@showAdminPage');
-
-
-Route:: post('/profile/update', 'UserController@updateProfile') -> name('update');
-
-Route:: post('/profile/changepassword', 'UserController@changePassword') -> name('changepassword');
-
-Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel');
-
-Route:: post('/admin/updatehotel', 'HotelController@updateHotel') -> name('updatehotel');
-Route:: post('/admin/updateinforoom', 'RoomController@updateInfoRoom') -> name('updateinforoom');
-Route:: post('/admin/addhoteltest', 'HotelController@addHotelTest')->name('addhotel');
-Route:: post('/admin/saveimageupload', 'HotelController@saveImage');
 
 Route::get('/hotel/search', 'HotelController@search');
 
@@ -56,22 +29,7 @@ Route::post('hotel/sort', 'HotelController@sortHotel');
 
 Route::post('hotel/dss', 'HotelController@getDSS');
 
-Route::post('user/updatestatus', 'UserController@updateStatus');
-
-Route::post('user/updaterole', 'UserController@updateRole');
-
 Route::post('/hotel/room/update', 'RoomController@updateStatusRoom');
-
-Route::get('/logout', ['as'=>'logout', function(){
-    session()->flush();
-    return redirect()->route('home');
-}]);
-
-Route::post('/profile/favorite/add', 'FavoriteController@addHotel');
-
-Route::post('/admin/deletehotel', 'HotelController@deleteHotel');
-
-Route::post('/review/addreview', 'ReviewController@addReview');
 
 Route:: get('/register',function(){
 	return view('register');
@@ -79,9 +37,49 @@ Route:: get('/register',function(){
 
 Route::post('/profile/register', 'UserController@register');
 
-Route:: post('/admin/addnewroom', 'RoomController@addNewRoom')->name('addroom');
+//cac route phu trach login va logout
+Route:: get('/login', function (){
+    return view('login');
+})->name('login');
 
-Route:: post('/admin/saveimageroom', 'RoomController@saveImageRoom');
+Route:: post('checklogin', 'UserController@checkLogin');
 
-Route::post('/admin/deleteroom', 'RoomController@deleteRoom');
+Route::get('/logout', ['as'=>'logout', function(){
+    session()->flush();
+    return redirect()->route('home');
+}])->middleware('checklogin');
 
+//cac route cua nguoi dung da dang nhap
+Route::post('/review/addreview', 'ReviewController@addReview')->middleware('checklogin');
+
+Route::get('room/book/{id}', 'BookController@showBookingPage')->middleware('checklogin');
+
+Route::get('/profile/{id}', 'UserController@showProfile')->middleware('checklogin');
+
+Route::post('/profile/favorite/add', 'FavoriteController@addHotel')->middleware('checklogin');
+
+Route:: post('/profile/update', 'UserController@updateProfile') -> name('update')->middleware('checklogin');
+
+Route:: post('/profile/changepassword', 'UserController@changePassword') -> name('changepassword')->middleware('checklogin');
+
+Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel')->middleware('checklogin');
+
+//cac route cho admin
+Route:: get('/admin', 'AdminController@showAdminPage')->middleware('checkadmin');
+
+Route:: post('/admin/updatehotel', 'HotelController@updateHotel') -> name('updatehotel')->middleware('checkadmin');
+Route:: post('/admin/updateinforoom', 'RoomController@updateInfoRoom') -> name('updateinforoom')->middleware('checkadmin');
+Route:: post('/admin/addhoteltest', 'HotelController@addHotelTest')->name('addhotel')->middleware('checkadmin');
+Route:: post('/admin/saveimageupload', 'HotelController@saveImage')->middleware('checkadmin');
+
+Route::post('user/updatestatus', 'UserController@updateStatus')->middleware('checkadmin');
+
+Route::post('user/updaterole', 'UserController@updateRole')->middleware('checkadmin');
+
+Route::post('/admin/deletehotel', 'HotelController@deleteHotel')->middleware('checkadmin');
+
+Route:: post('/admin/addnewroom', 'RoomController@addNewRoom')->name('addroom')->middleware('checkadmin');
+
+Route:: post('/admin/saveimageroom', 'RoomController@saveImageRoom')->middleware('checkadmin');
+
+Route::post('/admin/deleteroom', 'RoomController@deleteRoom')->middleware('checkadmin');
