@@ -309,6 +309,20 @@ class HotelController extends Controller
         $hotel = Hotel::find($hotelid);
         $path = 'images/'.$hotel->img_folder;
 
+        $path1 = 'images/'.$hotel->img_folder . '/room';
+        $path1 = rtrim($path1, '/') . '/';
+        $handle = opendir($path1);
+         
+        while (false !== ($file = readdir($handle))) {
+            if($file != '.' and $file != '..' ) {
+              $fullpath = $path1.$file;
+              if (is_dir($fullpath)) rmdir_recurse($fullpath);
+              else unlink($fullpath);
+            }
+        }
+        closedir($handle);
+        rmdir($path1);
+
         $path = rtrim($path, '/') . '/';
         $handle = opendir($path);
          
