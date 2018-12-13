@@ -715,15 +715,95 @@
                                 title: "Số lượng phòng đã được đặt mỗi tháng",
                                 subtitle: "Tính từ tháng 1/2018",
                                 bar: {groupWidth: "95%"},
-                                legend: { position: "none" },
+                                legend: { position: "none" }
+                                ,height: 500
+                                ,width: 900
                               };
                               var chart = new google.visualization.ColumnChart(document.getElementById("columnchart"));
                               chart.draw(view, options);
                             }
                             </script>
+                            <script type="text/javascript">
+                              google.charts.load("current", {packages:["imagelinechart"]});
+                              google.charts.setOnLoadCallback(drawChart);
+
+                              function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                  ['Tháng', 'Lượt truy cập', 'Lượt đăng ký mới'],
+                                  ['1',  5456,      323],
+                                  ['2',  6456,      321],
+                                  ['3',  2345,       233],
+                                  ['4',  7657,      222],
+                                  ['5',  4352,      432],
+                                  ['6',  6577,      460],
+                                  ['7',  8796,       411],
+                                  ['8',  6546,      311],
+                                  ['9',  7686,      322],
+                                  ['10',  8797,      431],
+                                  ['11',  9896,       389],
+                                  ['12',  3434,      454]
+                                ]);
+
+                                var chart = new google.visualization.ImageLineChart(document.getElementById('linechart'));
+
+                                var options = {
+                                title: "Số lượt truy cập và lượt đăng ký mới trong 12 tháng qua",
+                                subtitle: "Tính từ tháng 1/2018",
+                                bar: {groupWidth: "95%"},
+                                legend: { position: "none" }
+                                ,height: 500
+                                ,width: 900
+                                };
+
+                                chart.draw(data, options);
+                              }
+                            </script>
+                             <script type="text/javascript">
+                              google.charts.load("current", {packages:["imagelinechart"]});
+                              google.charts.setOnLoadCallback(drawChart);
+
+                              function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                  ['Ngày', 'Lượt truy cập', 'Lượt đăng ký mới', 'Số phòng được đặt'],
+                                  ['1',  132,      15,      33],
+                                  ['2',  321,      32,      45],
+                                  ['3',  222,      22,     36],
+                                  ['4',  111,      22,      57],
+                                  ['5',  432,      43,      26],
+                                  ['6',  577,      46,      44],
+                                  ['7',  596,      11,     43],
+                                  ['8',  346,      31,      55],
+                                  ['9',  186,      32,      73],
+                                  ['10',  197,     43,     54],
+                                  ['11',  296,     19,    85],
+                                  ['12',  334,     54,     86],
+                                  ['13',  334,     23,     68]
+                                ]);
+
+                                var chart = new google.visualization.ImageLineChart(document.getElementById('linechart2'));
+
+                                var options = {
+                                title: "Số lượt truy cập, lượt đăng ký mới và số phòng được đặt trong tháng này",
+                                bar: {groupWidth: "95%"},
+                                legend: { position: "none" }
+                                ,height: 500
+                                ,width: 900
+                                };
+
+                                chart.draw(data, options);
+                              }
+                            </script>
                             </script>
                             <div class="chart">
-                            <div id="columnchart" style="width: 100%; height: 300%;"></div>
+                                <div id="columnchart" style="width: 100%; height: 100%;"></div>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <div id="linechart" style="width: 100%; height: 100%; margin-left: 150px"></div>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <div id="linechart2" style="width: 100%; height: 100%; margin-left: 150px"></div>
                             </div>
                             <div class="clear"></div>
                         </div>
