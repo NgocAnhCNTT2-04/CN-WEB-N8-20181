@@ -46,4 +46,13 @@ class Book extends Model
                     ->first();
         return $book;
     }
+
+    public static function bookRoom($user_id,$room_id,$check_in,$check_out) {
+        $book = new Book();
+        $book->user_id = $user_id;
+        $book->room_id = $room_id;
+        $book->check_in = $check_in;
+        $book->check_out = $check_out;
+        $book -> save();
+    }
 }

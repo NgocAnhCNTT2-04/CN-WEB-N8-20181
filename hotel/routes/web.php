@@ -64,6 +64,8 @@ Route:: post('/profile/changepassword', 'UserController@changePassword') -> name
 
 Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel')->middleware('checklogin');
 
+Route:: post('/room/book/bookroom', 'BookController@bookRoom')->middleware('checklogin');
+
 //cac route cho admin
 Route:: get('/admin', 'AdminController@showAdminPage')->middleware('checkadmin');
 

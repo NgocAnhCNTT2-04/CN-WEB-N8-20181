@@ -24,4 +24,13 @@ class BookController extends Controller
 
         return view('book', ['room' => $room, 'hotel' => $hotel, 'user' => $user, 'days' => $days, 'book_id' => $book_id]);
     }
+
+    public function bookRoom(Request $request) {
+        $user_id = $request->input('userid');
+        $room_id = $request->input('roomid');
+        $check_in = session('checkin');
+        $check_out = session('checkout');
+
+        Book::bookRoom($user_id,$room_id,$check_in,$check_out);
+    }
 }

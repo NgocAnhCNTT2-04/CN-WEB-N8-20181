@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Đặt phòng</title>
     <!-- Bootstrap -->
     <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet" media="screen">
@@ -117,31 +118,13 @@
                 <div class="line2"></div>
 
                 {{--<script type="text/javascript"src="http://202.9.84.88/documents/payment/logoscript.jsp?logos=v,m,a,j,u,at&lang=en"></script>--}}
-                <form action="{{url('/book/sendrequest')}}" method="post">
-                    {!! csrf_field() !!}
-                    <input type="hidden" name="Title" value="VPC 3-Party" />
-                    <input type="hidden" name="virtualPaymentClientURL" size="63" value="https://mtf.onepay.vn/onecomm-pay/vpc.op" maxlength="250" />
-                    <input type="hidden" name="vpc_Merchant" value="ONEPAY" size="20" maxlength="16" />
-                    <input type="hidden" name="vpc_AccessCode" value="D67342C2" size="20" maxlength="8" />
-                    <input type="hidden" name="vpc_MerchTxnRef" value="<?php echo date ( 'YmdHis' ) . rand (); ?>" size="40" maxlength="40" />
-                    <input type="hidden" name="vpc_OrderInfo" value="{{$book_id}}" size="20" maxlength="34" />
-                    <input type="hidden" name="vpc_Amount" value="{{$room->price_per_night * $days * 100}}" size="20" maxlength="10" />
-                    <input type="hidden" name="vpc_ReturnURL" size="60" value="{{url('/book/getresponse')}}" maxlength="300" />
-                    <input type="hidden" name="vpc_Version" value="2" size="20" maxlength="8" />
-                    <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
-                    <input type="hidden" name="vpc_Locale" value="vn" size="20" maxlength="5" />
-                    <input type="hidden" name="vpc_Currency" value="VND" size="20" maxlength="5" />
-                    <input type="hidden" name="vpc_TicketNo" maxlength="15" value="<?php echo $_SERVER ['REMOTE_ADDR']; ?>" />
-                    <input type="hidden" name="vpc_SHIP_Street01" value="{{$user->address}}" size="20" maxlength="500" />
-                    <input type="hidden" name="vpc_SHIP_Provice" value="{{$user->district}}" size="20" maxlength="50" />
-                    <input type="hidden" name="vpc_SHIP_City" value="{{$user->city}}" size="20" maxlength="50" />
-                    <input type="hidden" name="vpc_SHIP_Country" value="Viet Nam" size="20" maxlength="50" />
-                    <input type="hidden" name="vpc_Customer_Phone" value="{{$user->phone}}" size="20" maxlength="50" />
-                    <input type="hidden" name="vpc_Customer_Email" size="20" value="{{$user->phone}}" maxlength="50" />
-                    <input type="hidden" name="vpc_Customer_Id" value="{{$user->username}}" size="20" maxlength="50" />
+                <div>
+                    
                     <script type="text/javascript" src="http://202.9.84.88/documents/payment/logoscript.jsp?logos=v,m&lang=vn"></script>
-                    <input type="submit" class="booknow margtop20 btnmarg"  value="Đặt phòng ngay với onepay" />
-                </form>
+                    <input type="hidden" name="userid" id="userid" value="{{$user->id}}">
+                    <input type="hidden" name="roomid" id="roomid" value="{{$room->id}}">
+                    <input id="booknow" type="submit" class="booknow2 margtop20 btnmarg"  value="Đặt phòng ngay với onepay" />
+                </div>
             </div>
         </div>
         <!-- END OF LEFT CONTENT -->
@@ -255,7 +238,7 @@
 @include('layouts.footer2')
 
 <!-- Javascript  -->
-<script src="{{asset('assets/js/js-payment.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/bookhotel.js')}}"></script>
 <!-- Nicescroll  -->
 <script src="{{asset('assets/js/jquery.nicescroll.min.js')}}"></script>
 <!-- Custom functions -->

@@ -208,8 +208,8 @@
                             <br/>
                             @foreach ($booked as $room)
                             <div class="col-md-4 offset-0">
-                                <a href="#"><img alt="" class="left mr20" src="{{asset('images/'. $room->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
-                                <a class="dark" href="#"><b>{{$room->name}}</b></a> /
+                                <a href="{{url('/hotel/detail/' . $room->hotel_id)}}"><img alt="" class="left mr20" src="{{asset('images/'. $room->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
+                                <a class="dark" href="{{url('/hotel/detail/' . $room->hotel_id)}}"><b>{{$room->name}}</b></a> /
                                 <span class="dark size12">{{$room->quality}}</span><br>
                                 <img alt="" src="{{asset('images/filter-rating-'.$room->stars.'.png')}}"><br/>
                                 <span class="opensans green bold size14">{{number_format($room->price_per_night, 0, '.', ',') . ' VNĐ'}}</span> <span class="grey"> / đêm</span><br>
@@ -239,8 +239,8 @@
                             @foreach($favorites as $favorite)
                             <div>
                                 <div class="col-md-4 offset-0">
-                                    <a href="#"><img alt="" class="left mr20" src="{{asset('images/'.$favorite->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
-                                    <a class="dark" href="#"><b>{{$favorite->name}}</b></a> /
+                                    <a href="{{url('/hotel/detail/' . $favorite->id)}}"><img alt="" class="left mr20" src="{{asset('images/'.$favorite->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
+                                    <a class="dark" href="{{url('/hotel/detail/' . $favorite->id)}}"><b>{{$favorite->name}}</b></a> /
                                     <span class="dark size12">{{$favorite->address.', '.$favorite->city}}</span><br>
                                     <span class="opensans green bold size14">{{"Từ " . number_format($favorite->lowest_price, 0, '.', ',') . " VNĐ"}}</span> <span class="grey"> / đêm</span><br>
                                     <img alt="" src="{{asset('images/filter-rating-'.$favorite->img_folder.'.png')}}"><br/>
@@ -362,6 +362,10 @@
 
 </div>
 <!-- END OF CONTENT -->
+
+<!-- FOOTER -->
+
+@include('layouts.footer2')
 
 <!-- Javascript  -->
 <script src="{{asset('assets/js/js-profile.js')}}"></script>
