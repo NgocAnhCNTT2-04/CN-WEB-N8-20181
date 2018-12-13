@@ -87,6 +87,11 @@
                             <span class="bookings-icon"></span>
                             Quản lý phòng khách sạn
                         </a></li>
+                    <li>
+                        <a href="#statis" data-toggle="tab" onclick="mySelectUpdate()">
+                            <span class="statistic-icon"></span>
+                            Thống kê
+                        </a></li>
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -675,6 +680,55 @@
                             
                         </div>
                     </div>
+                    <!-- START OF TAB 4 -->
+                    <div class="tab-pane" id="statis">
+                        <div class="padding40">
+                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                            <script type="text/javascript">
+                            google.charts.load("current", {packages:['corechart']});
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                              var data = google.visualization.arrayToDataTable([
+                                ["Tháng", "Số lượng"],
+                                ["1", 354],
+                                ["2", 432],
+                                ["3", 764],
+                                ["4", 254],
+                                ["5", 656],
+                                ["6", 765],
+                                ["7", 423],
+                                ["8", 546],
+                                ["9", 764],
+                                ["10", 476],
+                                ["11", 376],
+                                ["12", 543]
+                              ]);
+
+                              var view = new google.visualization.DataView(data);
+                              view.setColumns([0, 1,
+                                               { calc: "stringify",
+                                                 sourceColumn: 1,
+                                                 type: "string",
+                                                 role: "annotation" }]);
+
+                              var options = {
+                                title: "Số lượng phòng đã được đặt mỗi tháng",
+                                subtitle: "Tính từ tháng 1/2018",
+                                bar: {groupWidth: "95%"},
+                                legend: { position: "none" },
+                              };
+                              var chart = new google.visualization.ColumnChart(document.getElementById("columnchart"));
+                              chart.draw(view, options);
+                            }
+                            </script>
+                            </script>
+                            <div class="chart">
+                            <div id="columnchart" style="width: 100%; height: 300%;"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <!-- END OF TAB 4 -->
                 </div>
                 <!-- End of Tab panes from left menu -->
 

@@ -113,7 +113,7 @@
 
                         <!-- Admin top -->
                         <div class="col-md-4 offset-0">
-                            <img src="{{asset('images/users/dungnt.jpg')}}" width="60px" height="60px" alt="" class="left margright20"/>
+                            <img src="{{asset('images/users/no-avatar.jpg')}}" width="60px" height="60px" alt="" class="left margright20"/>
                             <p class="size12 grey margtop10">
                                 Xin chào <span class="lred">{{$user->name}}</span><br/>
                             </p>

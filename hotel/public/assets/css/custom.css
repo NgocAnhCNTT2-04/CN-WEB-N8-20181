@@ -5670,6 +5670,14 @@ span.bookings-icon {
     background: url('../../images/profile-icons.png') scroll 0 -30px no-repeat;
 }
 
+span.statistic-icon {
+    width: 25px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+    background: url('../../images/bar-chart.png') scroll 0 0 no-repeat;
+}
+
 span.wishlist-icon {
     width: 25px;
     height: 30px;
