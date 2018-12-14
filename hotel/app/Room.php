@@ -61,10 +61,14 @@ class Room extends Model
     }
 
     public static function updateImg($folder,$hotel_id) {
-        $room = Room::find($hotel_id)
-                ->orderBy('id','desc')
-                ->first();
-        $room->update(['img'=>$folder]);
+        $rooms = Room::all();
+        foreach ($rooms as $room) {
+            # code...
+            if($room->img != '') {
+                continue;
+            }
+            $room->update(['img'=>$folder]);
+        }
     }
 
     public static function deleteRoom($roomid)

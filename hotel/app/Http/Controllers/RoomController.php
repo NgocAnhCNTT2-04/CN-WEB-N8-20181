@@ -102,13 +102,13 @@ class RoomController extends Controller
         $images = $request->images;
         foreach ($images as $image) {
             $name = $image->getClientOriginalName();
-            $folder = $hotel->img_folder . '/room/' . $name;
+            $folder = 'images/' . $hotel->img_folder . '/room/' . $name;
             if(file_exists($folder)) {
                 unlink($folder);
             }
             $image->move($link,$name);
-            $folder = $hotel->img_folder . '/room/' . $name;
-            Room::updateImg($folder,$hotel_id);
+            $folder1 = $hotel->img_folder . '/room/' . $name;
+            Room::updateImg($folder1,$hotel_id);
         }
         $res = 1;
         return $res;
