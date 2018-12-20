@@ -33,4 +33,23 @@ class BookController extends Controller
 
         Book::bookRoom($user_id,$room_id,$check_in,$check_out);
     }
+
+    public function showBookedPage(Request $request) {
+        $id = $request->input('id_book');
+        $booked = Book::find($id);
+        $room = Room::find($booked->room_id);
+        $hotel = Hotel::find($room->hotel_id);
+        $user = User::find(session('userid'));
+        $checkin = $booked->check_in;
+        $checkout = $booked->check_out;
+        
+        $days = (strtotime($checkout) - strtotime($checkin)) / (60 * 60 * 24);
+
+        return view('detailbooked', ['idbooked' => $id,'room' => $room, 'hotel' => $hotel, 'user' => $user, 'days' => $days, 'checkin' => $checkin, 'checkout' => $checkout]);
+    }
+
+    public function cancelBook(Request $request) {
+        $id = $request->input('idbooked');
+        Book::cancelBook($id);
+    }
 }

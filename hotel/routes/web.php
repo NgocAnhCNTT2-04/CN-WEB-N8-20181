@@ -66,6 +66,10 @@ Route:: post('/profile/favorite/delete', 'FavoriteController@deleteHotel')->midd
 
 Route:: post('/room/book/bookroom', 'BookController@bookRoom')->middleware('checklogin');
 
+Route:: post('/room/cancelbook', 'BookController@cancelBook')->middleware('checklogin');
+
+Route:: post('room/booked', 'BookController@showBookedPage')->middleware('checklogin');
+
 //cac route cho admin
 Route:: get('/admin', 'AdminController@showAdminPage')->middleware('checkadmin');
 

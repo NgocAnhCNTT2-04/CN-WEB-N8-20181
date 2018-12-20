@@ -208,18 +208,21 @@
                             <br/>
                             @foreach ($booked as $room)
                             <div class="col-md-4 offset-0">
-                                <a href="{{url('/hotel/detail/' . $room->hotel_id)}}"><img alt="" class="left mr20" src="{{asset('images/'. $room->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
-                                <a class="dark" href="{{url('/hotel/detail/' . $room->hotel_id)}}"><b>{{$room->name}}</b></a> /
-                                <span class="dark size12">{{$room->quality}}</span><br>
-                                <img alt="" src="{{asset('images/filter-rating-'.$room->stars.'.png')}}"><br/>
-                                <span class="opensans green bold size14">{{number_format($room->price_per_night, 0, '.', ',') . ' VNĐ'}}</span> <span class="grey"> / đêm</span><br>
+                                <a href="{{url('/hotel/detail/' . $room[0]->hotel_id)}}"><img alt="" class="left mr20" src="{{asset('images/'. $room[0]->img_folder.'/main.jpg')}}" width="96px" height="61px"></a>
+                                <a class="dark" href="{{url('/hotel/detail/' . $room[0]->hotel_id)}}"><b>{{$room[0]->name}}</b></a> /
+                                <span class="dark size12">{{$room[0]->quality}}</span><br>
+                                <img alt="" src="{{asset('images/filter-rating-'.$room[0]->stars.'.png')}}"><br/>
+                                <span class="opensans green bold size14">{{number_format($room[0]->price_per_night, 0, '.', ',') . ' VNĐ'}}</span> <span class="grey"> / đêm</span><br>
                             </div>
                             <div class="col-md-7">
-                                <span class="grey"><?php if(strlen($room->description) > 300) echo substr($room->description, 0, 300) . '...';
-                                    else echo $room->description; ?></span>
+                                <span class="grey"><?php if(strlen($room[0]->description) > 300) echo substr($room[0]->description, 0, 300) . '...';
+                                    else echo $room[0]->description; ?></span>
                             </div>
                             <div class="col-md-1 offset-0">
-                                <a href="{{url('hotel/detail/' . $room->hotel_id)}}"><button type="submit" class="btn-search4 right">Xem</button></a>
+                                <form method="post" action="{{action('BookController@showBookedPage')}}">
+                                    <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                                    <button name="id_book" type="submit" class="btn-booked btn-search4 right" value="{{$room[1]->id}}">Xem</button>
+                                </form>
                             </div>
                             <div class="clearfix"></div>
                             <div class="line4"></div>

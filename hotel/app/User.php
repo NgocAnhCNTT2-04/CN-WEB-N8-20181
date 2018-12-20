@@ -27,7 +27,10 @@ class User extends Model
         foreach ($books as $book) {
             # code...
             $temp = Room::join('hotels','room.hotel_id','=','hotels.id')->where('room.id','=',$book->room_id)->first();
-            $booked[] = $temp;
+            $temp2 = array();
+            $temp2[] = $temp;
+            $temp2[] = $book;
+            $booked[] = $temp2;
         }
         $favorite = FavoriteHotel::where('user_id','=',$id)->get();
         $hotels = array();

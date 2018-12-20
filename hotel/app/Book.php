@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Room;
+use DB;
 
 class Book extends Model
 {
@@ -54,5 +55,10 @@ class Book extends Model
         $book->check_in = $check_in;
         $book->check_out = $check_out;
         $book -> save();
+    }
+
+    public static function cancelBook($id) {
+        //$deleted = DB::delete('delete from book where id = '.$id);
+        $delete = Book::where([['id','=',$id]])->delete();
     }
 }
